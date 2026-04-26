@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const BASE_PATH = "/ISCJ-Website-v2";
+const BASE_PATH = process.env.NODE_ENV === "production" ? "/ISCJ-Website-v2" : "";
 
 const nextConfig: NextConfig = {
   output: "export",

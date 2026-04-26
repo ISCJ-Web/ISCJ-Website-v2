@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import type { StatItem } from "@/types";
+import { assetPath } from "@/lib/assetPath";
 
 const STATS: StatItem[] = [
   { value: "500+", label: "Families served" },
@@ -99,7 +100,7 @@ export default function AboutSection() {
         <div style={{ position: "relative" }} className="max-sm:order-first">
           <div style={{ width: "100%", aspectRatio: "4/5", position: "relative", overflow: "hidden" }}>
             <Image
-              src="/images/hero.jpg"
+              src={assetPath("/images/hero.jpg")}
               alt="ISCJ community"
               fill
               style={{ objectFit: "cover", objectPosition: "center" }}

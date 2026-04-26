@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/ui/Button";
+import { assetPath } from "@/lib/assetPath";
 
 export default function HeroSection() {
   return (
@@ -17,7 +18,7 @@ export default function HeroSection() {
         overflow: "hidden",
         padding: "0 24px",
         background: "var(--navy)",
-        backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/images/hero.jpg')`,
+        backgroundImage: `url('${assetPath("/images/hero.jpg")}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

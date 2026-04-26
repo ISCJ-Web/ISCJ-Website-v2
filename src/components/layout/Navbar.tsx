@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { assetPath } from "@/lib/assetPath";
 
 const NAV_LINKS = [
   { label: "Home", href: "#hero" },
@@ -115,7 +116,7 @@ export default function Navbar() {
             transition: "opacity 0.4s",
           }}
         >
-          <Image src="/images/iscj-white-logo.png" alt="ISCJ" width={80} height={36} style={{ height: 36, width: "auto" }} />
+          <Image src={assetPath("/images/iscj-white-logo.png")} alt="ISCJ" width={80} height={36} style={{ height: 36, width: "auto" }} />
           <span
             style={{
               fontFamily: "var(--ff-body)",

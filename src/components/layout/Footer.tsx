@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { assetPath } from "@/lib/assetPath";
 
 const FOOTER_COLS = [
   {
@@ -49,7 +50,7 @@ export default function Footer() {
       >
         {/* Brand col */}
         <div>
-          <Image src="/images/iscj-white-logo.png" alt="ISCJ" width={100} height={44} style={{ height: 44, width: "auto", marginBottom: 16 }} />
+          <Image src={assetPath("/images/iscj-white-logo.png")} alt="ISCJ" width={100} height={44} style={{ height: 44, width: "auto", marginBottom: 16 }} />
           <p style={{ fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.75, color: "rgba(255,255,255,0.4)", maxWidth: 280 }}>
             Islamic Society of Central Jersey — a place of worship, learning, and community for Muslim families throughout Central New Jersey.
           </p>
