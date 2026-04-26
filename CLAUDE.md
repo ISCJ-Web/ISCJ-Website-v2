@@ -222,7 +222,6 @@ Apply to `.service-card`, `.event-card`, `.announce-item`, `.stat-card`:
 
 - **Stale `.next` cache:** After installing packages, if you see `__webpack_modules__[moduleId] is not a function`, delete `.next/` and restart the dev server. Webpack module IDs get out of sync with cached build artifacts.
 - **`Button.tsx` is a Client Component** (`"use client"`) because it uses `onMouseEnter`/`onMouseLeave` for hover effects. It is safe to import from both Server and Client Components.
-- **`index.html` in the project root** is the original static prototype — use it as a reference for styles and layout when porting sections to React.
 
 ## Future Plans
 
