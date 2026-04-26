@@ -1,3 +1,5 @@
+"use client";
+
 import type { PrayerTime } from "@/types";
 
 const PRAYER_TIMES: PrayerTime[] = [
@@ -7,10 +9,31 @@ const PRAYER_TIMES: PrayerTime[] = [
   { name: "Asr",      time: "4:50 PM",  iqama: "Iqama 5:10" },
   { name: "Maghrib",  time: "7:58 PM",  iqama: "Iqama 8:05" },
   { name: "Isha",     time: "9:24 PM",  iqama: "Iqama 9:45" },
-  { name: "Jumu’ah", time: "1:30 PM", iqama: "Fridays" },
 ];
 
-const DATE_LABEL = "Saturday, April 25 · 27 Shawwal 1446";
+const JUMUAH_TIMES = ["12:00 PM", "1:10 PM", "3:15 PM"];
+
+function buildDateLabel(): string {
+  const now = new Date();
+
+  const gregorian = new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  }).format(now);
+
+  const parts = new Intl.DateTimeFormat("en-US-u-ca-islamic-umalqura", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).formatToParts(now);
+
+  const hDay   = parts.find((p) => p.type === "day")?.value   ?? "";
+  const hMonth = parts.find((p) => p.type === "month")?.value ?? "";
+  const hYear  = (parts.find((p) => p.type === "year")?.value ?? "").replace(/\s*AH$/i, "");
+
+  return `${gregorian} · ${hDay} ${hMonth} ${hYear}`;
+}
 
 function PrayerCell({ p }: { p: PrayerTime }) {
   return (
@@ -58,7 +81,88 @@ function PrayerCell({ p }: { p: PrayerTime }) {
   );
 }
 
+function JumuahStrip() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: 18,
+        padding: "10px 24px",
+        background: "rgba(255,255,255,0.025)",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "0.62rem",
+          fontWeight: 500,
+          letterSpacing: "0.22em",
+          textTransform: "uppercase",
+          color: "var(--gold)",
+          whiteSpace: "nowrap",
+        }}
+      >
+        Jumu’ah Khutbahs
+      </span>
+
+      <span
+        aria-hidden
+        style={{
+          width: 1,
+          height: 14,
+          background: "rgba(255,255,255,0.18)",
+        }}
+      />
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 14,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {JUMUAH_TIMES.map((t, i) => (
+          <span key={t} style={{ display: "inline-flex", alignItems: "center", gap: 14 }}>
+            <span
+              style={{
+                fontFamily: "var(--ff-head)",
+                fontSize: "1rem",
+                fontWeight: 400,
+                color: "rgba(255,255,255,0.9)",
+                letterSpacing: "0.01em",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {t}
+            </span>
+            {i < JUMUAH_TIMES.length - 1 && (
+              <span
+                aria-hidden
+                style={{
+                  width: 3,
+                  height: 3,
+                  borderRadius: "50%",
+                  background: "var(--gold)",
+                  opacity: 0.6,
+                  display: "inline-block",
+                }}
+              />
+            )}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function PrayerTimesSection() {
+  const DATE_LABEL = buildDateLabel();
+
   return (
     <div
       id="prayer-times"
@@ -165,6 +269,9 @@ export default function PrayerTimesSection() {
           ))}
         </div>
       </div>
+
+      {/* Jumu'ah khutbah strip — shared by desktop + mobile */}
+      <JumuahStrip />
     </div>
   );
 }

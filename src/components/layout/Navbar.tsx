@@ -6,6 +6,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { assetPath } from "@/lib/assetPath";
 
 const SOCIAL_LINKS = [
+  /**
+   * The Path variable is the SVG path for the social icon.
+   */
   {
     title: "Facebook",
     href: "https://www.facebook.com/ISCJ1/",
