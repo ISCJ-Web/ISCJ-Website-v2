@@ -79,6 +79,7 @@ export default function HeroSection() {
         </h1>
 
         <p
+          className="hero-body"
           style={{
             fontSize: "clamp(0.9rem, 2.4vw, 1rem)",
             fontWeight: 300,
@@ -99,32 +100,6 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Scroll hint */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 36,
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: 8,
-          color: "rgba(255,255,255,0.3)",
-          fontSize: "0.65rem",
-          letterSpacing: "0.15em",
-          textTransform: "uppercase",
-        }}
-      >
-        <div
-          className="scroll-hint-line"
-          style={{
-            width: 1,
-            height: 48,
-            background: "linear-gradient(to bottom, rgba(255,255,255,0.3), transparent)",
-          }}
-        />
-      </div>
     </section>
   );
 }
