@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+:root {
+  --navy:       #012544;
+  --navy-light: #1a3a5c;
+  --navy-deep:  #011830;
+  --gold:       oklch(0.72 0.10 75);
+  --gold-light: oklch(0.88 0.06 80);
+  --white:      #ffffff;
+  --surface:    #f8fafc;
+  --text:       #0d1f2d;
+  --muted:      #6b7f8f;
+  --border:     #e2e8f0;
+  --ff-head:    var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --ff-body:    var(--font-dm-sans), 'DM Sans', sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--ff-body);
+  background: var(--white);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Section label */
+.section-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Section title */
+h2.section-title {
+  font-family: var(--ff-head);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+h2.section-title em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+/* Scroll pulse animation */
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 0.8; transform: scaleY(0.7); }
+}
+
+.scroll-hint-line {
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* Geometric overlay pattern */
+.geo-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(30deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px),
+    repeating-linear-gradient(-30deg, transparent, transparent 60px, rgba(255,255,255,0.012) 60px, rgba(255,255,255,0.012) 61px);
+  pointer-events: none;
+}
