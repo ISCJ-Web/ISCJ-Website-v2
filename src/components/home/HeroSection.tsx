@@ -17,7 +17,7 @@ export default function HeroSection() {
         overflow: "hidden",
         padding: "0 24px",
         background: "var(--navy)",
-        backgroundImage: "url('/images/hero.jpg')",
+        backgroundImage: `url('${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/images/hero.jpg')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
