@@ -78,8 +78,8 @@ export default function Footer() {
             Islamic Society of Central Jersey — a place of worship, learning, and community for Muslim families throughout Central New Jersey.
           </p>
           <div style={{ marginTop: 20, fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.35)", lineHeight: 1.7 }}>
-            123 Main Street<br />
-            East Brunswick, NJ 08816<br />
+            4145 Route 1 South and Promenade Blvd<br />
+            Monmouth Junction, NJ 08852<br />
             <a href="mailto:admin@iscj.org" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none", transition: "color 0.2s" }}
               onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--gold)")}
               onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)")}
