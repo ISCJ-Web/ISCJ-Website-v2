@@ -25,6 +25,7 @@ export default function HeroSection() {
     >
       {/* Dark overlay */}
       <div
+        className="hero-overlay"
         style={{
           position: "absolute",
           inset: 0,
@@ -48,12 +49,13 @@ export default function HeroSection() {
         <p
           style={{
             fontFamily: "var(--font-scheherazade), 'Scheherazade New', serif",
-            fontSize: "clamp(1.2rem, 2.5vw, 1.9rem)",
+            fontSize: "clamp(1.05rem, 4.5vw, 1.9rem)",
             fontWeight: 400,
             color: "var(--gold)",
             marginBottom: 20,
             opacity: 0.95,
             direction: "rtl",
+            lineHeight: 1.5,
           }}
         >
           السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
@@ -62,13 +64,12 @@ export default function HeroSection() {
         <h1
           style={{
             fontFamily: "var(--ff-head)",
-            fontSize: "clamp(2.4rem, 5vw, 4.8rem)",
+            fontSize: "clamp(2rem, 7.5vw, 4.8rem)",
             fontWeight: 400,
             color: "var(--white)",
             lineHeight: 1.1,
             letterSpacing: "0.02em",
             marginBottom: 24,
-            whiteSpace: "nowrap",
           }}
         >
           Welcome to{" "}
@@ -79,7 +80,7 @@ export default function HeroSection() {
 
         <p
           style={{
-            fontSize: "1rem",
+            fontSize: "clamp(0.9rem, 2.4vw, 1rem)",
             fontWeight: 300,
             color: "rgba(255,255,255,0.65)",
             letterSpacing: "0.06em",

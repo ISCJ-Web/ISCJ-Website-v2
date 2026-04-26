@@ -4,7 +4,7 @@ export default function DonateCTASection() {
   return (
     <section
       id="donate"
-      className="geo-pattern"
+      className="geo-pattern max-sm:!py-20 max-sm:!px-6"
       style={{
         background: "var(--navy)",
         padding: "120px 48px",

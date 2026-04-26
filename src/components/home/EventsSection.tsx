@@ -25,7 +25,16 @@ export default function EventsSection() {
         className="max-sm:!py-20 max-sm:!px-6"
       >
         {/* Header */}
-        <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", marginBottom: 56 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            marginBottom: 56,
+            flexWrap: "wrap",
+            gap: 20,
+          }}
+        >
           <div>
             <span className="section-label">Calendar</span>
             <h2 className="section-title">
