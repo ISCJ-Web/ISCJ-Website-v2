@@ -1,4 +1,5 @@
 import Container from "@/components/ui/Container";
+import { assetPath } from "@/lib/assetPath";
 
 const steps = [
   {
@@ -72,7 +73,7 @@ export default function Page() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: "url(/images/iscj2.jpg)",
+            backgroundImage: `url('${assetPath("/images/iscj2.jpg")}')`,
             backgroundSize: "cover",
             backgroundPosition: "center 30%",
             filter: "brightness(0.35)",

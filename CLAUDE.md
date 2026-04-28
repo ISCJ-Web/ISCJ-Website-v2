@@ -218,6 +218,24 @@ Apply to `.service-card`, `.event-card`, `.announce-item`, `.stat-card`:
 - Dark-background sections use `rgba(255,255,255,*)` for all sub-colors (never hardcode grays)
 - Geometric texture overlays go on `::before` pseudo-elements so content stays above
 
+## Image References
+
+This project is deployed as a static export (`output: "export"`) under a production `basePath` of `/ISCJ-Website-v2` (see `next.config.ts`). Next.js auto-prefixes `<Image>`/`<Link>` `href`/`src` props, but it does **not** rewrite raw URLs inside CSS `background-image`, plain `<img>` tags, or anything else where you build a string yourself.
+
+**Rule:** Every reference to a file in `/public` must go through the `assetPath()` helper from `@/lib/assetPath`. Otherwise the URL works in `next dev` but 404s in the production build, leaving you with broken images / missing assets.
+
+```tsx
+import { assetPath } from "@/lib/assetPath";
+
+// next/image
+<Image src={assetPath("/images/iscj-white-logo.png")} alt="ISCJ" width={80} height={36} />
+
+// inline-style background-image
+<div style={{ backgroundImage: `url('${assetPath("/images/hero.jpg")}')` }} />
+```
+
+Never write `src="/images/..."` or `backgroundImage: "url(/images/...)"` directly.
+
 ## Known Gotchas
 
 - **Stale `.next` cache:** After installing packages, if you see `__webpack_modules__[moduleId] is not a function`, delete `.next/` and restart the dev server. Webpack module IDs get out of sync with cached build artifacts.
