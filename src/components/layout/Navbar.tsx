@@ -69,12 +69,12 @@ const NAV_LINKS: NavLink[] = [
   },
   {
     label: "Programs",
-    href: "/services",
+    href: "/programs",
     children: [
-      { label: "Quran Academy", href: "/services" },
-      { label: "LIT", href: "/services" },
-      { label: "Weekend School", href: "/services" },
-      { label: "Sanad", href: "/services" },
+      { label: "Quran Academy", href: "/programs/quran-academy" },
+      { label: "LIT", href: "/programs/lit" },
+      { label: "Weekend School", href: "/programs/weekend-school" },
+      { label: "Sanad", href: "/programs/sanad" },
     ],
   },
   { label: "Committees", href: "/committees" },
