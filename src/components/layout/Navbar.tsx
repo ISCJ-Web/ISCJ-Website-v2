@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { assetPath } from "@/lib/assetPath";
 
 const SOCIAL_LINKS = [
-  /**
-   * The Path variable is the SVG path for the social icon.
-   */
   {
     title: "Facebook",
     href: "https://www.facebook.com/ISCJ1/",
@@ -35,57 +34,88 @@ const SOCIAL_LINKS = [
   },
 ];
 
-const NAV_LINKS = [
-  { label: "Home", href: "#hero" },
-  { label: "About", href: "#about" },
-  { label: "Prayer Times", href: "#prayer-times" },
-  { label: "Events", href: "#events" },
-  { label: "Contact", href: "#contact" },
+type NavChild = { label: string; href: string };
+type NavLink = { label: string; href: string; children?: NavChild[] };
+
+const NAV_LINKS: NavLink[] = [
+  {
+    label: "About",
+    href: "/about",
+    children: [
+      { label: "Who We Are", href: "/about/who-are-we" },
+      { label: "History", href: "/about/history" },
+      { label: "Board of Trustees", href: "/about/board-of-trustees" },
+      { label: "Resident Scholar", href: "/about/resident-scholar" },
+      { label: "Imam's Corner", href: "/about/imams-corner" },
+      { label: "Expansion", href: "/about/expansion" },
+      { label: "Contact", href: "/about/contact" },
+    ],
+  },
+  {
+    label: "Services",
+    href: "/services",
+    children: [
+      { label: "Funeral Services", href: "/services/funeral" },
+      { label: "Wedding", href: "/services/wedding" },
+      { label: "Zakat", href: "/services/zakat" },
+      { label: "Sadaqah", href: "/services/sadaqah" },
+      { label: "Food Pantry", href: "/services/food-pantry" },
+      { label: "Library", href: "/services/library" },
+      { label: "Senior Housing", href: "/services/senior-housing" },
+      { label: "Endowment Fund", href: "/services/endowment-fund" },
+      { label: "Business Directory", href: "/services/business-directory" },
+      { label: "Friday Halaqa", href: "/services/friday-halaqa" },
+    ],
+  },
+  {
+    label: "Programs",
+    href: "/services",
+    children: [
+      { label: "Quran Academy", href: "/services" },
+      { label: "LIT", href: "/services" },
+      { label: "Weekend School", href: "/services" },
+      { label: "Sanad", href: "/services" },
+    ],
+  },
+  { label: "Committees", href: "/committees" },
 ];
+
+const CHEVRON_PATH = "M6 9l6 6 6-6";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [activeHref, setActiveHref] = useState("#hero");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 60);
-
-      const sections = document.querySelectorAll<HTMLElement>("section[id], div[id]");
-      let current = "#hero";
-      sections.forEach((s) => {
-        if (window.scrollY >= s.offsetTop - 120) current = "#" + s.id;
-      });
-      setActiveHref(current);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
     if (mobileOpen) {
       const original = document.body.style.overflow;
       document.body.style.overflow = "hidden";
-      return () => {
-        document.body.style.overflow = original;
-      };
+      return () => { document.body.style.overflow = original; };
     }
   }, [mobileOpen]);
 
-  // Close drawer when viewport grows past mobile breakpoint
   useEffect(() => {
     const mql = window.matchMedia("(min-width: 640px)");
-    const handler = (e: MediaQueryListEvent) => {
-      if (e.matches) setMobileOpen(false);
-    };
+    const handler = (e: MediaQueryListEvent) => { if (e.matches) setMobileOpen(false); };
     mql.addEventListener("change", handler);
     return () => mql.removeEventListener("change", handler);
   }, []);
 
   const navBg = scrolled || mobileOpen ? "var(--navy-deep)" : "transparent";
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   return (
     <nav
@@ -144,8 +174,8 @@ export default function Navbar() {
         </div>
 
         {/* Logo */}
-        <a
-          href="#hero"
+        <Link
+          href="/"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -172,12 +202,12 @@ export default function Navbar() {
           >
             Islamic Society of Central Jersey
           </span>
-        </a>
+        </Link>
 
         {/* Donate button */}
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <a
-            href="#donate"
+          <Link
+            href="/donate"
             style={{
               background: "transparent",
               color: "var(--white)",
@@ -204,7 +234,7 @@ export default function Navbar() {
             }}
           >
             Donate
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -232,39 +262,158 @@ export default function Navbar() {
             margin: 0,
           }}
         >
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                style={{
-                  fontSize: "0.78rem",
-                  fontWeight: 400,
-                  letterSpacing: "0.08em",
-                  color: activeHref === link.href ? "var(--white)" : "rgba(255,255,255,0.72)",
-                  textDecoration: "none",
-                  position: "relative",
-                  paddingBottom: 2,
-                  transition: "color 0.2s",
-                  whiteSpace: "nowrap",
-                }}
+          {NAV_LINKS.map((link) => {
+            const active = isActive(link.href);
+            const dropOpen = openDropdown === link.label;
+
+            return (
+              <li
+                key={link.label}
+                style={{ position: "relative" }}
+                onMouseEnter={() => link.children && setOpenDropdown(link.label)}
+                onMouseLeave={() => setOpenDropdown(null)}
               >
-                {link.label}
-                <span
+                <Link
+                  href={link.href}
                   style={{
-                    position: "absolute",
-                    bottom: -2,
-                    left: 0,
-                    right: 0,
-                    height: 1,
-                    background: "var(--gold)",
-                    transform: activeHref === link.href ? "scaleX(1)" : "scaleX(0)",
-                    transition: "transform 0.2s",
-                    display: "block",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 4,
+                    fontSize: "0.78rem",
+                    fontWeight: 400,
+                    letterSpacing: "0.08em",
+                    color: active ? "var(--white)" : "rgba(255,255,255,0.72)",
+                    textDecoration: "none",
+                    position: "relative",
+                    paddingBottom: 2,
+                    transition: "color 0.2s",
+                    whiteSpace: "nowrap",
                   }}
-                />
-              </a>
-            </li>
-          ))}
+                >
+                  {link.label}
+                  {link.children && (
+                    <svg
+                      width="10"
+                      height="10"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      style={{
+                        transition: "transform 0.2s",
+                        transform: dropOpen ? "rotate(180deg)" : "rotate(0deg)",
+                        opacity: 0.7,
+                      }}
+                    >
+                      <path d={CHEVRON_PATH} />
+                    </svg>
+                  )}
+                  <span
+                    style={{
+                      position: "absolute",
+                      bottom: -2,
+                      left: 0,
+                      right: 0,
+                      height: 1,
+                      background: "var(--gold)",
+                      transform: active ? "scaleX(1)" : "scaleX(0)",
+                      transition: "transform 0.2s",
+                      display: "block",
+                    }}
+                  />
+                </Link>
+
+                {/* Dropdown panel */}
+                {link.children && (
+                  <AnimatePresence>
+                    {dropOpen && (
+                      <motion.div
+                        key="dropdown"
+                        initial={{ opacity: 0, y: 6, x: "-50%" }}
+                        animate={{ opacity: 1, y: 0, x: "-50%" }}
+                        exit={{ opacity: 0, y: 6, x: "-50%" }}
+                        transition={{ duration: 0.18, ease: "easeOut" }}
+                        style={{
+                          position: "absolute",
+                          top: "calc(100% + 10px)",
+                          left: "50%",
+                          background: "var(--navy-deep)",
+                          borderTop: "2px solid var(--gold)",
+                          boxShadow: "0 16px 40px rgba(1,24,48,0.45)",
+                          minWidth: link.label === "Services" ? 360 : 220,
+                          zIndex: 200,
+                        }}
+                      >
+                        {/* Arrow */}
+                        <div
+                          style={{
+                            position: "absolute",
+                            top: -7,
+                            left: "50%",
+                            transform: "translateX(-50%)",
+                            width: 12,
+                            height: 6,
+                            overflow: "hidden",
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: 10,
+                              height: 10,
+                              background: "var(--gold)",
+                              transform: "rotate(45deg)",
+                              margin: "3px auto 0",
+                            }}
+                          />
+                        </div>
+
+                        <ul
+                          style={{
+                            listStyle: "none",
+                            padding: "12px 0",
+                            margin: 0,
+                            display: link.label === "Services" ? "grid" : "block",
+                            gridTemplateColumns: link.label === "Services" ? "1fr 1fr" : undefined,
+                          }}
+                        >
+                          {link.children.map((child) => (
+                            <li key={child.href + child.label}>
+                              <Link
+                                href={child.href}
+                                style={{
+                                  display: "block",
+                                  padding: "9px 24px",
+                                  fontSize: "0.78rem",
+                                  fontWeight: 300,
+                                  letterSpacing: "0.04em",
+                                  color: "rgba(255,255,255,0.65)",
+                                  textDecoration: "none",
+                                  transition: "color 0.15s, background 0.15s",
+                                  whiteSpace: "nowrap",
+                                }}
+                                onMouseEnter={(e) => {
+                                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--white)";
+                                  (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.04)";
+                                }}
+                                onMouseLeave={(e) => {
+                                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)";
+                                  (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                                }}
+                              >
+                                {child.label}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
 
@@ -279,9 +428,9 @@ export default function Navbar() {
           gap: 12,
         }}
       >
-        {/* Brand: logo + 3-line wordmark */}
-        <a
-          href="#hero"
+        {/* Brand */}
+        <Link
+          href="/"
           onClick={() => setMobileOpen(false)}
           style={{
             display: "flex",
@@ -316,7 +465,7 @@ export default function Navbar() {
             <br />
             Central Jersey
           </span>
-        </a>
+        </Link>
 
         {/* Hamburger */}
         <button
@@ -349,55 +498,142 @@ export default function Navbar() {
               background: "var(--navy-deep)",
             }}
           >
-            <ul
-              style={{
-                listStyle: "none",
-                margin: 0,
-                padding: "12px 0 20px",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
+            <ul style={{ listStyle: "none", margin: 0, padding: "12px 0 4px", display: "flex", flexDirection: "column" }}>
               {NAV_LINKS.map((link, i) => {
-                const active = activeHref === link.href;
+                const active = isActive(link.href);
+                const mobileDropOpen = openMobileDropdown === link.label;
+
                 return (
                   <motion.li
-                    key={link.href}
+                    key={link.label}
                     initial={{ opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: -8 }}
                     transition={{ delay: 0.05 + i * 0.05, duration: 0.25 }}
                   >
-                    <a
-                      href={link.href}
-                      onClick={() => setMobileOpen(false)}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 14,
-                        padding: "14px 24px",
-                        fontFamily: "var(--ff-body)",
-                        fontSize: "0.95rem",
-                        fontWeight: 400,
-                        letterSpacing: "0.06em",
-                        color: active ? "var(--white)" : "rgba(255,255,255,0.72)",
-                        textDecoration: "none",
-                        borderLeft: active
-                          ? "2px solid var(--gold)"
-                          : "2px solid transparent",
-                        transition: "color 0.2s, border-color 0.2s",
-                      }}
-                    >
-                      <span
+                    {link.children ? (
+                      <>
+                        <button
+                          type="button"
+                          onClick={() => setOpenMobileDropdown(mobileDropOpen ? null : link.label)}
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "space-between",
+                            gap: 14,
+                            padding: "14px 24px",
+                            background: "none",
+                            border: "none",
+                            cursor: "pointer",
+                            fontFamily: "var(--ff-body)",
+                            fontSize: "0.95rem",
+                            fontWeight: 400,
+                            letterSpacing: "0.06em",
+                            color: active ? "var(--white)" : "rgba(255,255,255,0.72)",
+                            borderLeft: active ? "2px solid var(--gold)" : "2px solid transparent",
+                            textAlign: "left",
+                          }}
+                        >
+                          <span style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                            <span
+                              style={{
+                                width: 6,
+                                height: 1,
+                                background: active ? "var(--gold)" : "rgba(255,255,255,0.35)",
+                                display: "inline-block",
+                                flexShrink: 0,
+                              }}
+                            />
+                            {link.label}
+                          </span>
+                          <svg
+                            width="12"
+                            height="12"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            style={{
+                              transition: "transform 0.2s",
+                              transform: mobileDropOpen ? "rotate(180deg)" : "rotate(0deg)",
+                              opacity: 0.5,
+                              flexShrink: 0,
+                            }}
+                          >
+                            <path d={CHEVRON_PATH} />
+                          </svg>
+                        </button>
+
+                        <AnimatePresence>
+                          {mobileDropOpen && (
+                            <motion.ul
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.22 }}
+                              style={{
+                                listStyle: "none",
+                                margin: 0,
+                                padding: "0 0 8px 0",
+                                overflow: "hidden",
+                                background: "rgba(255,255,255,0.03)",
+                              }}
+                            >
+                              {link.children.map((child) => (
+                                <li key={child.href + child.label}>
+                                  <Link
+                                    href={child.href}
+                                    onClick={() => { setMobileOpen(false); setOpenMobileDropdown(null); }}
+                                    style={{
+                                      display: "block",
+                                      padding: "10px 24px 10px 48px",
+                                      fontSize: "0.85rem",
+                                      fontWeight: 300,
+                                      letterSpacing: "0.04em",
+                                      color: "rgba(255,255,255,0.55)",
+                                      textDecoration: "none",
+                                    }}
+                                  >
+                                    {child.label}
+                                  </Link>
+                                </li>
+                              ))}
+                            </motion.ul>
+                          )}
+                        </AnimatePresence>
+                      </>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
                         style={{
-                          width: 6,
-                          height: 1,
-                          background: active ? "var(--gold)" : "rgba(255,255,255,0.35)",
-                          display: "inline-block",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 14,
+                          padding: "14px 24px",
+                          fontFamily: "var(--ff-body)",
+                          fontSize: "0.95rem",
+                          fontWeight: 400,
+                          letterSpacing: "0.06em",
+                          color: active ? "var(--white)" : "rgba(255,255,255,0.72)",
+                          textDecoration: "none",
+                          borderLeft: active ? "2px solid var(--gold)" : "2px solid transparent",
                         }}
-                      />
-                      {link.label}
-                    </a>
+                      >
+                        <span
+                          style={{
+                            width: 6,
+                            height: 1,
+                            background: active ? "var(--gold)" : "rgba(255,255,255,0.35)",
+                            display: "inline-block",
+                          }}
+                        />
+                        {link.label}
+                      </Link>
+                    )}
                   </motion.li>
                 );
               })}
@@ -409,10 +645,10 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 0.05 + NAV_LINKS.length * 0.05, duration: 0.25 }}
-              style={{ padding: "4px 24px 20px" }}
+              style={{ padding: "8px 24px 20px" }}
             >
-              <a
-                href="#donate"
+              <Link
+                href="/donate"
                 onClick={() => setMobileOpen(false)}
                 style={{
                   display: "block",
@@ -430,7 +666,7 @@ export default function Navbar() {
                 }}
               >
                 Donate
-              </a>
+              </Link>
             </motion.div>
 
             {/* Social row in drawer */}

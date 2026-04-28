@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { assetPath } from "@/lib/assetPath";
 
 const SOCIAL_LINKS = [
@@ -21,37 +23,79 @@ const SOCIAL_LINKS = [
   },
 ];
 
-const FOOTER_COLS = [
-  {
-    heading: "Mosque",
-    links: [
-      { label: "Prayer Times", href: "#prayer-times" },
-      { label: "Jumu'ah", href: "#events" },
-      { label: "Ramadan", href: "#announcements" },
-      { label: "Directions", href: "#" },
-    ],
-  },
-  {
-    heading: "Programs",
-    links: [
-      { label: "Weekend School", href: "#services" },
-      { label: "Youth Programs", href: "#services" },
-      { label: "Adult Education", href: "#services" },
-      { label: "Social Services", href: "#services" },
-    ],
-  },
-  {
-    heading: "Community",
-    links: [
-      { label: "Events Calendar", href: "#events" },
-      { label: "Announcements", href: "#announcements" },
-      { label: "Volunteer", href: "#" },
-      { label: "Contact Us", href: "#contact" },
-    ],
-  },
+const EMAIL_CONTACTS = [
+  { label: "General Inquiry", email: "admin@iscj.org" },
+  { label: "Advertise With Us", email: "advertising@iscj.org" },
+  { label: "Volunteer", email: "volunteers@iscj.org" },
+  { label: "Imam", email: "imam@iscj.org" },
+  { label: "Feedback", email: "feedback@iscj.org" },
 ];
 
+const QUICK_LINKS = [
+  { label: "About", href: "/about" },
+  { label: "Donate", href: "/donate" },
+  { label: "Endowment Fund", href: "/services/endowment-fund" },
+  { label: "Contact Us", href: "/about/contact" },
+];
+
+const PROGRAMS = [
+  { label: "Quran Academy", href: "/services" },
+  { label: "LIT", href: "/services" },
+  { label: "Weekend School", href: "/services" },
+  { label: "Sanad", href: "/services" },
+];
+
+function FooterLink({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
+      style={{
+        fontSize: "0.85rem",
+        fontWeight: 300,
+        color: "rgba(255,255,255,0.45)",
+        textDecoration: "none",
+        transition: "color 0.2s",
+        display: "block",
+      }}
+      onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--white)")}
+      onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.45)")}
+    >
+      {children}
+    </a>
+  );
+}
+
+function ColHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h5
+      style={{
+        fontSize: "0.68rem",
+        fontWeight: 500,
+        letterSpacing: "0.16em",
+        textTransform: "uppercase",
+        color: "var(--gold)",
+        marginBottom: 20,
+      }}
+    >
+      {children}
+    </h5>
+  );
+}
+
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setSubmitted(true);
+      setEmail("");
+    }
+  };
+
   return (
     <footer
       id="contact"
@@ -65,65 +109,234 @@ export default function Footer() {
           maxWidth: 1200,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
+          gridTemplateColumns: "2fr 1fr 1fr 1.5fr",
           gap: 48,
-          paddingBottom: 56,
+          paddingBottom: 48,
           borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
       >
         {/* Brand col */}
         <div>
-          <Image src={assetPath("/images/iscj-white-logo.png")} alt="ISCJ" width={100} height={44} style={{ height: 44, width: "auto", marginBottom: 16 }} />
-          <p style={{ fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.75, color: "rgba(255,255,255,0.4)", maxWidth: 280 }}>
+          <Link href="/">
+            <Image
+              src={assetPath("/images/iscj-white-logo.png")}
+              alt="ISCJ"
+              width={100}
+              height={44}
+              style={{ height: 44, width: "auto", marginBottom: 16 }}
+            />
+          </Link>
+          <p style={{ fontSize: "0.85rem", fontWeight: 300, lineHeight: 1.75, color: "rgba(255,255,255,0.4)", maxWidth: 280, marginBottom: 24 }}>
             Islamic Society of Central Jersey — a place of worship, learning, and community for Muslim families throughout Central New Jersey.
           </p>
-          <div style={{ marginTop: 20, fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.35)", lineHeight: 1.7 }}>
-            4145 Route 1 South and Promenade Blvd<br />
-            Monmouth Junction, NJ 08852<br />
-            <a href="mailto:admin@iscj.org" style={{ color: "rgba(255,255,255,0.35)", textDecoration: "none", transition: "color 0.2s" }}
-              onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--gold)")}
-              onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.35)")}
-            >admin@iscj.org</a>
+
+          {/* Addresses */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            <div>
+              <p style={{ fontSize: "0.65rem", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>
+                Mailing Address
+              </p>
+              <p style={{ fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.35)", lineHeight: 1.7 }}>
+                P.O. Box 628<br />
+                Monmouth Junction, NJ 08852-0628
+              </p>
+            </div>
+            <div>
+              <p style={{ fontSize: "0.65rem", fontWeight: 500, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>
+                Address
+              </p>
+              <p style={{ fontSize: "0.8rem", fontWeight: 300, color: "rgba(255,255,255,0.35)", lineHeight: 1.7 }}>
+                4145 Route 1 South and Promenade Blvd<br />
+                Monmouth Junction, NJ 08852-0628
+              </p>
+              <a
+                href="https://maps.google.com/?q=4145+Route+1+South,+Monmouth+Junction,+NJ+08852"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 5,
+                  marginTop: 8,
+                  fontSize: "0.75rem",
+                  fontWeight: 400,
+                  letterSpacing: "0.08em",
+                  color: "var(--gold)",
+                  textDecoration: "none",
+                  opacity: 0.85,
+                  transition: "opacity 0.2s",
+                }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "1")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.opacity = "0.85")}
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+                Maps &amp; Directions
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Nav cols */}
-        {FOOTER_COLS.map((col) => (
-          <div key={col.heading}>
-            <h5
-              style={{
-                fontSize: "0.68rem",
-                fontWeight: 500,
-                letterSpacing: "0.16em",
-                textTransform: "uppercase",
-                color: "var(--gold)",
-                marginBottom: 20,
-              }}
-            >
-              {col.heading}
-            </h5>
-            <ul style={{ listStyle: "none" }}>
-              {col.links.map((link, i) => (
-                <li key={link.href + i} style={{ marginTop: i > 0 ? 10 : 0 }}>
-                  <a
-                    href={link.href}
-                    style={{
-                      fontSize: "0.85rem",
-                      fontWeight: 300,
-                      color: "rgba(255,255,255,0.45)",
-                      textDecoration: "none",
-                      transition: "color 0.2s",
-                    }}
-                    onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--white)")}
-                    onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.45)")}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {/* Quick Links col */}
+        <div>
+          <ColHeading>ISCJ</ColHeading>
+          <ul style={{ listStyle: "none" }}>
+            {QUICK_LINKS.map((link, i) => (
+              <li key={link.href + link.label} style={{ marginTop: i > 0 ? 10 : 0 }}>
+                <Link
+                  href={link.href}
+                  style={{
+                    fontSize: "0.85rem",
+                    fontWeight: 300,
+                    color: "rgba(255,255,255,0.45)",
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                    display: "block",
+                  }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--white)")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.45)")}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Programs col */}
+        <div>
+          <ColHeading>Programs</ColHeading>
+          <ul style={{ listStyle: "none" }}>
+            {PROGRAMS.map((link, i) => (
+              <li key={link.label} style={{ marginTop: i > 0 ? 10 : 0 }}>
+                <Link
+                  href={link.href}
+                  style={{
+                    fontSize: "0.85rem",
+                    fontWeight: 300,
+                    color: "rgba(255,255,255,0.45)",
+                    textDecoration: "none",
+                    transition: "color 0.2s",
+                    display: "block",
+                  }}
+                  onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--white)")}
+                  onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.45)")}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Email Us col */}
+        <div>
+          <ColHeading>Email Us</ColHeading>
+          <ul style={{ listStyle: "none" }}>
+            {EMAIL_CONTACTS.map((contact, i) => (
+              <li key={contact.email} style={{ marginTop: i > 0 ? 14 : 0 }}>
+                <p style={{ fontSize: "0.68rem", fontWeight: 400, letterSpacing: "0.06em", color: "rgba(255,255,255,0.3)", marginBottom: 3 }}>
+                  {contact.label}
+                </p>
+                <FooterLink href={`mailto:${contact.email}`}>
+                  {contact.email}
+                </FooterLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Mailing list banner */}
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "40px 0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 48,
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          flexWrap: "wrap",
+        }}
+        className="footer-mailing"
+      >
+        <div style={{ flex: "1 1 280px" }}>
+          <h4
+            style={{
+              fontFamily: "var(--ff-display)",
+              fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
+              fontWeight: 400,
+              color: "var(--white)",
+              marginBottom: 8,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Stay <em style={{ fontStyle: "italic", fontWeight: 300 }}>Connected</em>
+          </h4>
+          <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7 }}>
+            Join our mailing list to receive the latest news &amp; updates from ISCJ.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubscribe}
+          style={{ display: "flex", gap: 0, flex: "1 1 360px", maxWidth: 480 }}
+        >
+          {submitted ? (
+            <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--gold)", padding: "12px 0" }}>
+              Thank you for subscribing!
+            </p>
+          ) : (
+            <>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
+                required
+                style={{
+                  flex: 1,
+                  padding: "12px 18px",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRight: "none",
+                  color: "var(--white)",
+                  fontFamily: "var(--ff-body)",
+                  fontSize: "0.85rem",
+                  fontWeight: 300,
+                  outline: "none",
+                  borderRadius: 0,
+                }}
+              />
+              <button
+                type="submit"
+                style={{
+                  padding: "12px 24px",
+                  background: "var(--gold)",
+                  color: "var(--navy-deep)",
+                  fontFamily: "var(--ff-body)",
+                  fontSize: "0.72rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  border: "none",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "background 0.2s",
+                  borderRadius: 0,
+                }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold-light)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold)")}
+              >
+                Subscribe
+              </button>
+            </>
+          )}
+        </form>
       </div>
 
       {/* Bottom row */}
