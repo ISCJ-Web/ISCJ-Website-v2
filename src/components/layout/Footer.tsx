@@ -32,7 +32,7 @@ const EMAIL_CONTACTS = [
 ];
 
 const QUICK_LINKS = [
-  { label: "About", href: "/about" },
+  { label: "About", href: "/about/who-are-we" },
   { label: "Donate", href: "/donate" },
   { label: "Endowment Fund", href: "/services/endowment-fund" },
   { label: "Contact Us", href: "/about/contact" },
@@ -102,7 +102,97 @@ export default function Footer() {
       style={{ background: "var(--navy-deep)", color: "rgba(255,255,255,0.5)" }}
       className="footer-root"
     >
-      {/* Top grid */}
+      {/* Mailing list banner — top of footer */}
+      <div
+        style={{
+          maxWidth: 1200,
+          margin: "0 auto",
+          padding: "40px 0",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          gap: 48,
+          borderBottom: "1px solid rgba(255,255,255,0.07)",
+          flexWrap: "wrap",
+        }}
+        className="footer-mailing"
+      >
+        <div style={{ flex: "1 1 280px" }}>
+          <h4
+            style={{
+              fontFamily: "var(--ff-display)",
+              fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
+              fontWeight: 400,
+              color: "var(--white)",
+              marginBottom: 8,
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Stay <em style={{ fontStyle: "italic", fontWeight: 300 }}>Connected</em>
+          </h4>
+          <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7 }}>
+            Join our mailing list to receive the latest news &amp; updates from ISCJ.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubscribe}
+          style={{ display: "flex", gap: 0, flex: "1 1 360px", maxWidth: 480 }}
+        >
+          {submitted ? (
+            <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--gold)", padding: "12px 0" }}>
+              Thank you for subscribing!
+            </p>
+          ) : (
+            <>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
+                required
+                style={{
+                  flex: 1,
+                  padding: "12px 18px",
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRight: "none",
+                  color: "var(--white)",
+                  fontFamily: "var(--ff-body)",
+                  fontSize: "0.85rem",
+                  fontWeight: 300,
+                  outline: "none",
+                  borderRadius: 0,
+                }}
+              />
+              <button
+                type="submit"
+                style={{
+                  padding: "12px 24px",
+                  background: "var(--gold)",
+                  color: "var(--navy-deep)",
+                  fontFamily: "var(--ff-body)",
+                  fontSize: "0.72rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  border: "none",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                  transition: "background 0.2s",
+                  borderRadius: 0,
+                }}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold-light)")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold)")}
+              >
+                Subscribe
+              </button>
+            </>
+          )}
+        </form>
+      </div>
+
+      {/* Main grid */}
       <div
         className="footer-grid"
         style={{
@@ -111,6 +201,7 @@ export default function Footer() {
           display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr 1.5fr",
           gap: 48,
+          paddingTop: 48,
           paddingBottom: 48,
           borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
@@ -247,96 +338,6 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-      </div>
-
-      {/* Mailing list banner */}
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "40px 0",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 48,
-          borderBottom: "1px solid rgba(255,255,255,0.07)",
-          flexWrap: "wrap",
-        }}
-        className="footer-mailing"
-      >
-        <div style={{ flex: "1 1 280px" }}>
-          <h4
-            style={{
-              fontFamily: "var(--ff-display)",
-              fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
-              fontWeight: 400,
-              color: "var(--white)",
-              marginBottom: 8,
-              letterSpacing: "-0.01em",
-            }}
-          >
-            Stay <em style={{ fontStyle: "italic", fontWeight: 300 }}>Connected</em>
-          </h4>
-          <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "rgba(255,255,255,0.4)", lineHeight: 1.7 }}>
-            Join our mailing list to receive the latest news &amp; updates from ISCJ.
-          </p>
-        </div>
-
-        <form
-          onSubmit={handleSubscribe}
-          style={{ display: "flex", gap: 0, flex: "1 1 360px", maxWidth: 480 }}
-        >
-          {submitted ? (
-            <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--gold)", padding: "12px 0" }}>
-              Thank you for subscribing!
-            </p>
-          ) : (
-            <>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                required
-                style={{
-                  flex: 1,
-                  padding: "12px 18px",
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  borderRight: "none",
-                  color: "var(--white)",
-                  fontFamily: "var(--ff-body)",
-                  fontSize: "0.85rem",
-                  fontWeight: 300,
-                  outline: "none",
-                  borderRadius: 0,
-                }}
-              />
-              <button
-                type="submit"
-                style={{
-                  padding: "12px 24px",
-                  background: "var(--gold)",
-                  color: "var(--navy-deep)",
-                  fontFamily: "var(--ff-body)",
-                  fontSize: "0.72rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  border: "none",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  transition: "background 0.2s",
-                  borderRadius: 0,
-                }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold-light)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold)")}
-              >
-                Subscribe
-              </button>
-            </>
-          )}
-        </form>
       </div>
 
       {/* Bottom row */}

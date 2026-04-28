@@ -83,17 +83,24 @@ const NAV_LINKS: NavLink[] = [
 const CHEVRON_PATH = "M6 9l6 6 6-6";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const [scrolled, setScrolled] = useState(!isHome);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
-  const pathname = usePathname();
 
   useEffect(() => {
+    if (!isHome) {
+      setScrolled(true);
+      return;
+    }
     const handleScroll = () => setScrolled(window.scrollY > 60);
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
 
   useEffect(() => {
     if (mobileOpen) {
@@ -273,25 +280,30 @@ export default function Navbar() {
                 onMouseEnter={() => link.children && setOpenDropdown(link.label)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
-                <Link
-                  href={link.href}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 4,
-                    fontSize: "0.78rem",
-                    fontWeight: 400,
-                    letterSpacing: "0.08em",
-                    color: active ? "var(--white)" : "rgba(255,255,255,0.72)",
-                    textDecoration: "none",
-                    position: "relative",
-                    paddingBottom: 2,
-                    transition: "color 0.2s",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {link.label}
-                  {link.children && (
+                {link.children ? (
+                  <button
+                    type="button"
+                    onClick={() => setOpenDropdown(dropOpen ? null : link.label)}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 4,
+                      fontSize: "0.78rem",
+                      fontWeight: 400,
+                      letterSpacing: "0.08em",
+                      color: active ? "var(--white)" : "rgba(255,255,255,0.72)",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      fontFamily: "var(--ff-body)",
+                      position: "relative",
+                      paddingBottom: 2,
+                      padding: 0,
+                      transition: "color 0.2s",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {link.label}
                     <svg
                       width="10"
                       height="10"
@@ -309,21 +321,54 @@ export default function Navbar() {
                     >
                       <path d={CHEVRON_PATH} />
                     </svg>
-                  )}
-                  <span
+                    <span
+                      style={{
+                        position: "absolute",
+                        bottom: -2,
+                        left: 0,
+                        right: 0,
+                        height: 1,
+                        background: "var(--gold)",
+                        transform: active ? "scaleX(1)" : "scaleX(0)",
+                        transition: "transform 0.2s",
+                        display: "block",
+                      }}
+                    />
+                  </button>
+                ) : (
+                  <Link
+                    href={link.href}
                     style={{
-                      position: "absolute",
-                      bottom: -2,
-                      left: 0,
-                      right: 0,
-                      height: 1,
-                      background: "var(--gold)",
-                      transform: active ? "scaleX(1)" : "scaleX(0)",
-                      transition: "transform 0.2s",
-                      display: "block",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 4,
+                      fontSize: "0.78rem",
+                      fontWeight: 400,
+                      letterSpacing: "0.08em",
+                      color: active ? "var(--white)" : "rgba(255,255,255,0.72)",
+                      textDecoration: "none",
+                      position: "relative",
+                      paddingBottom: 2,
+                      transition: "color 0.2s",
+                      whiteSpace: "nowrap",
                     }}
-                  />
-                </Link>
+                  >
+                    {link.label}
+                    <span
+                      style={{
+                        position: "absolute",
+                        bottom: -2,
+                        left: 0,
+                        right: 0,
+                        height: 1,
+                        background: "var(--gold)",
+                        transform: active ? "scaleX(1)" : "scaleX(0)",
+                        transition: "transform 0.2s",
+                        display: "block",
+                      }}
+                    />
+                  </Link>
+                )}
 
                 {/* Dropdown panel */}
                 {link.children && (
