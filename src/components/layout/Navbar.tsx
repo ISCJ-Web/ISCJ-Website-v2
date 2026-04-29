@@ -34,7 +34,7 @@ const SOCIAL_LINKS = [
   },
 ];
 
-type NavChild = { label: string; href: string };
+type NavChild = { label: string; href: string; external?: boolean };
 type NavLink = { label: string; href: string; children?: NavChild[] };
 
 const NAV_LINKS: NavLink[] = [
@@ -49,6 +49,7 @@ const NAV_LINKS: NavLink[] = [
       { label: "Imam's Corner", href: "/about/imams-corner" },
       { label: "Expansion", href: "/about/expansion" },
       { label: "Contact", href: "/about/contact" },
+      { label: "Learn About Islam", href: "/learn-about-islam" },
     ],
   },
   {
@@ -71,10 +72,11 @@ const NAV_LINKS: NavLink[] = [
     label: "Programs",
     href: "/programs",
     children: [
-      { label: "Quran Academy", href: "/programs/quran-academy" },
-      { label: "LIT", href: "/programs/lit" },
-      { label: "Weekend School", href: "/programs/weekend-school" },
-      { label: "Sanad", href: "/programs/sanad" },
+      { label: "Quran Academy", href: "https://qa.iscj.org/", external: true },
+      { label: "LIT", href: "https://lit.iscj.org/", external: true },
+      { label: "Weekend School", href: "https://www.iscjwes.org/", external: true },
+      { label: "NUI School", href: "https://www.nuischool.org/", external: true },
+      { label: "Sanad", href: "http://sanad.iscj.org", external: true },
     ],
   },
   { label: "Committees", href: "/committees" },
@@ -425,30 +427,59 @@ export default function Navbar() {
                         >
                           {link.children.map((child) => (
                             <li key={child.href + child.label}>
-                              <Link
-                                href={child.href}
-                                style={{
-                                  display: "block",
-                                  padding: "9px 24px",
-                                  fontSize: "0.78rem",
-                                  fontWeight: 300,
-                                  letterSpacing: "0.04em",
-                                  color: "rgba(255,255,255,0.65)",
-                                  textDecoration: "none",
-                                  transition: "color 0.15s, background 0.15s",
-                                  whiteSpace: "nowrap",
-                                }}
-                                onMouseEnter={(e) => {
-                                  (e.currentTarget as HTMLAnchorElement).style.color = "var(--white)";
-                                  (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.04)";
-                                }}
-                                onMouseLeave={(e) => {
-                                  (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)";
-                                  (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
-                                }}
-                              >
-                                {child.label}
-                              </Link>
+                              {child.external ? (
+                                <a
+                                  href={child.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  style={{
+                                    display: "block",
+                                    padding: "9px 24px",
+                                    fontSize: "0.78rem",
+                                    fontWeight: 300,
+                                    letterSpacing: "0.04em",
+                                    color: "rgba(255,255,255,0.65)",
+                                    textDecoration: "none",
+                                    transition: "color 0.15s, background 0.15s",
+                                    whiteSpace: "nowrap",
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    (e.currentTarget as HTMLAnchorElement).style.color = "var(--white)";
+                                    (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.04)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)";
+                                    (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                                  }}
+                                >
+                                  {child.label}
+                                </a>
+                              ) : (
+                                <Link
+                                  href={child.href}
+                                  style={{
+                                    display: "block",
+                                    padding: "9px 24px",
+                                    fontSize: "0.78rem",
+                                    fontWeight: 300,
+                                    letterSpacing: "0.04em",
+                                    color: "rgba(255,255,255,0.65)",
+                                    textDecoration: "none",
+                                    transition: "color 0.15s, background 0.15s",
+                                    whiteSpace: "nowrap",
+                                  }}
+                                  onMouseEnter={(e) => {
+                                    (e.currentTarget as HTMLAnchorElement).style.color = "var(--white)";
+                                    (e.currentTarget as HTMLAnchorElement).style.background = "rgba(255,255,255,0.04)";
+                                  }}
+                                  onMouseLeave={(e) => {
+                                    (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.65)";
+                                    (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
+                                  }}
+                                >
+                                  {child.label}
+                                </Link>
+                              )}
                             </li>
                           ))}
                         </ul>
@@ -629,21 +660,41 @@ export default function Navbar() {
                             >
                               {link.children.map((child) => (
                                 <li key={child.href + child.label}>
-                                  <Link
-                                    href={child.href}
-                                    onClick={() => { setMobileOpen(false); setOpenMobileDropdown(null); }}
-                                    style={{
-                                      display: "block",
-                                      padding: "10px 24px 10px 48px",
-                                      fontSize: "0.85rem",
-                                      fontWeight: 300,
-                                      letterSpacing: "0.04em",
-                                      color: "rgba(255,255,255,0.55)",
-                                      textDecoration: "none",
-                                    }}
-                                  >
-                                    {child.label}
-                                  </Link>
+                                  {child.external ? (
+                                    <a
+                                      href={child.href}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      onClick={() => { setMobileOpen(false); setOpenMobileDropdown(null); }}
+                                      style={{
+                                        display: "block",
+                                        padding: "10px 24px 10px 48px",
+                                        fontSize: "0.85rem",
+                                        fontWeight: 300,
+                                        letterSpacing: "0.04em",
+                                        color: "rgba(255,255,255,0.55)",
+                                        textDecoration: "none",
+                                      }}
+                                    >
+                                      {child.label}
+                                    </a>
+                                  ) : (
+                                    <Link
+                                      href={child.href}
+                                      onClick={() => { setMobileOpen(false); setOpenMobileDropdown(null); }}
+                                      style={{
+                                        display: "block",
+                                        padding: "10px 24px 10px 48px",
+                                        fontSize: "0.85rem",
+                                        fontWeight: 300,
+                                        letterSpacing: "0.04em",
+                                        color: "rgba(255,255,255,0.55)",
+                                        textDecoration: "none",
+                                      }}
+                                    >
+                                      {child.label}
+                                    </Link>
+                                  )}
                                 </li>
                               ))}
                             </motion.ul>

@@ -39,10 +39,11 @@ const QUICK_LINKS = [
 ];
 
 const PROGRAMS = [
-  { label: "Quran Academy", href: "/services" },
-  { label: "LIT", href: "/services" },
-  { label: "Weekend School", href: "/services" },
-  { label: "Sanad", href: "/services" },
+  { label: "Quran Academy", href: "https://qa.iscj.org/", external: true },
+  { label: "LIT", href: "https://lit.iscj.org/", external: true },
+  { label: "Weekend School", href: "https://www.iscjwes.org/", external: true },
+  { label: "NUI School", href: "https://www.nuischool.org/", external: true },
+  { label: "Sanad", href: "http://sanad.iscj.org", external: true },
 ];
 
 function FooterLink({ href, children, external }: { href: string; children: React.ReactNode; external?: boolean }) {
@@ -302,21 +303,9 @@ export default function Footer() {
           <ul style={{ listStyle: "none" }}>
             {PROGRAMS.map((link, i) => (
               <li key={link.label} style={{ marginTop: i > 0 ? 10 : 0 }}>
-                <Link
-                  href={link.href}
-                  style={{
-                    fontSize: "0.85rem",
-                    fontWeight: 300,
-                    color: "rgba(255,255,255,0.45)",
-                    textDecoration: "none",
-                    transition: "color 0.2s",
-                    display: "block",
-                  }}
-                  onMouseEnter={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "var(--white)")}
-                  onMouseLeave={(e) => ((e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.45)")}
-                >
+                <FooterLink href={link.href} external={link.external}>
                   {link.label}
-                </Link>
+                </FooterLink>
               </li>
             ))}
           </ul>
