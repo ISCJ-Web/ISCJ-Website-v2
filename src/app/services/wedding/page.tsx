@@ -56,6 +56,61 @@ const guidelines = [
   "No one will be turned away for lack of funds.",
 ];
 
+const steps = [
+  {
+    number: "01",
+    title: "Initial Contact",
+    body: [
+      "Email shamsa.khan@iscj.org as soon as possible with the following information: occasion description, membership status, requested date & time, number of expected guests, and food plan.",
+      "The office will reply within 3 business days. Please allow enough time — last-minute requests will NOT be honored.",
+    ],
+  },
+  {
+    number: "02",
+    title: "Reservation & Payment",
+    body: [
+      "Once the admin office confirms date and time availability, fill out the Reservation Form and email it back with proof of your full payment.",
+      "Your reservation will be confirmed after ISCJ fees are received. Refer to the Reservation Form for fee schedules.",
+    ],
+  },
+  {
+    number: "03",
+    title: "Imam Coordination",
+    body: [
+      "The office will verify Imam Hamad Chebli's availability and facilitate direct communication with him.",
+      "Please contact Imam Chebli directly for any inquiries regarding the Nikkah ceremony or marriage certificates.",
+    ],
+  },
+  {
+    number: "04",
+    title: "Day-of Requirements",
+    body: [],
+    list: [
+      "Provide two witnesses for the Nikkah ceremony",
+      "Bring your marriage permit obtained from your local Township Municipality",
+      "A printed Marriage Application Form (to be given to the Imam)",
+      "Imam's payment",
+    ],
+  },
+];
+
+const paymentMethods = [
+  "In-Person (10am–2pm, 7 days a week)",
+  "Zelle: accounting@iscj.org",
+  "PayPal: accounting@iscj.org",
+  "Venmo: iscj-nj",
+  "Check payable to ISCJ",
+];
+
+const guidelines = [
+  "All marriage requests and reservations are handled by the ISCJ office to streamline the process and coordinate scheduling.",
+  "Marriage request forms and ISCJ Space/MPR reservation forms are available online and at the ISCJ office.",
+  "After confirming availability and finalizing the date/time, the admin office will contact Imam Chebli to confirm his availability and update the applicant.",
+  "A refundable security deposit of $500 in CASH ONLY is due at the time of reservation. If the deposit is not received, your reservation may be CANCELLED. The deposit will be refunded after a satisfactory post-event inspection.",
+  "Satisfactory inspection includes: adhering to your reservation time and the NO FOOD OR DRINKS in the Musala area policy.",
+  "No one will be turned away for lack of funds.",
+];
+
 export default function Page() {
   return (
     <main style={{ minHeight: "100vh", background: "var(--surface)" }}>
