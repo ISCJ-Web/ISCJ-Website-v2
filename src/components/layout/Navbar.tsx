@@ -50,6 +50,7 @@ const NAV_LINKS: NavLink[] = [
       { label: "Expansion", href: "/about/expansion" },
       { label: "Contact", href: "/about/contact" },
       { label: "Learn About Islam", href: "/learn-about-islam" },
+      { label: "Committees", href: "/committees" },
     ],
   },
   {
@@ -79,7 +80,7 @@ const NAV_LINKS: NavLink[] = [
       { label: "Sanad", href: "http://sanad.iscj.org", external: true },
     ],
   },
-  { label: "Committees", href: "/committees" },
+  { label: "Volunteer", href: "/volunteer" },
 ];
 
 const CHEVRON_PATH = "M6 9l6 6 6-6";
@@ -389,7 +390,7 @@ export default function Navbar() {
                           background: "var(--navy-deep)",
                           borderTop: "2px solid var(--gold)",
                           boxShadow: "0 16px 40px rgba(1,24,48,0.45)",
-                          minWidth: link.label === "Services" ? 360 : 220,
+                          minWidth: link.label === "Services" || link.label === "About" ? 360 : 220,
                           zIndex: 200,
                         }}
                       >
@@ -421,8 +422,8 @@ export default function Navbar() {
                             listStyle: "none",
                             padding: "12px 0",
                             margin: 0,
-                            display: link.label === "Services" ? "grid" : "block",
-                            gridTemplateColumns: link.label === "Services" ? "1fr 1fr" : undefined,
+                            display: link.label === "Services" || link.label === "About" ? "grid" : "block",
+                            gridTemplateColumns: link.label === "Services" || link.label === "About" ? "1fr 1fr" : undefined,
                           }}
                         >
                           {link.children.map((child) => (
