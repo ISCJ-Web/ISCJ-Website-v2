@@ -91,11 +91,18 @@ h2.section-title em {
 .nav-mobile-bar { display: none; }
 .nav-mobile-drawer { display: none; }
 .prayer-mobile { display: none; }
+.prayer-mobile-grid { display: none; }
 
 @media (max-width: 639px) {
   .nav-mobile-bar    { display: flex; }
   .nav-mobile-drawer { display: block; }
   .prayer-mobile     { display: block; }
+  /* Grid alternative — swap comments below to switch layouts:
+  .prayer-mobile      { display: none; }
+  .prayer-mobile-grid { display: block; } */
+
+  .jumuah-strip { flex-direction: column; gap: 5px; padding: 8px 16px; }
+  .jumuah-strip-sep { display: none; }
 }
 
 /* ---------- Hamburger button ---------- */
