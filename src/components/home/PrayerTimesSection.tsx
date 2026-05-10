@@ -269,14 +269,19 @@ export default function PrayerTimesSection() {
 
   const activePrayer = computeActivePrayer(times, now);
 
-  // Scroll the active prayer cell into view in the mobile horizontal strip
+  // Centre the active prayer cell horizontally within its scroll container.
+  // Uses scrollLeft directly so the page's vertical position is never touched.
   useEffect(() => {
     const container = mobileScrollRef.current;
     if (!container || !activePrayer) return;
     const activeIndex = times.findIndex((p) => p.name === activePrayer);
     if (activeIndex < 0) return;
     const cell = container.children[activeIndex] as HTMLElement | undefined;
-    cell?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+    if (!cell) return;
+    container.scrollLeft = Math.max(
+      0,
+      cell.offsetLeft - container.clientWidth / 2 + cell.clientWidth / 2
+    );
   }, [times, activePrayer]);
 
   const gregorian = buildGregorianLabel();
