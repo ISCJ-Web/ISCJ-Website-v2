@@ -13,22 +13,21 @@ Where the project stands after ~3 months away, and the path to finishing it.
 
 ## Problems found during the scan
 
-1. **Uncommitted deletion of `src/app/morocco-26/`** (trip page + registration).
-   Decide: commit the removal (`git add -A && git commit`) if the trip is over,
-   or restore with `git checkout -- src/app/morocco-26/`.
+1. ~~**Uncommitted deletion of `src/app/morocco-26/`**~~ **RESOLVED 2026-08-11:**
+   trip is over — removal committed.
 2. **Stale hardcoded events are live on the site.** `EventsSection.tsx` and
-   `AnnouncementsSection.tsx` show May 2026 events in August. Quick interim fix:
-   hand-update the arrays until the database exists (Phase 3 replaces this).
-3. **4 high-severity npm audit findings** (postcss, sharp). Both are build-time
-   only — low real-world risk for a static site — but run `npm audit fix`,
-   rebuild, and commit the lockfile.
+   `AnnouncementsSection.tsx` show May 2026 events in August.
+   **DECISION 2026-08-11:** leave as-is; the Supabase work (Phase 3) replaces them.
+3. **npm audit findings** (postcss, sharp). Build-time only — low real-world risk
+   for a static site. `npm audit fix` was a no-op; the remaining 3 high findings
+   are versions bundled inside Next 15 and only clear with a **Next 16 upgrade**
+   (breaking). Fold that upgrade into Phase 3 or 4 when there's appetite for it.
 4. **The old site is Webflow, and every document lives on Webflow's CDN**
    (`cdn.prod.website-files.com/...`). The moment the Webflow subscription is
    cancelled, every PDF link dies. All files must be downloaded and rehosted
    (Phase 2c) before the old site is retired.
-5. **Stale docs:** CLAUDE.md/README still list `about/page.tsx`,
-   `services/page.tsx`, and `morocco-26/` and omit `programs/*` and
-   `volunteer/`. Update the directory trees.
+5. ~~**Stale docs**~~ **RESOLVED 2026-08-11:** CLAUDE.md and README directory
+   trees, component lists, and roadmaps updated to match reality.
 
 ## Architectural constraint to keep in mind
 
@@ -39,13 +38,13 @@ today and carries over to Cloudflare unchanged.
 
 ---
 
-## Phase 1 — Housekeeping (first session back, ~1 hour)
+## Phase 1 — Housekeeping ✅ (completed 2026-08-11)
 
-- [ ] Resolve the morocco-26 deletion (commit or restore).
-- [ ] `npm audit fix`, verify `npm run build`, commit.
-- [ ] Update CLAUDE.md + README directory structure to match reality.
-- [ ] Hand-update the hardcoded events/announcements so the live site isn't
-      showing May events (stopgap until Phase 3).
+- [x] Resolved morocco-26: trip over, pages removed and committed.
+- [x] `npm audit fix` (no-op — remaining findings need Next 16, deferred),
+      `npm run build` verified.
+- [x] CLAUDE.md + README updated to match reality.
+- [x] Stale events stopgap: skipped by decision — Supabase (Phase 3) replaces them.
 
 ## Phase 2 — Content parity with ISCJ.org (the launch-blocking work)
 
@@ -54,7 +53,8 @@ sitemap.xml) and build a checklist table in `content-audit.md`:
 `old URL → new route → status (matched / content differs / missing / dropped on purpose)`.
 
 Known gaps already found:
-- `/hff` — Halal Food Fest page: exists on old site, missing from new site.
+- `/hff` — Halal Food Fest page: **dropped on purpose** (event over, per 2026-08-11
+  decision) — do not port; add a redirect at launch (Phase 5).
 - External links in old nav to verify in the new navbar/footer: Noor-Ul-Iman
   School, Maun Credit Union, LIT/Sanad/Weekend School/Quran Academy externals,
   YouTube, Facebook.

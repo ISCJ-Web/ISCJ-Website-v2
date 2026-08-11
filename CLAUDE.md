@@ -21,8 +21,8 @@ src/
 │   ├── layout.tsx                # Root layout (fonts, metadata, navbar/footer)
 │   ├── page.tsx                  # Home page (assembles section components)
 │   ├── globals.css               # Tailwind directives + CSS custom properties
-│   ├── about/
-│   │   ├── page.tsx
+│   ├── not-found.tsx             # Custom 404 page
+│   ├── about/                    # No index page — subpages only
 │   │   ├── who-are-we/page.tsx
 │   │   ├── history/page.tsx
 │   │   ├── board-of-trustees/page.tsx
@@ -30,8 +30,7 @@ src/
 │   │   ├── imams-corner/page.tsx
 │   │   ├── expansion/page.tsx
 │   │   └── contact/page.tsx
-│   ├── services/
-│   │   ├── page.tsx
+│   ├── services/                 # No index page — subpages only
 │   │   ├── funeral/page.tsx
 │   │   ├── wedding/page.tsx
 │   │   ├── zakat/page.tsx
@@ -42,16 +41,18 @@ src/
 │   │   ├── endowment-fund/page.tsx
 │   │   ├── business-directory/page.tsx
 │   │   └── friday-halaqa/page.tsx
+│   ├── programs/
+│   │   ├── lit/page.tsx
+│   │   ├── quran-academy/page.tsx
+│   │   ├── sanad/page.tsx
+│   │   └── weekend-school/page.tsx
 │   ├── committees/page.tsx
 │   ├── donate/page.tsx
 │   ├── learn-about-islam/page.tsx
-│   └── morocco-26/
-│       ├── page.tsx
-│       └── registration/page.tsx
+│   └── volunteer/page.tsx
 ├── components/
 │   ├── ui/                       # Reusable design-system primitives
 │   │   ├── Button.tsx
-│   │   ├── Card.tsx
 │   │   ├── Container.tsx
 │   │   └── SectionHeading.tsx
 │   ├── layout/
@@ -66,13 +67,12 @@ src/
 │       ├── AnnouncementsSection.tsx
 │       └── DonateCTASection.tsx
 ├── lib/
-│   └── utils.ts                  # cn() utility
+│   ├── utils.ts                  # cn() utility
+│   └── assetPath.ts              # basePath-aware URL helper for /public assets
 └── types/
     └── index.ts                  # Shared TypeScript interfaces
 public/
-└── images/
-    ├── iscj-white-logo.png
-    └── hero.jpg
+└── images/                       # iscj-white-logo.png, hero.jpg, iscj1–3 photos
 ```
 
 ## Design System
@@ -204,8 +204,8 @@ Apply to `.service-card`, `.event-card`, `.announce-item`, `.stat-card`:
 - UI primitives accept standard HTML props via `React.ComponentPropsWithoutRef`
 - Section components are self-contained with their own data/layout
 - Use `"use client"` on components that need browser APIs, interactivity, or event handlers. Any component with `onMouseEnter`/`onMouseLeave`/`onClick` etc. **must** be a Client Component — even if it has no hooks — or Next.js will throw when a Server Component tries to render it.
-- Current Client Components: `Navbar`, `Footer`, `Button`, `HeroSection`, `AboutSection`, `ServicesSection`, `EventsSection`, `AnnouncementsSection`
-- Current Server Components (no `"use client"`): `PrayerTimesSection`, `DonateCTASection`
+- Current Client Components: `Navbar`, `Footer`, `Button`, `HeroSection`, `AboutSection`, `ServicesSection`, `EventsSection`, `AnnouncementsSection`, `PrayerTimesSection` (fetches live times from the Aladhan API)
+- Current Server Components (no `"use client"`): `DonateCTASection`, `Container`, `SectionHeading`
 - Framer Motion variants defined at the component level, not inline
 
 ## Styling Conventions
@@ -241,8 +241,20 @@ Never write `src="/images/..."` or `backgroundImage: "url(/images/...)"` directl
 - **Stale `.next` cache:** After installing packages, if you see `__webpack_modules__[moduleId] is not a function`, delete `.next/` and restart the dev server. Webpack module IDs get out of sync with cached build artifacts.
 - **`Button.tsx` is a Client Component** (`"use client"`) because it uses `onMouseEnter`/`onMouseLeave` for hover effects. It is safe to import from both Server and Client Components.
 
-## Future Plans
+## Roadmap
 
-- Supabase integration for events CRUD and prayer times
-- Admin dashboard with Supabase Auth (email/password)
-- Data migration from existing static site
+See `NEXT-STEPS.md` for the full phased plan. Confirmed direction:
+
+- **Content parity** with the old Webflow site (iscj.org), including rescuing all
+  PDFs/documents off Webflow's CDN into `public/documents/` before it is retired.
+  Morocco '26 and Halal Food Fest (`/hff`) pages are intentionally dropped (events over).
+- **Supabase** (confirmed backend): `events`, `announcements`, `documents` tables +
+  Storage. Anon key ships client-side with read-only RLS on published rows.
+- **Admin portal at `/admin`** — static route in this app, client-side Supabase Auth
+  (email/password, no self-signup). CRUD for events/announcements, plus a documents
+  manager that tracks where each file is referenced.
+- **LLM event entry** — admin pastes an event description; a Supabase Edge Function
+  (holds the Claude API key, requires admin JWT) extracts structured fields to
+  prefill the event form. The API key must never ship in the static bundle.
+- **Hosting migration** to Cloudflare Pages at the end; basePath drops to `""` then
+  (centralized in `next.config.ts` + `assetPath()`).

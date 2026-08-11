@@ -44,10 +44,11 @@ src/
 │   ├── globals.css             # CSS custom properties + Tailwind directives
 │   ├── about/                  # About section (who we are, history, board, etc.)
 │   ├── services/               # Services (funeral, wedding, zakat, library, etc.)
+│   ├── programs/               # LIT, Quran Academy, Sanad, Weekend School
 │   ├── committees/
 │   ├── donate/
 │   ├── learn-about-islam/
-│   └── morocco-26/             # Morocco 2026 trip + registration
+│   └── volunteer/
 ├── components/
 │   ├── ui/                     # Design-system primitives (Button, Card, Container)
 │   ├── layout/                 # Navbar, Footer
@@ -133,6 +134,9 @@ Next.js is configured with `output: "export"` to produce a fully static site in 
 
 ## Roadmap
 
-- Supabase integration for live prayer times and events CRUD
-- Admin dashboard with Supabase Auth
-- Data migration from the existing static site
+See [NEXT-STEPS.md](NEXT-STEPS.md) for the full phased plan.
+
+- Content parity with the old Webflow site (iscj.org), including rehosting all documents off Webflow's CDN
+- Supabase-backed events, announcements, and documents
+- Admin portal at `/admin` (Supabase Auth) with LLM-assisted event entry via a Supabase Edge Function
+- Hosting migration to Cloudflare Pages
