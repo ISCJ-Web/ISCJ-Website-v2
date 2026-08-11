@@ -51,7 +51,7 @@ const NAV_LINKS: NavLink[] = [
       { label: "Contact", href: "/about/contact" },
       { label: "Learn About Islam", href: "/learn-about-islam" },
       { label: "Committees", href: "/committees" },
-      { label: "History of Women at ISCJ", href: assetPath("/documents/history-of-women-at-iscj.pdf"), external: true },
+      { label: "History of Women at ISCJ", href: "/about/history-of-women" },
     ],
   },
   {

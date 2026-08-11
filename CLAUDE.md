@@ -25,6 +25,7 @@ src/
 │   ├── about/                    # No index page — subpages only
 │   │   ├── who-are-we/page.tsx
 │   │   ├── history/page.tsx
+│   │   ├── history-of-women/page.tsx
 │   │   ├── board-of-trustees/page.tsx
 │   │   ├── resident-scholar/page.tsx
 │   │   ├── imams-corner/page.tsx
@@ -72,7 +73,11 @@ src/
 └── types/
     └── index.ts                  # Shared TypeScript interfaces
 public/
-└── images/                       # iscj-white-logo.png, hero.jpg, iscj1–3 photos
+├── images/                       # iscj-white-logo.png, hero.jpg, iscj1–3 photos
+└── documents/                    # PDFs rescued from the old Webflow site (bylaws,
+                                  # membership/zakat forms, etc.) — referenced via
+                                  # assetPath("/documents/<name>.pdf"); keep filenames
+                                  # stable/year-less so yearly updates are drop-in
 ```
 
 ## Design System
