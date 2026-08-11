@@ -193,6 +193,8 @@ export default function Page() {
               </p>
               <a
                 href={assetPath("/documents/history-of-women-at-iscj.pdf")}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   display: "inline-block",
                   background: "var(--gold)",

@@ -290,8 +290,8 @@ export default function Page() {
               <a
                 key={r.label}
                 href={r.external ? r.href : assetPath(r.href)}
-                target={r.external ? "_blank" : undefined}
-                rel={r.external ? "noopener noreferrer" : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   background: "var(--white)",
                   padding: "36px 28px",

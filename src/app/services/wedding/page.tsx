@@ -505,6 +505,8 @@ export default function Page() {
           >
             <a
               href={assetPath("/documents/mpr-reservation-form.pdf")}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ background: "var(--white)", padding: "36px 28px", textDecoration: "none", display: "block" }}
             >
               <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>
@@ -519,6 +521,8 @@ export default function Page() {
             </a>
             <a
               href={assetPath("/documents/marriage-application.pdf")}
+              target="_blank"
+              rel="noopener noreferrer"
               style={{ background: "var(--white)", padding: "36px 28px", textDecoration: "none", display: "block" }}
             >
               <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>

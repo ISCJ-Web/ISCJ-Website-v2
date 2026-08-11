@@ -14,8 +14,8 @@ const committees: Committee[] = [
     contact: "volunteers@iscj.org",
     description: "Maintains and verifies accurate membership records, reviews applications, conducts membership drives, and proposes ways to welcome new members. Download the applicable form below, complete it, and send it to admin@iscj.org or hand it in at the ISCJ office.",
     links: [
-      { label: "Family Membership Form", href: "/documents/membership-form-family.pdf" },
-      { label: "Single Membership Form", href: "/documents/membership-form-single.pdf" },
+      { label: "Family Membership Form", href: "/documents/membership-form-family-2026.pdf" },
+      { label: "Single Membership Form", href: "/documents/membership-form-single-2026.pdf" },
     ],
   },
   {
@@ -173,6 +173,8 @@ export default function Page() {
                       <a
                         key={l.label}
                         href={assetPath(l.href)}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         style={{
                           fontSize: "0.8rem",
                           fontWeight: 400,

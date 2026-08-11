@@ -128,7 +128,9 @@ export default function Page() {
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 24 }}>
                 <a
-                  href={assetPath("/documents/membership-form-family.pdf")}
+                  href={assetPath("/documents/membership-form-family-2026.pdf")}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     display: "inline-block",
                     background: "var(--gold)",
@@ -145,7 +147,9 @@ export default function Page() {
                   Family Membership Form
                 </a>
                 <a
-                  href={assetPath("/documents/membership-form-single.pdf")}
+                  href={assetPath("/documents/membership-form-single-2026.pdf")}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   style={{
                     display: "inline-block",
                     background: "var(--gold)",
@@ -164,6 +168,8 @@ export default function Page() {
               </div>
               <a
                 href={assetPath("/documents/iscj-bylaws.pdf")}
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ fontSize: "0.9rem", fontWeight: 400, color: "var(--navy)", textDecoration: "underline", textUnderlineOffset: 4 }}
               >
                 Click here for ISCJ Bylaws

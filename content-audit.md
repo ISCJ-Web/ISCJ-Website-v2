@@ -64,12 +64,21 @@ Notes: #3/#4 exist in two revisions on the CDN — take the 2026-07-21 revisions
 (the ones linked from /committees). Source URLs for all files are in the
 scratchpad crawl and re-derivable from the live old site.
 
-**Status 2026-08-11:** 8 of 10 files uploaded to `public/documents/` (membership
-forms normalized to year-less names so annual updates are drop-in replacements).
-Still missing: **`marriage-application.pdf`** and **`mpr-reservation-form.pdf`**
-(wedding page links 404 until they're added). "History of Women at ISCJ" is now
-a full page at `/about/history-of-women` (adapted from the PDF, which remains
-downloadable from that page); the About menu links to the page instead of the PDF.
+**Status 2026-08-11:** ✅ all 10 files uploaded to `public/documents/` and verified
+against every link in the built output.
+
+Filename convention: most files use stable, year-less names, so a refreshed
+version is a drop-in replacement. The two membership forms keep the year in the
+name (`membership-form-family-2026.pdf`, `membership-form-single-2026.pdf`).
+**When the 2027 forms arrive, the href must be updated in two places:**
+`src/app/about/who-are-we/page.tsx` and the `committees` array in
+`src/app/committees/page.tsx`.
+
+All document links open in a new tab (`target="_blank"` + `rel="noopener noreferrer"`).
+
+"History of Women at ISCJ" is now a full page at `/about/history-of-women`
+(adapted from the PDF, which remains downloadable from that page); the About menu
+links to the page instead of the PDF.
 
 Non-PDF links to port (no download needed):
 - Zakat/Sadaqah online application: `https://forms.gle/G8ga2JvBF7zNponx7` (zakat page has it; add to sadaqah) and the Google Docs viewform on the sadaqah page
