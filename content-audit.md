@@ -80,11 +80,15 @@ Non-PDF links to port (no download needed):
 
 ## Suggested fix order
 
-1. Update Board of Trustees roster (content is public-facing and wrong).
-2. Download the 10 documents into `public/documents/` (CDN-death risk), then wire
-   the links on who-are-we, committees, zakat, sadaqah, wedding, business-directory.
-3. Add donate payment links + QR codes.
-4. Wire the footer Subscribe to Constant Contact.
-5. Small ports: upf.tv resource, Maun Credit Union nav link, restore full mission
-   statement on who-are-we, sadaqah online-application link.
-6. Ask the board for senior-housing content (old page is password-protected).
+1. ~~Update Board of Trustees roster~~ ✅ done 2026-08-11 (2026–2027 roster live).
+2. Links wired ✅ 2026-08-11 — all document links now point to `/documents/*`
+   placeholder paths (they 404 until the files are uploaded). **Still to do:
+   download the 10 PDFs into `public/documents/` using the exact filenames in the
+   inventory table above.**
+3. Add donate payment links + QR codes. *(deferred by user — revisit later)*
+4. Wire the footer Subscribe to Constant Contact. *(deferred by user)*
+5. ~~Small ports~~ ✅ done 2026-08-11: upf.tv, Maun Credit Union nav link, full
+   mission statement, sadaqah online application, Star-Ledger link, imam fax,
+   business package + partner links, homepage stats/text corrected.
+6. ~~Senior housing~~ ✅ resolved 2026-08-11: page removed entirely (no longer
+   exists on old site); nav link removed.
