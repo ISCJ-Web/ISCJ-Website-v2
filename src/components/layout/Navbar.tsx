@@ -51,6 +51,7 @@ const NAV_LINKS: NavLink[] = [
       { label: "Contact", href: "/about/contact" },
       { label: "Learn About Islam", href: "/learn-about-islam" },
       { label: "Committees", href: "/committees" },
+      { label: "History of Women at ISCJ", href: assetPath("/documents/history-of-women-at-iscj.pdf"), external: true },
     ],
   },
   {
@@ -63,10 +64,10 @@ const NAV_LINKS: NavLink[] = [
       { label: "Sadaqah", href: "/services/sadaqah" },
       { label: "Food Pantry", href: "/services/food-pantry" },
       { label: "Library", href: "/services/library" },
-      { label: "Senior Housing", href: "/services/senior-housing" },
       { label: "Endowment Fund", href: "/services/endowment-fund" },
       { label: "Business Directory", href: "/services/business-directory" },
       { label: "Friday Halaqa", href: "/services/friday-halaqa" },
+      { label: "Maun Credit Union", href: "https://maunfcu.org", external: true },
     ],
   },
   {

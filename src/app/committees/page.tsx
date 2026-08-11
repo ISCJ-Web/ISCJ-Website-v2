@@ -1,11 +1,22 @@
 import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
-const committees = [
+type Committee = {
+  name: string;
+  contact: string;
+  description: string;
+  links?: { label: string; href: string }[];
+};
+
+const committees: Committee[] = [
   {
     name: "Membership Committee",
-    contact: "admin@iscj.org",
-    description: "Maintains and verifies accurate membership records, reviews applications, conducts membership drives, and proposes ways to welcome new members. Family and single membership forms are available.",
+    contact: "volunteers@iscj.org",
+    description: "Maintains and verifies accurate membership records, reviews applications, conducts membership drives, and proposes ways to welcome new members. Download the applicable form below, complete it, and send it to admin@iscj.org or hand it in at the ISCJ office.",
+    links: [
+      { label: "Family Membership Form", href: "/documents/membership-form-family.pdf" },
+      { label: "Single Membership Form", href: "/documents/membership-form-single.pdf" },
+    ],
   },
   {
     name: "Social Activities Committee",
@@ -20,12 +31,13 @@ const committees = [
   {
     name: "Media and Outreach Committee",
     contact: "732-329-6995",
-    description: "Handles media relations, interfaith meetings, and all external communications on behalf of ISCJ.",
+    description: "The official clearinghouse for information disseminated from our Society and community — handling media relations, interfaith meetings, and all outreach programs on behalf of ISCJ. Contact Arif Patel via the main office number.",
   },
   {
-    name: "Constitution Committee",
+    name: "Bylaws Committee",
     contact: "admin@iscj.org",
-    description: "Reviews and proposes constitutional amendments for community voting. Maintains the ISCJ Constitution, procedures, and amendment resources.",
+    description: "Islam is by nature democratic and so is the ISCJ. As members make recommendations, this committee reviews, presents, and proposes amendments that our community votes on. Every great system of organizing people depends on a quality constitution that is adhered to.",
+    links: [{ label: "ISCJ Bylaws", href: "/documents/iscj-bylaws.pdf" }],
   },
   {
     name: "Internal Audit Committee",
@@ -35,7 +47,7 @@ const committees = [
   {
     name: "Maintenance Committee",
     contact: "maint@iscj.org",
-    description: "Responsible for routine repairs and maintenance of the main Masjid building and campus facilities.",
+    description: "Responsible for routine repairs and maintenance of the main Masjid building, the burial preparation house, and other ISCJ rental properties. Meets monthly to prioritize open items and report progress.",
   },
   {
     name: "Career Advancement Program (CAP)",
@@ -45,7 +57,7 @@ const committees = [
   {
     name: "Endowment Fund Management",
     contact: "endowment@iscj.org",
-    description: "Manages the ISCJ Endowment Fund with a goal of reaching $1 million and beyond through community contributions and halal investments.",
+    description: "The ISCJ Endowment Fund has existed since 2008 and benefits ISCJ members and their families — sponsoring scholarships, cultural, social, and interfaith programs, helping needy members, and covering operational expenses. Immediate goal: grow the fund to $1 million through community gifts and investment returns.",
   },
   {
     name: "Expansion Funding Group (EFG)",
@@ -60,7 +72,7 @@ const committees = [
   {
     name: "Policies and Procedures Committee",
     contact: "admin@iscj.org",
-    description: "Maintains standards of quality for ISCJ policies and procedures, ensuring consistency and fairness across all operations.",
+    description: "There is a right way and a haphazard way to do the same thing. This committee ensures that standards of quality for our policies and procedures are maintained.",
   },
 ];
 
@@ -104,9 +116,11 @@ export default function Page() {
             ISCJ <em>Committees</em>
           </h1>
           <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, maxWidth: 560 }}>
-            ISCJ is powered by dedicated volunteers and elected committees that manage
-            everything from community events and expansion funding to financial oversight
-            and career development. Find your place and get involved.
+            Committees made up of ISCJ volunteers are the backbone of the community — it is
+            with their help that ISCJ accomplishes many different things and provides
+            various services. Make sure you are ready to commit and your reasons for
+            joining are sincere; ultimately we do these things for the sake of Allah
+            Subhanahu Wa Ta&rsquo;ala.
           </p>
         </Container>
       </section>
@@ -153,6 +167,25 @@ export default function Page() {
                 >
                   {c.description}
                 </p>
+                {c.links && (
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 16 }}>
+                    {c.links.map((l) => (
+                      <a
+                        key={l.label}
+                        href={assetPath(l.href)}
+                        style={{
+                          fontSize: "0.8rem",
+                          fontWeight: 400,
+                          color: i % 6 === 0 || i % 6 === 3 ? "var(--gold-light)" : "var(--navy)",
+                          textDecoration: "underline",
+                          textUnderlineOffset: 3,
+                        }}
+                      >
+                        {l.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
                 <a
                   href={c.contact.includes("@") ? `mailto:${c.contact}` : `tel:${c.contact.replace(/-/g, "")}`}
                   style={{

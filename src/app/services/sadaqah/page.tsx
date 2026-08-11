@@ -17,6 +17,30 @@ const requirements = [
   "Supply supporting documentation: disability statements, welfare letters, unemployment records, employment stubs, unpaid bills, etc.",
 ];
 
+const resources: { label: string; description: string; href: string; external?: boolean }[] = [
+  {
+    label: "Sadaqah FAQ Document",
+    description: "Reference the FAQ document to get answers to common questions about Sadaqah and Zakat.",
+    href: "/documents/zakat-faqs.pdf",
+  },
+  {
+    label: "Application & Instructions (Paper)",
+    description: "The application used to apply for assistance at ISCJ. Complete it thoroughly and submit with the appropriate documentation.",
+    href: "/documents/zakat-application.pdf",
+  },
+  {
+    label: "Online Application",
+    description: "Complete your application online. Submit all required documentation immediately as directed so it can be processed without delay.",
+    href: "https://docs.google.com/forms/d/e/1FAIpQLSf8-pvWZjHg_Ody71Hd8O9S5hCSUaZK8eEz5do-qUUUXP5xQg/viewform",
+    external: true,
+  },
+  {
+    label: "Resource Packet",
+    description: "A compiled list of organizations that can be contacted for further assistance (as of May 2022). Contact at your own discretion.",
+    href: "/documents/zakat-resource-packet.pdf",
+  },
+];
+
 const donationMethods = [
   { label: "Venmo", value: "@iscj-nj" },
   { label: "Zelle", value: "accounting@iscj.org" },
@@ -141,6 +165,54 @@ export default function Page() {
                 ))}
               </ul>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Resources */}
+      <section style={{ padding: "0 0 80px" }}>
+        <Container style={{ padding: "0 48px" }}>
+          <span className="section-label">Resources</span>
+          <h2 className="section-title" style={{ marginTop: 12, marginBottom: 48 }}>
+            Giving <em>Sadaqah</em>
+          </h2>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2px" }}
+            className="max-sm:!grid-cols-1"
+          >
+            {resources.map((r) => (
+              <a
+                key={r.label}
+                href={r.external ? r.href : assetPath(r.href)}
+                target={r.external ? "_blank" : undefined}
+                rel={r.external ? "noopener noreferrer" : undefined}
+                style={{
+                  background: "var(--white)",
+                  padding: "36px 28px",
+                  textDecoration: "none",
+                  display: "block",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "var(--ff-head)",
+                    fontSize: "1.15rem",
+                    fontWeight: 400,
+                    color: "var(--navy)",
+                    marginBottom: 10,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {r.label}
+                </p>
+                <p style={{ fontSize: "0.83rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.7, marginBottom: 14 }}>
+                  {r.description}
+                </p>
+                <span style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--gold)" }}>
+                  {r.external ? "Open ↗" : "Download"}
+                </span>
+              </a>
+            ))}
           </div>
         </Container>
       </section>

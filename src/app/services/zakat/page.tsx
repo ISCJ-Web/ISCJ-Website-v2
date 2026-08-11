@@ -16,6 +16,30 @@ const submissionMethods = [
   { label: "Mail", value: "P.O. Box 628\nMonmouth Junction, NJ 08852", href: null },
 ];
 
+const resources: { label: string; description: string; href: string; external?: boolean }[] = [
+  {
+    label: "Zakat FAQ Document",
+    description: "Reference the Zakat FAQ document to get answers to common questions about Zakat.",
+    href: "/documents/zakat-faqs.pdf",
+  },
+  {
+    label: "Zakat Application (Paper)",
+    description: "The application used to apply for Zakat at ISCJ. Complete it thoroughly and submit with the appropriate documentation.",
+    href: "/documents/zakat-application.pdf",
+  },
+  {
+    label: "Resource Packet",
+    description: "A compiled list of organizations that can be contacted for further assistance (as of May 2022). Contact at your own discretion.",
+    href: "/documents/zakat-resource-packet.pdf",
+  },
+  {
+    label: "Zakat Calculator",
+    description: "To help calculate the Zakat that must be paid, we provide a reference to a Zakat calculator on the web. Use at your own discretion.",
+    href: "http://www.hidaya.org/zakat-calculator",
+    external: true,
+  },
+];
+
 export default function Page() {
   return (
     <main style={{ minHeight: "100vh", background: "var(--surface)" }}>
@@ -247,6 +271,54 @@ export default function Page() {
                 ))}
               </ul>
             </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Resources */}
+      <section style={{ padding: "0 0 80px" }}>
+        <Container style={{ padding: "0 48px" }}>
+          <span className="section-label">Resources</span>
+          <h2 className="section-title" style={{ marginTop: 12, marginBottom: 48 }}>
+            Giving <em>Zakat</em>
+          </h2>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2px" }}
+            className="max-sm:!grid-cols-1"
+          >
+            {resources.map((r) => (
+              <a
+                key={r.label}
+                href={r.external ? r.href : assetPath(r.href)}
+                target={r.external ? "_blank" : undefined}
+                rel={r.external ? "noopener noreferrer" : undefined}
+                style={{
+                  background: "var(--white)",
+                  padding: "36px 28px",
+                  textDecoration: "none",
+                  display: "block",
+                }}
+              >
+                <p
+                  style={{
+                    fontFamily: "var(--ff-head)",
+                    fontSize: "1.15rem",
+                    fontWeight: 400,
+                    color: "var(--navy)",
+                    marginBottom: 10,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {r.label}
+                </p>
+                <p style={{ fontSize: "0.83rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.7, marginBottom: 14 }}>
+                  {r.description}
+                </p>
+                <span style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--gold)" }}>
+                  {r.external ? "Visit ↗" : "Download"}
+                </span>
+              </a>
+            ))}
           </div>
         </Container>
       </section>

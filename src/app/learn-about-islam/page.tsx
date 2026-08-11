@@ -17,6 +17,7 @@ const quranResources = [
 
 const otherResources = [
   { name: "Zabihah", url: "https://www.zabihah.com", description: "Find halal food and restaurants near you." },
+  { name: "Unity Productions Foundation (UPF)", url: "https://www.upf.tv", description: "Films and media that build bridges of understanding about Islam." },
 ];
 
 export default function Page() {

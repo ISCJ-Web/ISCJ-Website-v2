@@ -2,25 +2,22 @@ import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
 const leadership = [
-  { title: "Chair", name: "Atiya Aftab" },
+  { title: "Chair", name: "Arif Khan" },
   { title: "President", name: "Arif Patel" },
-  { title: "Secretary", name: "Arif Khan" },
+  { title: "Secretary", name: "Omayma Mansour" },
   { title: "Treasurer", name: "Habib Ahson" },
-  { title: "Executive Secretary", name: "Shireif Battat" },
+  { title: "Executive Secretary", name: "Mohammed Farooqui" },
 ];
 
 const members = [
-  "Yousuf Farooqui",
+  "Arifa Zaheer",
   "Quratulain Annie Hassan",
   "Aysha Khalid",
   "Issam Koleilat",
 ];
 
-const overseers = [
-  { title: "Chief Overseer", name: "Khalid Ozair" },
+const liaisons = [
   { title: "NUI Liaison", name: "Mohamed Asker" },
-  { title: "Overseer", name: "Ayaz Rahman" },
-  { title: "Overseer", name: "Matina Shahed" },
 ];
 
 export default function Page() {
@@ -65,7 +62,7 @@ export default function Page() {
           <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, maxWidth: 560 }}>
             The ISCJ Board of Trustees is elected by the community to govern the Islamic
             Society of Central Jersey. The board oversees operations, finances, and the
-            long-term mission of ISCJ. Shown below: 2025–2026 board.
+            long-term mission of ISCJ. Shown below: Board of Trustees &amp; Overseers 2026–2027.
           </p>
         </Container>
       </section>
@@ -151,16 +148,16 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Overseers */}
+            {/* Liaisons */}
             <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
-                Overseers
+                Liaisons
               </span>
               <h3 style={{ fontFamily: "var(--ff-head)", fontSize: "1.6rem", fontWeight: 400, color: "var(--white)", marginBottom: 28 }}>
-                Board <em>Overseers</em>
+                Board <em>Liaisons</em>
               </h3>
               <div style={{ display: "flex", flexDirection: "column" }}>
-                {overseers.map((o) => (
+                {liaisons.map((o) => (
                   <div
                     key={o.name}
                     style={{

@@ -492,6 +492,83 @@ export default function Page() {
         </Container>
       </section>
 
+      {/* Forms & Setup Photos */}
+      <section style={{ padding: "0 0 80px" }}>
+        <Container style={{ padding: "0 48px" }}>
+          <span className="section-label">Forms &amp; Photos</span>
+          <h2 className="section-title" style={{ marginTop: 12, marginBottom: 48 }}>
+            Downloads &amp; <em>Venue Setup</em>
+          </h2>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}
+            className="max-sm:!grid-cols-1"
+          >
+            <a
+              href={assetPath("/documents/mpr-reservation-form.pdf")}
+              style={{ background: "var(--white)", padding: "36px 28px", textDecoration: "none", display: "block" }}
+            >
+              <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>
+                Reservation Form
+              </p>
+              <p style={{ fontSize: "0.83rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.7, marginBottom: 14 }}>
+                ISCJ Space / Multi-Purpose Room (MPR) reservation form, including the full fee schedule.
+              </p>
+              <span style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--gold)" }}>
+                Download
+              </span>
+            </a>
+            <a
+              href={assetPath("/documents/marriage-application.pdf")}
+              style={{ background: "var(--white)", padding: "36px 28px", textDecoration: "none", display: "block" }}
+            >
+              <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>
+                Marriage Application Form
+              </p>
+              <p style={{ fontSize: "0.83rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.7, marginBottom: 14 }}>
+                Print and bring a completed copy on the day of the Nikkah ceremony, to be given to the Imam.
+              </p>
+              <span style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--gold)" }}>
+                Download
+              </span>
+            </a>
+            <div style={{ background: "var(--white)", padding: "36px 28px" }}>
+              <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>
+                Setup Photos
+              </p>
+              <p style={{ fontSize: "0.83rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.7, marginBottom: 14 }}>
+                Browse photos of the available spaces:
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                <a
+                  href="https://drive.google.com/drive/folders/10bvEJUyyWJMYBcASapci79ys7o8ruXSa?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: "0.85rem", fontWeight: 400, color: "var(--navy)", textDecoration: "underline", textUnderlineOffset: 3 }}
+                >
+                  Upstairs MPR ↗
+                </a>
+                <a
+                  href="https://drive.google.com/drive/folders/1NhCtrcbao997G7XXStOPQ6LgXhCi-nEH?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: "0.85rem", fontWeight: 400, color: "var(--navy)", textDecoration: "underline", textUnderlineOffset: 3 }}
+                >
+                  Downstairs MPR ↗
+                </a>
+                <a
+                  href="https://drive.google.com/drive/folders/1kES_0px1dMPjBjC4_cwVsvxlvCMJyobD?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: "0.85rem", fontWeight: 400, color: "var(--navy)", textDecoration: "underline", textUnderlineOffset: 3 }}
+                >
+                  Musala Area ↗
+                </a>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* Contact CTA */}
       <section
         style={{

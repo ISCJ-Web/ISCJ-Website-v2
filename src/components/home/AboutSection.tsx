@@ -6,10 +6,10 @@ import type { StatItem } from "@/types";
 import { assetPath } from "@/lib/assetPath";
 
 const STATS: StatItem[] = [
-  { value: "500+", label: "Families served" },
+  { value: "1970", label: "Founded in Central NJ" },
   { value: "5",    label: "Daily prayers held", dark: true },
-  { value: "20+",  label: "Years of service" },
-  { value: "12+",  label: "Community programs" },
+  { value: "53+",  label: "Years serving New Jersey" },
+  { value: "17",   label: "Acres of campus" },
 ];
 
 const fadeUp = {
@@ -42,10 +42,10 @@ export default function AboutSection() {
           </h2>
 
           <p style={{ marginTop: 24, fontSize: "1.05rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.85 }}>
-            The Islamic Society of Central Jersey has served as a spiritual home and community center for Muslim families across Central New Jersey for decades. We are committed to fostering a welcoming, inclusive environment for worship, education, and service.
+            We aspire to be the anchor of a model community of practicing Muslims of diverse backgrounds, democratically governed, efficiently served, relating to one another with inclusiveness and tolerance, and interacting with the neighbors and the community at large in an Islamic exemplary fashion.
           </p>
           <p style={{ marginTop: 16, fontSize: "1.05rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.85 }}>
-            From daily prayers to youth programs, from community iftars to charitable outreach — ISCJ is built on the values of compassion, knowledge, and unity.
+            ISCJ is a community center serving New Jersey for over 53 years — offering a Food Pantry, a Friday Halaqa, a weekend school for K–10th grade students, Qur&apos;an classes, and youth and young adult classes, alongside Friday sermons, funeral services, Eid services, and marriage services.
           </p>
 
           {/* Stats grid */}

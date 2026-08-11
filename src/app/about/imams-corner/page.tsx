@@ -148,14 +148,27 @@ export default function Page() {
                 {[
                   { label: "Mosque", value: "732-329-6995 (Option 4)", href: "tel:7323296995" },
                   { label: "Home", value: "732-329-2400", href: "tel:7323292400" },
+                  { label: "Fax", value: "732-329-1988", href: null },
                   { label: "Email", value: "imam@iscj.org", href: "mailto:imam@iscj.org" },
                 ].map((c) => (
                   <div key={c.label} style={{ padding: "16px 0", borderBottom: "1px solid var(--border)" }}>
                     <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 4 }}>{c.label}</p>
-                    <a href={c.href} style={{ fontFamily: "var(--ff-head)", fontSize: "1.05rem", color: "var(--navy)", textDecoration: "none" }}>{c.value}</a>
+                    {c.href ? (
+                      <a href={c.href} style={{ fontFamily: "var(--ff-head)", fontSize: "1.05rem", color: "var(--navy)", textDecoration: "none" }}>{c.value}</a>
+                    ) : (
+                      <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.05rem", color: "var(--navy)" }}>{c.value}</p>
+                    )}
                   </div>
                 ))}
               </div>
+              <a
+                href="http://blog.nj.com/iamnj/2006/12/rich_fritzky.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: "inline-block", marginTop: 24, fontSize: "0.88rem", fontWeight: 400, color: "var(--navy)", textDecoration: "underline", textUnderlineOffset: 4 }}
+              >
+                2006 Star-Ledger Profile of Imam Chebli ↗
+              </a>
             </div>
           </div>
         </Container>

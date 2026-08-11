@@ -70,10 +70,19 @@ export default function Page() {
               <h2 style={{ fontFamily: "var(--ff-head)", fontSize: "1.8rem", fontWeight: 400, color: "var(--white)", marginBottom: 20, lineHeight: 1.2 }}>
                 Our <em>Aspiration</em>
               </h2>
-              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, fontStyle: "italic" }}>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, fontStyle: "italic", marginBottom: 16 }}>
                 &ldquo;We aspire to be the anchor of a model community of practicing Muslims of
                 diverse backgrounds, democratically governed, efficiently served, relating to
-                one another with inclusiveness and tolerance.&rdquo;
+                one another with inclusiveness and tolerance, and interacting with the
+                neighbors and the community at large in an Islamic exemplary fashion.&rdquo;
+              </p>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: 16 }}>
+                The fundamental objective of the Society will be to seek Glory to Allah
+                Subhanahu Wa Ta&rsquo;ala.
+              </p>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85 }}>
+                The Quran, Sunnah and the Sharia shall always be the guiding light for the
+                Society.
               </p>
             </div>
             <div style={{ background: "var(--white)", padding: "48px 36px" }}>
@@ -110,26 +119,54 @@ export default function Page() {
                 Join <em>ISCJ</em>
               </h2>
               <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, marginBottom: 24 }}>
-                Family and single membership forms are available for download and submission
-                to the administrative office. Becoming a member connects you to the full
-                breadth of ISCJ programs and services.
+                Are you a member? If not, download the applicable form below, complete it,
+                and send it to{" "}
+                <a href="mailto:admin@iscj.org" style={{ color: "var(--navy)" }}>
+                  admin@iscj.org
+                </a>{" "}
+                or hand it in person at the ISCJ office.
               </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 24 }}>
+                <a
+                  href={assetPath("/documents/membership-form-family.pdf")}
+                  style={{
+                    display: "inline-block",
+                    background: "var(--gold)",
+                    color: "var(--navy-deep)",
+                    padding: "14px 32px",
+                    fontSize: "0.8rem",
+                    fontWeight: 500,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                    borderRadius: 2,
+                  }}
+                >
+                  Family Membership Form
+                </a>
+                <a
+                  href={assetPath("/documents/membership-form-single.pdf")}
+                  style={{
+                    display: "inline-block",
+                    background: "var(--gold)",
+                    color: "var(--navy-deep)",
+                    padding: "14px 32px",
+                    fontSize: "0.8rem",
+                    fontWeight: 500,
+                    letterSpacing: "0.1em",
+                    textTransform: "uppercase",
+                    textDecoration: "none",
+                    borderRadius: 2,
+                  }}
+                >
+                  Single Membership Form
+                </a>
+              </div>
               <a
-                href="mailto:admin@iscj.org"
-                style={{
-                  display: "inline-block",
-                  background: "var(--gold)",
-                  color: "var(--navy-deep)",
-                  padding: "14px 32px",
-                  fontSize: "0.8rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  textDecoration: "none",
-                  borderRadius: 2,
-                }}
+                href={assetPath("/documents/iscj-bylaws.pdf")}
+                style={{ fontSize: "0.9rem", fontWeight: 400, color: "var(--navy)", textDecoration: "underline", textUnderlineOffset: 4 }}
               >
-                Contact to Join
+                Click here for ISCJ Bylaws
               </a>
             </div>
             <div>

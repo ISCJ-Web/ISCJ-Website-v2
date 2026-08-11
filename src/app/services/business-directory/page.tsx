@@ -1,14 +1,14 @@
 import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
-const partners = [
-  "Go Physical Therapy",
-  "Manville Manor",
-  "Insure Shelter Services",
-  "MR CPA PLLC",
-  "BelleMeade Orthodontics",
-  "H&A",
-  "Blossom Commercial",
+const partners: { name: string; href?: string }[] = [
+  { name: "Go Physical Therapy", href: "https://www.goptny.com" },
+  { name: "Manville Manor" },
+  { name: "Insure Shelter Services", href: "https://insureshelter.com" },
+  { name: "MR CPA PLLC", href: "https://mrcpapllc.com" },
+  { name: "BelleMeade Orthodontics" },
+  { name: "H&A" },
+  { name: "Blossom Commercial" },
 ];
 
 export default function Page() {
@@ -77,10 +77,28 @@ export default function Page() {
                 fostering brand visibility and meaningful customer engagement within a
                 trusted community setting.
               </p>
-              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, marginBottom: 28 }}>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, marginBottom: 20 }}>
                 Multiple advertising packages are available to suit your budget and goals.
                 Contact our advertising team to learn more about how to get listed.
               </p>
+              <a
+                href={assetPath("/documents/business-package.pdf")}
+                style={{
+                  display: "inline-block",
+                  background: "var(--gold)",
+                  color: "var(--navy-deep)",
+                  padding: "14px 32px",
+                  fontSize: "0.8rem",
+                  fontWeight: 500,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  borderRadius: 2,
+                  marginBottom: 28,
+                }}
+              >
+                View Available Packages
+              </a>
               <div style={{ borderTop: "1px solid var(--border)", paddingTop: 24 }}>
                 <p style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>
                   Advertising Contact
@@ -111,9 +129,20 @@ export default function Page() {
                     }}
                   >
                     <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--gold)", flexShrink: 0 }} />
-                    <span style={{ fontFamily: "var(--ff-head)", fontSize: "1.05rem", color: "var(--white)" }}>
-                      {partner}
-                    </span>
+                    {partner.href ? (
+                      <a
+                        href={partner.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ fontFamily: "var(--ff-head)", fontSize: "1.05rem", color: "var(--white)", textDecoration: "underline", textUnderlineOffset: 3 }}
+                      >
+                        {partner.name} ↗
+                      </a>
+                    ) : (
+                      <span style={{ fontFamily: "var(--ff-head)", fontSize: "1.05rem", color: "var(--white)" }}>
+                        {partner.name}
+                      </span>
+                    )}
                   </div>
                 ))}
               </div>
