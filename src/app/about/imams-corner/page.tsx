@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
@@ -108,6 +109,40 @@ export default function Page() {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Opening prayer before the U.S. House */}
+      <section style={{ padding: "0 0 80px" }}>
+        <Container style={{ padding: "0 48px" }}>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: "2px" }}
+            className="max-sm:!grid-cols-1"
+          >
+            <div style={{ position: "relative", aspectRatio: "3/2", background: "var(--navy-deep)" }}>
+              <Image
+                src={assetPath("/images/chebli-congress.jpg")}
+                alt="Imam Hamad Ahmad Chebli delivering the opening prayer before the U.S. House of Representatives"
+                fill
+                sizes="(max-width: 768px) 100vw, 60vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+
+            <div style={{ background: "var(--navy)", padding: "48px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
+                On the House Floor
+              </span>
+              <h3 style={{ fontFamily: "var(--ff-head)", fontSize: "1.6rem", fontWeight: 400, color: "var(--white)", marginBottom: 16, lineHeight: 1.2 }}>
+                The Opening <em>Prayer</em>
+              </h3>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85 }}>
+                Imam Chebli was invited to deliver the opening prayer before the United
+                States House of Representatives, representing the Islamic Society of
+                Central Jersey on the floor of Congress.
+              </p>
             </div>
           </div>
         </Container>

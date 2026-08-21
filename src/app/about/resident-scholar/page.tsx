@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
@@ -63,9 +64,19 @@ export default function Page() {
       <section style={{ padding: "80px 0" }}>
         <Container style={{ padding: "0 48px" }}>
           <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
+            style={{ display: "grid", gridTemplateColumns: "0.8fr 1.2fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
+            <div style={{ position: "relative", minHeight: 420, background: "var(--navy-deep)" }}>
+              <Image
+                src={assetPath("/images/ismail-bowers.jpg")}
+                alt="Shaykh Ismail Bowers, ISCJ resident scholar"
+                fill
+                sizes="(max-width: 768px) 100vw, 40vw"
+                style={{ objectFit: "cover", objectPosition: "center 22%" }}
+              />
+            </div>
+
             <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Resident Scholar
@@ -89,8 +100,9 @@ export default function Page() {
                 researching Hadith and Islamic theology.
               </p>
             </div>
+          </div>
 
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+          <div style={{ background: "var(--white)", padding: "48px 36px", marginTop: 2 }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Areas of Study
               </span>
@@ -126,7 +138,6 @@ export default function Page() {
                   inspire the community.
                 </p>
               </div>
-            </div>
           </div>
         </Container>
       </section>

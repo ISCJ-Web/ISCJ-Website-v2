@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
@@ -499,6 +500,36 @@ export default function Page() {
           <h2 className="section-title" style={{ marginTop: 12, marginBottom: 48 }}>
             Downloads &amp; <em>Venue Setup</em>
           </h2>
+
+          <div
+            style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: "2px", marginBottom: 2 }}
+            className="max-sm:!grid-cols-1"
+          >
+            <div style={{ position: "relative", aspectRatio: "3/2", background: "var(--navy-deep)" }}>
+              <Image
+                src={assetPath("/images/iscj-wedding.jpg")}
+                alt="A wedding setup in the ISCJ Multi-Purpose Room, with a floral arch"
+                fill
+                sizes="(max-width: 768px) 100vw, 60vw"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+
+            <div style={{ background: "var(--navy)", padding: "48px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+              <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
+                The Space
+              </span>
+              <h3 style={{ fontFamily: "var(--ff-head)", fontSize: "1.6rem", fontWeight: 400, color: "var(--white)", marginBottom: 16, lineHeight: 1.2 }}>
+                Your Day at <em>ISCJ</em>
+              </h3>
+              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85 }}>
+                The Multi-Purpose Room can be decorated to suit your ceremony. Browse the
+                setup photos below to see the available spaces, then reserve the room using
+                the form.
+              </p>
+            </div>
+          </div>
+
           <div
             style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}
             className="max-sm:!grid-cols-1"
