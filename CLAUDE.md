@@ -81,6 +81,10 @@ public/
                                   # prayer-hall-worshipper, mihrab, skylight-chandelier,
                                   # calligraphy-{arch,panels,roundel}. All resized to
                                   # 2400px wide, mozjpeg q72, EXIF stripped.
+                                  # hero.jpg: 2560px, mozjpeg q82, progressive.
+                                  # Keep new photos under ~600 KB — next.config.ts sets
+                                  # images.unoptimized (required by output: "export"),
+                                  # so nothing is compressed at build time.
 └── documents/                    # PDFs rescued from the old Webflow site (bylaws,
                                   # membership/zakat forms, etc.) — referenced via
                                   # assetPath("/documents/<name>.pdf"); keep filenames
