@@ -108,3 +108,34 @@ Non-PDF links to port (no download needed):
    business package + partner links, homepage stats/text corrected.
 6. ~~Senior housing~~ ✅ resolved 2026-08-11: page removed entirely (no longer
    exists on old site); nav link removed.
+
+## Image map (image → page)
+
+Generated from `src/`. Regenerate after moving any photo.
+
+| Image | Dimensions | Size | Used on |
+|---|---|---|---|
+| `calligraphy-arch.jpg` | 2400×1600 | 203 KB | /about/imams-corner · /learn-about-islam |
+| `calligraphy-panels.jpg` | 2400×1600 | 229 KB | /about/history-of-women · /services/zakat |
+| `calligraphy-roundel.jpg` | 2400×1600 | 103 KB | /about/resident-scholar · /services/library |
+| `campus-grounds.jpg` | 2400×1600 | 347 KB | /about/expansion · /services/food-pantry |
+| `dome-entrance.jpg` | 2400×1600 | 165 KB | /about/contact |
+| `dome-golden-hour.jpg` | 2400×1600 | 576 KB | /services/funeral |
+| `dome-minaret.jpg` | 2400×1600 | 185 KB | /committees |
+| `dome-through-trees.jpg` | 2400×1600 | 604 KB | /donate |
+| `hero.jpg` | 2560×1440 | 526 KB | Homepage — hero |
+| `iscj-white-logo.png` | 276×280 | 29 KB | Footer · Navbar |
+| `masjid-entrance.jpg` | 2400×1600 | 220 KB | /about/board-of-trustees · /services/business-directory |
+| `mihrab-portrait.jpg` | 1200×2133 | 471 KB | Homepage — About visual |
+| `mihrab.jpg` | 2400×1600 | 512 KB | /services/friday-halaqa |
+| `minaret-sky.jpg` | 2400×1600 | 99 KB | /services/endowment-fund |
+| `prayer-hall-worshipper.jpg` | 2400×1600 | 364 KB | /volunteer |
+| `prayer-hall.jpg` | 2400×1600 | 318 KB | /about/who-are-we · /services/sadaqah |
+| `skylight-chandelier.jpg` | 2400×1600 | 214 KB | /about/history · /services/wedding |
+
+17 files, 5.0 MB total.
+
+Pages with no hero photo: the four `/programs/*` routes and `/404`. Intentional —
+the Programs nav menu links straight to the external program sites (qa.iscj.org,
+lit.iscj.org, iscjwes.org, sanad.iscj.org), so those routes are unreachable
+"coming soon" stubs. No photo is missing.
