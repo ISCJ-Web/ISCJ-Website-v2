@@ -48,14 +48,14 @@ export default function Page() {
             backgroundImage: `url('${assetPath("/images/calligraphy-panels.jpg")}')`,
             backgroundSize: "cover",
             backgroundPosition: "center 45%",
-            filter: "brightness(0.28)",
+            filter: "brightness(0.55)",
           }}
         />
         <div
           style={{
             position: "absolute",
             inset: 0,
-            background: "linear-gradient(to right, rgba(1,25,48,0.92) 55%, rgba(1,25,48,0.5) 100%)",
+            background: "linear-gradient(to right, rgba(1,25,48,0.88) 0%, rgba(1,25,48,0.74) 48%, rgba(1,25,48,0.34) 100%)",
           }}
         />
         <Container style={{ position: "relative", padding: "0 48px" }}>

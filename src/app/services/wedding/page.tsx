@@ -76,7 +76,7 @@ export default function Page() {
             backgroundImage: `url('${assetPath("/images/skylight-chandelier.jpg")}')`,
             backgroundSize: "cover",
             backgroundPosition: "center 40%",
-            filter: "brightness(0.35)",
+            filter: "brightness(0.62)",
           }}
         />
         {/* Gradient overlay for readability */}
@@ -85,7 +85,7 @@ export default function Page() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to right, rgba(1,25,48,0.85) 55%, rgba(1,25,48,0.4) 100%)",
+              "linear-gradient(to right, rgba(1,25,48,0.88) 0%, rgba(1,25,48,0.74) 48%, rgba(1,25,48,0.34) 100%)",
           }}
         />
 
