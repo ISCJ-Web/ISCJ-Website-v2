@@ -100,10 +100,10 @@ export default function AboutSection() {
         <div style={{ position: "relative" }} className="max-sm:order-first">
           <div style={{ width: "100%", aspectRatio: "4/5", position: "relative", overflow: "hidden" }}>
             <Image
-              src={assetPath("/images/prayer-hall-worshipper.jpg")}
-              alt="The main prayer hall at ISCJ"
+              src={assetPath("/images/mihrab-portrait.jpg")}
+              alt="The mihrab in the main prayer hall at ISCJ"
               fill
-              style={{ objectFit: "cover", objectPosition: "center" }}
+              style={{ objectFit: "cover", objectPosition: "center 25%" }}
             />
           </div>
           {/* Gold accent border */}
