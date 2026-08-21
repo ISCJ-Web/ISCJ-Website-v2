@@ -85,6 +85,11 @@ public/
                                   # Keep new photos under ~600 KB — next.config.ts sets
                                   # images.unoptimized (required by output: "export"),
                                   # so nothing is compressed at build time.
+                                  # Run EVERY new image through the optimizer first:
+                                  #   npm run optimize-image public/images/<file>
+                                  # (see scripts/optimize-image.mjs). Add --quality 88
+                                  # for screenshots/graphics with text, which show JPEG
+                                  # ringing at the q80 default.
 └── documents/                    # PDFs rescued from the old Webflow site (bylaws,
                                   # membership/zakat forms, etc.) — referenced via
                                   # assetPath("/documents/<name>.pdf"); keep filenames
