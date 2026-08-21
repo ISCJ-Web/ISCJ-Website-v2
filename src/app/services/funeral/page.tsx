@@ -66,9 +66,9 @@ export default function Page() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `url('${assetPath("/images/iscj2.jpg")}')`,
+            backgroundImage: `url('${assetPath("/images/dome-golden-hour.jpg")}')`,
             backgroundSize: "cover",
-            backgroundPosition: "center 40%",
+            backgroundPosition: "center 42%",
             filter: "brightness(0.25)",
           }}
         />

@@ -28,9 +28,9 @@ export default function Page() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `url('${assetPath("/images/iscj2.jpg")}')`,
+            backgroundImage: `url('${assetPath("/images/campus-grounds.jpg")}')`,
             backgroundSize: "cover",
-            backgroundPosition: "center 50%",
+            backgroundPosition: "center 35%",
             filter: "brightness(0.28)",
           }}
         />

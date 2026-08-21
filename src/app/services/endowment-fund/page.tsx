@@ -37,10 +37,10 @@ export default function Page() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `url('${assetPath("/images/iscj2.jpg")}')`,
+            backgroundImage: `url('${assetPath("/images/minaret-sky.jpg")}')`,
             backgroundSize: "cover",
-            backgroundPosition: "center 40%",
-            filter: "brightness(0.28)",
+            backgroundPosition: "center 48%",
+            filter: "brightness(0.42)",
           }}
         />
         <div

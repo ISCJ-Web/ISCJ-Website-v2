@@ -20,9 +20,9 @@ export default function Page() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundImage: `url('${assetPath("/images/iscj2.jpg")}')`,
+            backgroundImage: `url('${assetPath("/images/mihrab.jpg")}')`,
             backgroundSize: "cover",
-            backgroundPosition: "center 40%",
+            backgroundPosition: "center 50%",
             filter: "brightness(0.28)",
           }}
         />

@@ -73,7 +73,14 @@ src/
 └── types/
     └── index.ts                  # Shared TypeScript interfaces
 public/
-├── images/                       # iscj-white-logo.png, hero.jpg, iscj1–3 photos
+├── images/                       # iscj-white-logo.png, hero.jpg (homepage hero only),
+                                  # + 14 masjid photos (Aug 2026 shoot) used as page
+                                  # heroes: campus-grounds, dome-through-trees,
+                                  # dome-golden-hour, dome-entrance, dome-minaret,
+                                  # masjid-entrance, minaret-sky, prayer-hall,
+                                  # prayer-hall-worshipper, mihrab, skylight-chandelier,
+                                  # calligraphy-{arch,panels,roundel}. All resized to
+                                  # 2400px wide, mozjpeg q72, EXIF stripped.
 └── documents/                    # PDFs rescued from the old Webflow site (bylaws,
                                   # membership/zakat forms, etc.) — referenced via
                                   # assetPath("/documents/<name>.pdf"); keep filenames
