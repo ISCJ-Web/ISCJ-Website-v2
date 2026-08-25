@@ -6,6 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { assetPath } from "@/lib/assetPath";
+import AlertBanner from "./AlertBanner";
 
 const SOCIAL_LINKS = [
   {
@@ -142,6 +143,8 @@ export default function Navbar() {
         overflow: "visible",
       }}
     >
+      <AlertBanner />
+
       {/* ===================== DESKTOP ===================== */}
       <div
         className="desktop-only"
