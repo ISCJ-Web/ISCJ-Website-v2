@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
@@ -24,25 +23,8 @@ export default function Page() {
     <main style={{ minHeight: "100vh", background: "var(--surface)" }}>
 
       {/* Hero */}
-      <section style={{ position: "relative", padding: "204px 0 80px", overflow: "hidden" }}>
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: `url('${assetPath("/images/calligraphy-arch.jpg")}')`,
-            backgroundSize: "cover",
-            backgroundPosition: "center 40%",
-            filter: "brightness(0.55)",
-          }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to right, rgba(1,25,48,0.88) 0%, rgba(1,25,48,0.74) 48%, rgba(1,25,48,0.34) 100%)",
-          }}
-        />
-        <Container style={{ position: "relative", padding: "0 48px" }}>
+      <section className="imam-hero">
+        <Container className="imam-container imam-hero-content">
           <span className="section-label">About</span>
           <h1
             style={{
@@ -64,11 +46,17 @@ export default function Page() {
             dialogue throughout Central New Jersey and beyond.
           </p>
         </Container>
+        <div
+          className="imam-hero-photo"
+          role="img"
+          aria-label="Imam Hamad Ahmad Chebli delivering the opening prayer before the U.S. House of Representatives"
+          style={{ backgroundImage: `url('${assetPath("/images/chebli-congress.jpg")}')` }}
+        />
       </section>
 
       {/* Bio */}
       <section style={{ padding: "80px 0" }}>
-        <Container style={{ padding: "0 48px" }}>
+        <Container className="imam-container">
           <div
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"
@@ -114,43 +102,9 @@ export default function Page() {
         </Container>
       </section>
 
-      {/* Opening prayer before the U.S. House */}
-      <section style={{ padding: "0 0 80px" }}>
-        <Container style={{ padding: "0 48px" }}>
-          <div
-            style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr", gap: "2px" }}
-            className="max-sm:!grid-cols-1"
-          >
-            <div style={{ position: "relative", aspectRatio: "3/2", background: "var(--navy-deep)" }}>
-              <Image
-                src={assetPath("/images/chebli-congress.jpg")}
-                alt="Imam Hamad Ahmad Chebli delivering the opening prayer before the U.S. House of Representatives"
-                fill
-                sizes="(max-width: 768px) 100vw, 60vw"
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-
-            <div style={{ background: "var(--navy)", padding: "48px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
-                On the House Floor
-              </span>
-              <h3 style={{ fontFamily: "var(--ff-head)", fontSize: "1.6rem", fontWeight: 400, color: "var(--white)", marginBottom: 16, lineHeight: 1.2 }}>
-                The Opening <em>Prayer</em>
-              </h3>
-              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85 }}>
-                Imam Chebli was invited to deliver the opening prayer before the United
-                States House of Representatives, representing the Islamic Society of
-                Central Jersey on the floor of Congress.
-              </p>
-            </div>
-          </div>
-        </Container>
-      </section>
-
       {/* Accomplishments + Contact */}
       <section style={{ padding: "0 0 80px" }}>
-        <Container style={{ padding: "0 48px" }}>
+        <Container className="imam-container">
           <div
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"

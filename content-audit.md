@@ -115,10 +115,11 @@ Generated from `src/`. Regenerate after moving any photo.
 
 | Image | Dimensions | Size | Used on |
 |---|---|---|---|
-| `calligraphy-arch.jpg` | 2400×1600 | 203 KB | /about/imams-corner · /learn-about-islam |
+| `calligraphy-arch.jpg` | 2400×1600 | 203 KB | /learn-about-islam |
 | `calligraphy-panels.jpg` | 2400×1600 | 229 KB | /about/history-of-women · /services/zakat |
 | `calligraphy-roundel.jpg` | 2400×1600 | 103 KB | /about/resident-scholar · /services/library |
 | `campus-grounds.jpg` | 2400×1600 | 347 KB | /about/expansion · /services/food-pantry |
+| `chebli-congress.jpg` | 1383×922 | 125 KB | /about/imams-corner |
 | `dome-entrance.jpg` | 2400×1600 | 165 KB | /about/contact |
 | `dome-golden-hour.jpg` | 2400×1600 | 576 KB | /services/funeral |
 | `dome-minaret.jpg` | 2400×1600 | 185 KB | /committees |
@@ -133,7 +134,7 @@ Generated from `src/`. Regenerate after moving any photo.
 | `prayer-hall.jpg` | 2400×1600 | 318 KB | /about/who-are-we · /services/sadaqah |
 | `skylight-chandelier.jpg` | 2400×1600 | 214 KB | /about/history · /services/wedding |
 
-17 files, 5.0 MB total.
+18 files, 5.1 MB total.
 
 Pages with no hero photo: the four `/programs/*` routes and `/404`. Intentional —
 the Programs nav menu links straight to the external program sites (qa.iscj.org,

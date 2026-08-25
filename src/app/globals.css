@@ -147,6 +147,78 @@ h2.section-title em {
   }
 }
 
+/* ---------- Imam's Corner hero ---------- */
+/* The photo is shown whole — no crop, no letterbox: the panel carries the
+   photo's own aspect ratio, so `cover` fills it exactly, and a mask fades its
+   edge into the navy instead of leaving a hard border. Wide screens pin it to
+   the navbar's bottom edge and the hero's right/bottom edges; under 1100px it
+   drops to a full-width band below the copy. */
+.imam-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-deep);
+  padding: 204px 0 80px;
+}
+
+/* Keeps the copy legible where it runs over the photo's faded edge. */
+.imam-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to right, rgba(1,24,48,0.55) 0%, rgba(1,24,48,0.22) 46%, rgba(1,24,48,0) 66%);
+  pointer-events: none;
+}
+
+/* Container's Tailwind utilities don't emit in this setup, so the page's
+   gutters live here — 48px desktop, 24px mobile. */
+.imam-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.imam-hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.imam-hero-photo {
+  position: absolute;
+  top: 108px;            /* navbar height — the photo starts flush beneath it */
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  aspect-ratio: 1383 / 922;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.92);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 14%, #000 34%);
+          mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.6) 14%, #000 34%);
+}
+
+@media (max-width: 1099px) {
+  .imam-hero { padding-bottom: 0; }
+  .imam-hero::before { display: none; }
+  .imam-hero-photo {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    width: 100%;
+    margin-top: 56px;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 20%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 20%);
+  }
+}
+
+@media (max-width: 639px) {
+  .imam-container { padding: 0 24px; }
+  .imam-hero { padding-top: 132px; }
+  .imam-hero-photo { margin-top: 36px; }
+}
+
 /* ---------- Footer responsive ---------- */
 .footer-root {
   padding: 72px 48px 36px;
