@@ -50,7 +50,8 @@ src/
 │   ├── committees/page.tsx
 │   ├── donate/page.tsx
 │   ├── learn-about-islam/page.tsx
-│   └── volunteer/page.tsx
+│   ├── volunteer/page.tsx
+│   └── admin/page.tsx            # Admin dashboard (noindex). See "Admin Dashboard".
 ├── components/
 │   ├── ui/                       # Reusable design-system primitives
 │   │   ├── Button.tsx
@@ -58,7 +59,17 @@ src/
 │   │   └── SectionHeading.tsx
 │   ├── layout/
 │   │   ├── Navbar.tsx
+│   │   ├── AlertBanner.tsx       # Announcement ticker (top strip of the navbar)
+│   │   ├── AlertBannerView.tsx   # The strip's markup, shared with the admin preview
 │   │   └── Footer.tsx
+│   ├── events/
+│   │   └── EventCardView.tsx     # The event card, shared with the admin preview
+│   ├── admin/                    # Admin dashboard (see "Admin Dashboard" below)
+│   │   ├── AdminDashboard.tsx    # Shell: header, tab bar
+│   │   ├── EventsManager.tsx
+│   │   ├── PrayerTimesManager.tsx
+│   │   ├── AlertsManager.tsx
+│   │   └── adminUi.tsx           # Form primitives + shared inline styles
 │   └── home/                     # Home page section components
 │       ├── HeroSection.tsx
 │       ├── AboutSection.tsx
@@ -69,6 +80,10 @@ src/
 │       └── DonateCTASection.tsx
 ├── lib/
 │   ├── utils.ts                  # cn() utility
+│   ├── announcements.ts          # Alert banner messages (edit these to change the ticker)
+│   ├── events.ts                 # DbEvent shape + date/display helpers
+│   ├── prayerSettings.ts         # Iqamah + jumu'ah shape, fallbacks, iqamaLabel()
+│   ├── adminData.ts              # Admin's data layer. Mock store today, Supabase next.
 │   └── assetPath.ts              # basePath-aware URL helper for /public assets
 └── types/
     └── index.ts                  # Shared TypeScript interfaces
@@ -202,6 +217,62 @@ Defined as CSS custom properties in `globals.css`. Map these directly to Tailwin
 - Default (over hero): `background: transparent`, social icons hidden (`opacity: 0`), nav links slid up (`top: -54px`), logo hidden
 - On scroll past 60px (`.scrolled`): `background: var(--navy-deep)`, all elements fade in, nav links slide down to `top: 0`
 - Active link: full-width gold underline via `::after` pseudo-element
+
+### Alert Banner
+
+Site-wide announcement ticker, rendered as the first child of the fixed `<nav>`
+so it stays visible while scrolling and never reflows page content.
+
+- **Content:** `src/lib/announcements.ts`. One entry per message; the banner
+  cycles them every 6.5s (paused on hover/focus). Keep text to ~90 characters.
+  Every field maps to a future Supabase column and to a control on the planned
+  admin form: `label`, `text`, `href`, `linkLabel`, `active` (on/off switch),
+  `startsAt`/`endsAt` (ISO scheduling window). `getVisibleAnnouncements()` is
+  the only thing the component calls, so swapping the array for a fetch is the
+  whole migration.
+- **Dismissal is session-only, by design.** The X hides the banner for the rest
+  of that visit (it survives client-side navigation, since the component lives
+  in the root layout) and a reload brings it back. Nothing is written to
+  storage — a closure notice must not be lost to a stray tap.
+- **Rendered after mount**, not at build time: this is a static export, so a
+  build-time `Date.now()` would freeze the `startsAt`/`endsAt` window at deploy
+  time and scheduled announcements would never turn over.
+- **Height:** the banner publishes its measured height as the `--banner-h` CSS
+  variable on `<html>` (0px when hidden or empty). Anything positioned against
+  the bottom of the navbar must add it, e.g. `.imam-hero-photo` uses
+  `top: calc(108px + var(--banner-h))`. Navbar is 108px desktop / 64px mobile.
+- **Styles:** `.alert-banner*` in `globals.css` (inline styles can't do the
+  media queries or the pulse keyframes).
+
+### Admin Dashboard
+
+`/admin` is a single static route holding a tabbed client dashboard: Events,
+Prayer Times, Alerts. It is `robots: noindex` and, being a static export, has no
+server behind it. Auth and persistence are Supabase and are not built yet.
+
+- **Status: mock data.** `src/lib/adminData.ts` exports `MOCK = true` and an
+  in-memory store. Every function there is already `async` and returns the row
+  shapes the Supabase tables will have, so wiring the real backend means
+  replacing that file's bodies, not touching the managers. Edits currently reset
+  on reload, and there is no login yet.
+- **Previews render the real components, not mock-ups.** `EventCardView` and
+  `AlertBannerView` were extracted out of `EventsSection` / `AlertBanner` so the
+  public site and the admin preview cannot drift. Pass `animate={false}`
+  (card) so the preview shows without scrolling into view, and `linkAs="span"`
+  (banner) so a half-typed href can't navigate the admin away.
+  - **The admin preview must never mount the `--banner-h` ResizeObserver.**
+    That observer stays in `AlertBanner` alone; a second writer would corrupt
+    the offset the imam's-corner pages depend on. This is why the preview uses
+    `AlertBannerView` directly rather than `AlertBanner`.
+  - The prayer strip preview in `PrayerTimesManager` *is* a purpose-built mini
+    version (the real section is 500 lines with three layouts), and its caption
+    says so. Its adhan times are samples; only the iqamah lines are real.
+- **Dates:** `event_date` is an ISO calendar date and is the source of truth.
+  Parse it with `parseEventDate()` from `src/lib/events.ts`, which reads it at
+  local noon. A bare `new Date("2026-09-14")` is UTC midnight, which is the
+  previous evening in New Jersey and shows the wrong day on the card.
+- **Iqamah** is stored as a plain time with a suffix (`"5:30 AM"`);
+  `iqamaLabel()` is what turns it into the `"Iqama 5:30"` the strip renders.
 
 ### Scroll Animations
 
