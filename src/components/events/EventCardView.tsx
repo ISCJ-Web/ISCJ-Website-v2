@@ -22,13 +22,13 @@ const shell: React.CSSProperties = {
 type Props = {
   ev: EventCard;
   index?: number;
-  /** Off in the admin preview, where the card must be visible without scrolling into view. */
+  /** Off when the card must be visible without first scrolling into view. */
   animate?: boolean;
 };
 
 /**
- * The event card exactly as it appears on the home page. The admin dashboard
- * renders this same component for its live preview, so the two can never drift.
+ * The event card. Kept apart from EventsSection so the card can be rendered on
+ * its own, and so the section is left holding only the layout around it.
  */
 export default function EventCardView({ ev, index = 0, animate = true }: Props) {
   const body = (

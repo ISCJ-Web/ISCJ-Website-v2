@@ -9,18 +9,15 @@ type Props = {
   index: number;
   onSelectIndex?: (i: number) => void;
   onDismiss?: () => void;
-  /**
-   * "span" in the admin preview, so a half-written href cannot navigate the
-   * admin away from the form.
-   */
+  /** "span" renders the call to action as plain text instead of a link. */
   linkAs?: "link" | "span";
 };
 
 /**
  * The banner strip itself, with no state of its own. The rotation timer, the
  * session dismissal and the ResizeObserver that publishes --banner-h all stay in
- * AlertBanner; the admin preview renders this directly so it never touches that
- * variable, which page layouts elsewhere are anchored to.
+ * AlertBanner, which must remain the only writer of that variable: page layouts
+ * elsewhere are anchored to it.
  */
 export default function AlertBannerView({
   items,

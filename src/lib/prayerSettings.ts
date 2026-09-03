@@ -1,11 +1,15 @@
 /**
  * Iqamah and jumu'ah times — the half of the prayer strip the masjid sets by
- * hand. Adhan times keep coming from the Aladhan API; these sit underneath them
- * and are whatever the admin last published.
+ * hand. Adhan times come from the Aladhan API and change on their own; these
+ * sit underneath them and only change when someone edits this file.
  *
- * Stored as plain display strings with an AM/PM suffix ("5:30 AM"). The strip
- * renders them through iqamaLabel(), which is what drops the suffix and adds the
- * word "Iqama".
+ * ── To update the iqamah times, edit the values below. ──
+ *
+ * Write them as plain clock times with AM or PM: "5:30 AM". The strip renders
+ * them through iqamaLabel(), which drops the suffix and prints "Iqama 5:30".
+ * An empty string hides that prayer's iqamah line entirely.
+ *
+ * Sunrise has no iqamah and is deliberately absent.
  */
 
 export const IQAMAH_PRAYERS = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"] as const;
@@ -13,13 +17,13 @@ export const IQAMAH_PRAYERS = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"] as con
 export type IqamahPrayer = (typeof IQAMAH_PRAYERS)[number];
 
 export type PrayerSettings = {
-  /** Keyed by prayer name. Sunrise has no iqamah and is absent by design. */
+  /** Keyed by prayer name, as spelled in IQAMAH_PRAYERS. */
   iqamah: Record<string, string>;
+  /** Jumu'ah khutbah times, in order. Add or remove entries freely. */
   jumuah: string[];
 };
 
-/** What the strip showed before the database existed; also the offline fallback. */
-export const FALLBACK_PRAYER_SETTINGS: PrayerSettings = {
+export const PRAYER_SETTINGS: PrayerSettings = {
   iqamah: {
     Fajr: "5:30 AM",
     Dhuhr: "1:30 PM",

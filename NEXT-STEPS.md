@@ -15,9 +15,12 @@ Where the project stands after ~3 months away, and the path to finishing it.
 
 1. ~~**Uncommitted deletion of `src/app/morocco-26/`**~~ **RESOLVED 2026-08-11:**
    trip is over — removal committed.
-2. **Stale hardcoded events are live on the site.** `EventsSection.tsx` and
-   `AnnouncementsSection.tsx` show May 2026 events in August.
-   **DECISION 2026-08-11:** leave as-is; the Supabase work (Phase 3) replaces them.
+2. ~~**Stale hardcoded events are live on the site.**~~ **RESOLVED 2026-09-03:**
+   events moved to `src/lib/events.ts` with real ISO dates, and `EventsSection`
+   now drops past events after mount, so they expire on their own.
+   `AnnouncementsSection.tsx` is a separate hardcoded list and still shows April
+   2026 items — it was left out of the content-file work and needs either the
+   same treatment or deletion.
 3. **npm audit findings** (postcss, sharp). Build-time only — low real-world risk
    for a static site. `npm audit fix` was a no-op; the remaining 3 high findings
    are versions bundled inside Next 15 and only clear with a **Next 16 upgrade**
@@ -32,9 +35,9 @@ Where the project stands after ~3 months away, and the path to finishing it.
 ## Architectural constraint to keep in mind
 
 The site is a **static export** (`output: "export"`) — there is no server at
-runtime on GitHub Pages. So the admin terminal, database, and LLM event-parsing
-cannot use Next.js API routes. The architecture below works on GitHub Pages
-today and carries over to Cloudflare unchanged.
+runtime on GitHub Pages. Anything dynamic has to be a third-party service called
+from the browser, or it has to happen at build time. This is why content lives in
+files that ship with the build rather than behind an API.
 
 ---
 
@@ -44,7 +47,8 @@ today and carries over to Cloudflare unchanged.
 - [x] `npm audit fix` (no-op — remaining findings need Next 16, deferred),
       `npm run build` verified.
 - [x] CLAUDE.md + README updated to match reality.
-- [x] Stale events stopgap: skipped by decision — Supabase (Phase 3) replaces them.
+- [x] Stale events stopgap: skipped at the time; fixed in Phase 3 by moving events
+      to `src/lib/events.ts`, where past ones expire on their own.
 
 ## Phase 2 — Content parity with ISCJ.org (the launch-blocking work)
 
@@ -72,29 +76,35 @@ new/updated versions where ISCJ has them. Keep a `documents.json` manifest
 (name, path, category, which pages reference it) — this becomes the seed data
 for the Phase 3 documents manager.
 
-## Phase 3 — Database, events, and the admin terminal (Supabase)
+## Phase 3 — Content editing ✅ (completed 2026-09-03)
 
-Supabase free tier: Postgres + Auth + Storage + Edge Functions, all callable
-from a static site.
+**Superseded plan:** this phase was going to be Supabase plus an `/admin`
+dashboard with LLM flyer parsing. The dashboard was built against mock data,
+reviewed, and then removed along with the whole database plan.
 
-1. **Schema:** `events` (title, date, time, location, tag, description,
-   published), `announcements`, `documents` (name, category, storage_url,
-   referenced_on[]). RLS: anonymous role gets read-only on published rows;
-   writes require an authenticated admin.
-2. **Public site:** convert `EventsSection` / `AnnouncementsSection` to fetch
-   from Supabase client-side with the anon key (safe to ship — RLS enforces
-   read-only). Keep the current hardcoded data as the loading/error fallback.
-3. **Admin terminal:** an `/admin` route in the same app — static page,
-   client-side Supabase Auth (email/password), so it deploys with GitHub Pages
-   unchanged. Sections: Events, Announcements, Documents.
-4. **LLM event entry:** a paste-a-description box. The Claude API key cannot
-   live in a static page, so put the call in a **Supabase Edge Function** that
-   requires an authenticated admin JWT: paste text → Edge Function calls Claude
-   (claude-haiku-4-5 is cheap and plenty for field extraction) → returns
-   structured fields → prefills the event form → admin reviews → save.
-5. **Documents manager:** upload to Supabase Storage from the admin page; the
-   `documents` table tracks each file and which pages reference it, so admins
-   can see where a file is used and swap in a new version without touching code.
+**Why it was dropped.** The site changes roughly fifty times a year and the
+developer makes those changes. A database bought nothing that editing a file
+does not already do, while adding an account someone has to keep alive, RLS to
+get right, an API key to hold, and a runtime failure mode a static site
+otherwise cannot have (Supabase down or paused means an empty events section).
+The fallback cascade in the plan existed only to paper over that.
+
+**What shipped instead.** Three content files, each documented in its own header
+comment, edited and pushed like any other change:
+
+- `src/lib/events.ts` — the `EVENTS` array. ISO dates; past events drop off on
+  their own after mount.
+- `src/lib/prayerSettings.ts` — `PRAYER_SETTINGS`, the iqamah and jumu'ah times.
+  Adhan times still come from the Aladhan API at runtime.
+- `src/lib/announcements.ts` — the alert banner, with `active` and
+  `startsAt`/`endsAt` so a notice can be written ahead of time and appear on its
+  own.
+
+**If this ever needs to change**, the trigger is a non-technical volunteer
+needing to publish without the developer. Reach for a git-based CMS (Decap,
+Sveltia, Pages CMS) before a database: those give a form UI, commit to this repo,
+and keep the site's zero-backend property. A step below that, GitHub's own web
+editor already lets someone edit these files through a browser.
 
 ## Phase 4 — Cloudflare migration (last)
 
@@ -102,8 +112,6 @@ from a static site.
 - Once on a custom domain, drop the `/ISCJ-Website-v2` basePath — it's
   centralized in `next.config.ts` + `assetPath()`, so it's a one-line env
   change, but grep for any stragglers.
-- Optionally move the LLM endpoint from Supabase Edge Functions to a Cloudflare
-  Worker later; not required.
 - DNS cutover for iscj.org only after Phase 2 parity is confirmed; keep the
   Webflow site up until then (but rescue the files first — 2c).
 
@@ -114,8 +122,8 @@ from a static site.
       `/hff` and anything renamed) via Cloudflare redirect rules.
 - [ ] Lighthouse + real-phone mobile pass.
 - [ ] Analytics (Cloudflare Web Analytics is free and cookie-less).
-- [ ] Hand off admin credentials + a one-page "how to post an event" doc.
+- [ ] A one-page "how to post an event" doc covering the three content files in
+      `src/lib/`, for whoever maintains the site next.
 
-**Recommended order:** Phase 1 now → Phase 2 (content is what blocks retiring
-the old site) → Phase 3 (admin/DB) → Phase 4/5. If motivation strikes for the
-fun part first, Phase 3 is independent of Phase 2 — nothing breaks either way.
+**Recommended order:** Phase 2 is what blocks retiring the old site, so it comes
+next, then Phase 4/5. Phase 3 is done.

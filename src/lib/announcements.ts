@@ -1,25 +1,27 @@
 /**
  * Site-wide alert banner content.
  *
- * This module is the seam for the planned admin dashboard: today the rows live
- * in the array below, later they come from the Supabase `announcements` table.
- * Every field here is meant to map 1:1 to a column and to a control on an admin
- * form, so swapping the source should not touch the banner component at all:
+ * ── To change what the banner says, edit the array below. ──
  *
- *   id        text (primary key)   — stable; the admin form never edits it
- *   label     text                 — short tag shown in the gold pill
- *   text      text                 — the message itself
- *   href      text, nullable       — where the message links
- *   linkLabel text, nullable       — the call-to-action wording
- *   active    boolean, default true — the admin's on/off switch
- *   startsAt  timestamptz, nullable — publish from (admin date picker)
- *   endsAt    timestamptz, nullable — auto-expire at (admin date picker)
- *   sortOrder int                   — array order here; a column there
+ * The banner cycles through every entry that is currently visible, in the order
+ * written here, so put the most urgent message first. One entry is the normal
+ * case; with only one the rotation and its dots switch themselves off.
  *
- * Ordering is the array order, most urgent first. The banner cycles through
- * whatever `getVisibleAnnouncements()` returns.
+ *   id        Any short unique string. Only used as the animation key.
+ *   label     The gold pill on the left, e.g. "Closure". Two words max.
+ *   text      The message. Keep it to roughly 90 characters, about one line.
+ *   href      Optional. Where the message links; defaults to the home page.
+ *   linkLabel Optional. The wording of the link; defaults to "Read more".
+ *   active    Optional. Set false to switch an entry off without deleting it.
+ *   startsAt  Optional ISO date. The entry stays hidden until this instant.
+ *   endsAt    Optional ISO date. The entry hides itself after this instant.
  *
- * Dismissing the banner is deliberately session-only — see AlertBanner.tsx.
+ * startsAt and endsAt are the reason to write an announcement ahead of time:
+ * a Ramadan notice can sit here for weeks and appear on its own. Entries are
+ * filtered in the browser, not at build time, so a scheduled message turns over
+ * without anyone redeploying the site.
+ *
+ * Dismissing the banner is deliberately session-only, see AlertBanner.tsx.
  */
 
 export type Announcement = {

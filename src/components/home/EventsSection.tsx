@@ -1,15 +1,25 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import EventCardView from "@/components/events/EventCardView";
-import type { EventCard } from "@/types";
+import { EVENTS, eventDisplayParts, sortEvents, upcomingOnly } from "@/lib/events";
+import type { SiteEvent } from "@/lib/events";
 
-const EVENTS: EventCard[] = [
-  { month: "May", day: "02", tag: "Community",  title: "Community Potluck Dinner",   time: "6:30 PM", location: "Main Hall" },
-  { month: "May", day: "10", tag: "Education",  title: "Islamic Finance Workshop",   time: "2:00 PM", location: "Conference Room" },
-  { month: "May", day: "17", tag: "Youth",      title: "Youth Leadership Summit",    time: "10:00 AM", location: "Community Center" },
-];
+/**
+ * The list is sorted at module scope so the build output and the browser's
+ * first render are identical, then narrowed to upcoming events after mount.
+ * Filtering by date up front would not survive hydration: this is a static
+ * export, so the build would bake in whatever "today" meant at deploy time.
+ */
+const SORTED = sortEvents(EVENTS);
 
 export default function EventsSection() {
+  const [events, setEvents] = useState<SiteEvent[]>(SORTED);
+
+  useEffect(() => {
+    setEvents(upcomingOnly(SORTED));
+  }, []);
+
   return (
     <section id="events">
       <div style={{ padding: "120px 48px", maxWidth: 1200, margin: "0 auto" }}
@@ -52,14 +62,38 @@ export default function EventsSection() {
         </div>
 
         {/* Events grid */}
-        <div
-          style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}
-          className="max-sm:!grid-cols-1"
-        >
-          {EVENTS.map((ev, i) => (
-            <EventCardView key={ev.title} ev={ev} index={i} />
-          ))}
-        </div>
+        {events.length > 0 ? (
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 2 }}
+            className="max-sm:!grid-cols-1"
+          >
+            {events.map((ev, i) => (
+              <EventCardView
+                key={`${ev.date}-${ev.title}`}
+                index={i}
+                ev={{
+                  ...eventDisplayParts(ev.date),
+                  tag: ev.tag,
+                  title: ev.title,
+                  time: ev.time,
+                  location: ev.location,
+                }}
+              />
+            ))}
+          </div>
+        ) : (
+          <p
+            style={{
+              fontSize: "0.95rem",
+              fontWeight: 300,
+              lineHeight: 1.8,
+              color: "var(--muted)",
+              margin: 0,
+            }}
+          >
+            New events are announced here as they are scheduled. Check back soon.
+          </p>
+        )}
       </div>
     </section>
   );

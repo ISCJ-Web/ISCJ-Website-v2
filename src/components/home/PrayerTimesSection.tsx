@@ -2,22 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PrayerTime } from "@/types";
+import { PRAYER_SETTINGS, iqamaLabel } from "@/lib/prayerSettings";
 
 // ISCJ — Monmouth Junction, NJ
 const LAT = 40.3748;
 const LNG = -74.5488;
 const CACHE_KEY = "iscj_prayer_times";
 const PRAYER_NAMES = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
-
-// Iqama times — update monthly as needed
-const IQAMA_TIMES: Record<string, string> = {
-  Fajr:    "Iqama 5:30",
-  Sunrise: "",
-  Dhuhr:   "Iqama 1:30",
-  Asr:     "Iqama 5:10",
-  Maghrib: "Iqama 8:05",
-  Isha:    "Iqama 9:45",
-};
 
 // Fallback adhan times — update monthly if API is unavailable
 const FALLBACK_TIMES: PrayerTime[] = [
@@ -29,7 +20,7 @@ const FALLBACK_TIMES: PrayerTime[] = [
   { name: "Isha",    time: "9:24 PM" },
 ];
 
-const JUMUAH_TIMES = ["12:00 PM", "1:10 PM", "3:15 PM"];
+const JUMUAH_TIMES = PRAYER_SETTINGS.jumuah;
 
 function to12h(time24: string): string {
   const [h, m] = time24.split(":").map(Number);
@@ -91,7 +82,7 @@ function saveCache(times: PrayerTime[]): void {
 }
 
 function withIqama(times: PrayerTime[]): PrayerTime[] {
-  return times.map((p) => ({ ...p, iqama: IQAMA_TIMES[p.name] ?? "" }));
+  return times.map((p) => ({ ...p, iqama: iqamaLabel(PRAYER_SETTINGS.iqamah[p.name] ?? "") }));
 }
 
 function buildGregorianLabel(): string {

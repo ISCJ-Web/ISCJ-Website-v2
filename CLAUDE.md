@@ -50,8 +50,7 @@ src/
 │   ├── committees/page.tsx
 │   ├── donate/page.tsx
 │   ├── learn-about-islam/page.tsx
-│   ├── volunteer/page.tsx
-│   └── admin/page.tsx            # Admin dashboard (noindex). See "Admin Dashboard".
+│   └── volunteer/page.tsx
 ├── components/
 │   ├── ui/                       # Reusable design-system primitives
 │   │   ├── Button.tsx
@@ -60,16 +59,10 @@ src/
 │   ├── layout/
 │   │   ├── Navbar.tsx
 │   │   ├── AlertBanner.tsx       # Announcement ticker (top strip of the navbar)
-│   │   ├── AlertBannerView.tsx   # The strip's markup, shared with the admin preview
+│   │   ├── AlertBannerView.tsx   # The strip's markup
 │   │   └── Footer.tsx
 │   ├── events/
-│   │   └── EventCardView.tsx     # The event card, shared with the admin preview
-│   ├── admin/                    # Admin dashboard (see "Admin Dashboard" below)
-│   │   ├── AdminDashboard.tsx    # Shell: header, tab bar
-│   │   ├── EventsManager.tsx
-│   │   ├── PrayerTimesManager.tsx
-│   │   ├── AlertsManager.tsx
-│   │   └── adminUi.tsx           # Form primitives + shared inline styles
+│   │   └── EventCardView.tsx     # The event card itself
 │   └── home/                     # Home page section components
 │       ├── HeroSection.tsx
 │       ├── AboutSection.tsx
@@ -80,10 +73,9 @@ src/
 │       └── DonateCTASection.tsx
 ├── lib/
 │   ├── utils.ts                  # cn() utility
-│   ├── announcements.ts          # Alert banner messages (edit these to change the ticker)
-│   ├── events.ts                 # DbEvent shape + date/display helpers
-│   ├── prayerSettings.ts         # Iqamah + jumu'ah shape, fallbacks, iqamaLabel()
-│   ├── adminData.ts              # Admin's data layer. Mock store today, Supabase next.
+│   ├── announcements.ts          # CONTENT: alert banner messages
+│   ├── events.ts                 # CONTENT: upcoming events + date helpers
+│   ├── prayerSettings.ts         # CONTENT: iqamah + jumu'ah times
 │   └── assetPath.ts              # basePath-aware URL helper for /public assets
 └── types/
     └── index.ts                  # Shared TypeScript interfaces
@@ -225,11 +217,10 @@ so it stays visible while scrolling and never reflows page content.
 
 - **Content:** `src/lib/announcements.ts`. One entry per message; the banner
   cycles them every 6.5s (paused on hover/focus). Keep text to ~90 characters.
-  Every field maps to a future Supabase column and to a control on the planned
-  admin form: `label`, `text`, `href`, `linkLabel`, `active` (on/off switch),
-  `startsAt`/`endsAt` (ISO scheduling window). `getVisibleAnnouncements()` is
-  the only thing the component calls, so swapping the array for a fetch is the
-  whole migration.
+  Fields: `label`, `text`, `href`, `linkLabel`, `active` (off switch),
+  `startsAt`/`endsAt` (ISO scheduling window, so a notice can be written weeks
+  ahead and appear on its own). `getVisibleAnnouncements()` does the filtering
+  and is the only thing the component calls.
 - **Dismissal is session-only, by design.** The X hides the banner for the rest
   of that visit (it survives client-side navigation, since the component lives
   in the root layout) and a reload brings it back. Nothing is written to
@@ -244,35 +235,39 @@ so it stays visible while scrolling and never reflows page content.
 - **Styles:** `.alert-banner*` in `globals.css` (inline styles can't do the
   media queries or the pulse keyframes).
 
-### Admin Dashboard
+### Editing Site Content
 
-`/admin` is a single static route holding a tabbed client dashboard: Events,
-Prayer Times, Alerts. It is `robots: noindex` and, being a static export, has no
-server behind it. Auth and persistence are Supabase and are not built yet.
+Three files hold everything the masjid changes between code releases. There is
+no database and no admin UI: edit the file, commit, push, and the GitHub Actions
+workflow redeploys. Each file opens with a comment explaining its own fields.
 
-- **Status: mock data.** `src/lib/adminData.ts` exports `MOCK = true` and an
-  in-memory store. Every function there is already `async` and returns the row
-  shapes the Supabase tables will have, so wiring the real backend means
-  replacing that file's bodies, not touching the managers. Edits currently reset
-  on reload, and there is no login yet.
-- **Previews render the real components, not mock-ups.** `EventCardView` and
-  `AlertBannerView` were extracted out of `EventsSection` / `AlertBanner` so the
-  public site and the admin preview cannot drift. Pass `animate={false}`
-  (card) so the preview shows without scrolling into view, and `linkAs="span"`
-  (banner) so a half-typed href can't navigate the admin away.
-  - **The admin preview must never mount the `--banner-h` ResizeObserver.**
-    That observer stays in `AlertBanner` alone; a second writer would corrupt
-    the offset the imam's-corner pages depend on. This is why the preview uses
-    `AlertBannerView` directly rather than `AlertBanner`.
-  - The prayer strip preview in `PrayerTimesManager` *is* a purpose-built mini
-    version (the real section is 500 lines with three layouts), and its caption
-    says so. Its adhan times are samples; only the iqamah lines are real.
-- **Dates:** `event_date` is an ISO calendar date and is the source of truth.
-  Parse it with `parseEventDate()` from `src/lib/events.ts`, which reads it at
-  local noon. A bare `new Date("2026-09-14")` is UTC midnight, which is the
-  previous evening in New Jersey and shows the wrong day on the card.
-- **Iqamah** is stored as a plain time with a suffix (`"5:30 AM"`);
-  `iqamaLabel()` is what turns it into the `"Iqama 5:30"` the strip renders.
+| What changes | File | Notes |
+|---|---|---|
+| Alert banner ticker | `src/lib/announcements.ts` | See "Alert Banner" above |
+| Upcoming events | `src/lib/events.ts` | `EVENTS` array |
+| Iqamah + jumu'ah times | `src/lib/prayerSettings.ts` | `PRAYER_SETTINGS` |
+
+- **Events carry an ISO date, not display strings.** `"2026-09-14"` is the
+  source of truth; the "Sep" and "14" on the card are derived by
+  `eventDisplayParts()`. Parse dates only with `parseEventDate()`, which reads
+  them at local noon: a bare `new Date("2026-09-14")` is UTC midnight, which is
+  the previous evening in New Jersey and renders the wrong day.
+- **Past events drop off by themselves.** `EventsSection` sorts at module scope
+  so the build output and the browser's first render match, then narrows to
+  upcoming events in a `useEffect`. Filtering before mount would bake "today"
+  into the static HTML at deploy time and break hydration. Leaving an old event
+  in the array is therefore harmless; deleting it just keeps the file tidy. With
+  nothing upcoming the section renders a short line instead of an empty grid.
+- **Iqamah times are stored plain** (`"5:30 AM"`); `iqamaLabel()` is what turns
+  them into the `"Iqama 5:30"` the strip renders. An empty string hides that
+  prayer's line. Sunrise has no iqamah and is absent from the record by design.
+- **Adhan times are never edited here.** They come from the Aladhan API at
+  runtime; `FALLBACK_TIMES` in `PrayerTimesSection` only shows if that call
+  fails.
+- `EventCardView` and `AlertBannerView` hold the markup for the event card and
+  the banner strip. They are separate from their sections so the card and strip
+  can be rendered on their own; `AlertBanner` remains the only writer of
+  `--banner-h`.
 
 ### Scroll Animations
 
@@ -340,13 +335,15 @@ See `NEXT-STEPS.md` for the full phased plan. Confirmed direction:
 - **Content parity** with the old Webflow site (iscj.org), including rescuing all
   PDFs/documents off Webflow's CDN into `public/documents/` before it is retired.
   Morocco '26 and Halal Food Fest (`/hff`) pages are intentionally dropped (events over).
-- **Supabase** (confirmed backend): `events`, `announcements`, `documents` tables +
-  Storage. Anon key ships client-side with read-only RLS on published rows.
-- **Admin portal at `/admin`** — static route in this app, client-side Supabase Auth
-  (email/password, no self-signup). CRUD for events/announcements, plus a documents
-  manager that tracks where each file is referenced.
-- **LLM event entry** — admin pastes an event description; a Supabase Edge Function
-  (holds the Claude API key, requires admin JWT) extracts structured fields to
-  prefill the event form. The API key must never ship in the static bundle.
+- **No database.** Events, iqamah times and banner alerts are edited in the three
+  content files listed under "Editing Site Content" and ship in the build. A
+  Supabase backend and an `/admin` portal were planned, built against mock data,
+  and then removed: at roughly fifty content changes a year, run by the developer,
+  a database bought nothing that code edits do not already do, and it added an
+  account to keep alive plus a runtime failure mode a static site otherwise cannot
+  have. Revisit only if a non-technical volunteer needs to publish, and prefer a
+  git-based CMS (Decap, Sveltia) over a database even then.
+- **Visitor analytics** — Cloudflare Web Analytics, a cookieless script tag, for
+  visit counts and referrers. Not yet added.
 - **Hosting migration** to Cloudflare Pages at the end; basePath drops to `""` then
   (centralized in `next.config.ts` + `assetPath()`).

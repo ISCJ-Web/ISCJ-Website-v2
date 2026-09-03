@@ -137,6 +137,6 @@ Next.js is configured with `output: "export"` to produce a fully static site in 
 See [NEXT-STEPS.md](NEXT-STEPS.md) for the full phased plan.
 
 - Content parity with the old Webflow site (iscj.org), including rehosting all documents off Webflow's CDN
-- Supabase-backed events, announcements, and documents
-- Admin portal at `/admin` (Supabase Auth) with LLM-assisted event entry via a Supabase Edge Function
+- No database: events, iqamah times and banner alerts are edited in three content files under `src/lib/` and ship with the build
+- Visitor analytics via Cloudflare Web Analytics
 - Hosting migration to Cloudflare Pages
