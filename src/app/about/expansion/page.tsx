@@ -2,7 +2,7 @@ import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
 const phases = [
-  { year: "2007", title: "Master Plan Approved", body: "South Brunswick Township approved ISCJ's master expansion plan, authorizing the long-term campus growth vision." },
+  { year: "2006", title: "Master Plan Approved", body: "South Brunswick Township approved ISCJ's master expansion plan, authorizing the long-term campus growth vision." },
   { year: "2020", title: "Masjid Phase 1 Complete", body: "The first phase of the Masjid expansion was completed during COVID-19 — a testament to the community's resolve and dedication." },
   { year: "2021", title: "Zoning Board Approval", body: "The Zoning Board approved a 42,449 sq ft two-story school addition, a 44,880 sq ft sports facility, and 24 senior housing units." },
   { year: "2024", title: "Infrastructure Complete", body: "Stormwater management, utilities, and parking infrastructure finished — the foundation for all future construction phases." },
@@ -66,7 +66,7 @@ export default function Page() {
             {[
               { number: "17", label: "Acres of Land", dark: false },
               { number: "$1.5M+", label: "Community-Funded Property", dark: true },
-              { number: "2007–2025+", label: "Expansion Timeline", dark: false },
+              { number: "2006–2025+", label: "Expansion Timeline", dark: false },
             ].map((s) => (
               <div
                 key={s.label}

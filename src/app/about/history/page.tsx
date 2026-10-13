@@ -90,12 +90,7 @@ const eras: Era[] = [
       {
         year: "2006",
         title: "Campus Master Plan",
-        body: "ISCJ prepared a master plan for the whole campus, including a permanent school building, an addition to the masjid and new parking, and submitted it to the South Brunswick Township Zoning Board.",
-      },
-      {
-        year: "2007",
-        title: "Expansion Plan Approved",
-        body: "South Brunswick Township approved ISCJ's master expansion plan, setting the stage for a major campus growth that would serve the community for decades to come.",
+        body: "ISCJ prepared a master plan for the whole campus, including a permanent school building, an addition to the masjid and new parking. The South Brunswick Township Zoning Board approved it, setting the stage for a major campus growth that would serve the community for decades to come.",
       },
       {
         year: "2009",
@@ -230,7 +225,7 @@ export default function Page() {
           </h1>
           <p style={{ fontSize: "1.05rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, maxWidth: 560 }}>
             Conceived by Muslim American students of Rutgers University in the 1970s, ISCJ
-            has grown from a small gathering of eight families into one of America&apos;s most
+            has grown from a small gathering of four students and four families into one of America&apos;s most
             distinguished Islamic centers — serving thousands and expanding every year.
           </p>
         </Container>

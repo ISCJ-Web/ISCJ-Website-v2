@@ -7,9 +7,9 @@ import MissionVision from "@/components/about/MissionVision";
 import { assetPath } from "@/lib/assetPath";
 
 const STATS: StatItem[] = [
-  { value: "1970", label: "Founded in Central NJ" },
+  { value: "1975", label: "Founded in Central NJ" },
   { value: "5",    label: "Daily prayers held", dark: true },
-  { value: "53+",  label: "Years serving New Jersey" },
+  { value: "50+",  label: "Years serving New Jersey" },
   { value: "17",   label: "Acres of campus" },
 ];
 
