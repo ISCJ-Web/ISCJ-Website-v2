@@ -42,6 +42,9 @@ export type Announcement = {
   endsAt?: string;
 };
 
+/* Nothing to announce right now, so every entry below is switched off and the
+   banner renders nothing. To bring it back, delete `active: false` from an
+   entry (or add a new one) and the strip reappears on its own. */
 export const ANNOUNCEMENTS: Announcement[] = [
   {
     id: "snow-closure-2026-02",
@@ -49,6 +52,7 @@ export const ANNOUNCEMENTS: Announcement[] = [
     text: "Snow day. The masjid is closed today and all classes and programs are cancelled.",
     href: "/#announcements",
     linkLabel: "Details",
+    active: false,
   },
   {
     id: "ramadan-2026",
@@ -56,6 +60,7 @@ export const ANNOUNCEMENTS: Announcement[] = [
     text: "Taraweeh begins nightly after Isha, with iftar served in the community hall.",
     href: "/#events",
     linkLabel: "See schedule",
+    active: false,
   },
   {
     id: "zakat-drive-2026",
@@ -63,6 +68,7 @@ export const ANNOUNCEMENTS: Announcement[] = [
     text: "Your sadaqah keeps the masjid, the food pantry, and the weekend school running.",
     href: "/donate",
     linkLabel: "Donate",
+    active: false,
   },
 ];
 
