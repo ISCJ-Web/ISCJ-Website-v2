@@ -63,6 +63,8 @@ src/
 │   │   └── Footer.tsx
 │   ├── events/
 │   │   └── EventCardView.tsx     # The event card itself
+│   ├── about/
+│   │   └── MissionVision.tsx     # CONTENT: Mission + Vision cards (home + Who We Are)
 │   └── home/                     # Home page section components
 │       ├── HeroSection.tsx
 │       ├── AboutSection.tsx
@@ -98,7 +100,9 @@ public/
                                   # for screenshots/graphics with text, which show JPEG
                                   # ringing at the q80 default.
 └── documents/                    # PDFs rescued from the old Webflow site (bylaws,
-                                  # membership/zakat forms, etc.) — referenced via
+                                  # membership/zakat forms, etc.), plus the 2018 ISCJ
+                                  # history book (iscj-history-book.pdf, 324 pages, the
+                                  # source for /about/history) — referenced via
                                   # assetPath("/documents/<name>.pdf"); keep filenames
                                   # stable/year-less so yearly updates are drop-in
 ```
@@ -291,7 +295,7 @@ Apply to `.service-card`, `.event-card`, `.announce-item`, `.stat-card`:
 - UI primitives accept standard HTML props via `React.ComponentPropsWithoutRef`
 - Section components are self-contained with their own data/layout
 - Use `"use client"` on components that need browser APIs, interactivity, or event handlers. Any component with `onMouseEnter`/`onMouseLeave`/`onClick` etc. **must** be a Client Component — even if it has no hooks — or Next.js will throw when a Server Component tries to render it.
-- Current Client Components: `Navbar`, `Footer`, `Button`, `HeroSection`, `AboutSection`, `ServicesSection`, `EventsSection`, `AnnouncementsSection`, `PrayerTimesSection` (fetches live times from the Aladhan API)
+- Current Client Components: `Navbar`, `Footer`, `Button`, `HeroSection`, `AboutSection`, `ServicesSection`, `EventsSection`, `AnnouncementsSection`, `MissionVision`, `PrayerTimesSection` (fetches live times from the Aladhan API)
 - Current Server Components (no `"use client"`): `DonateCTASection`, `Container`, `SectionHeading`
 - Framer Motion variants defined at the component level, not inline
 

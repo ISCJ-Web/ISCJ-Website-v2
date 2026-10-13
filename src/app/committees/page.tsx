@@ -36,7 +36,7 @@ const committees: Committee[] = [
   {
     name: "Bylaws Committee",
     contact: "admin@iscj.org",
-    description: "Islam is by nature democratic and so is the ISCJ. As members make recommendations, this committee reviews, presents, and proposes amendments that our community votes on. Every great system of organizing people depends on a quality constitution that is adhered to.",
+    description: "In 2026, the ISCJ community comprehensively revised its bylaws. The Bylaws Committee is charged with periodically reviewing the bylaws and recommending changes to the Board as needed. The Committee is also responsible to draft procedures related to the bylaws. Finally, the Bylaws Committee would aid the Board and the ISCJ Community in preparing future amendments.",
     links: [{ label: "ISCJ Bylaws", href: "/documents/iscj-bylaws.pdf" }],
   },
   {
@@ -68,11 +68,6 @@ const committees: Committee[] = [
     name: "Senior Citizens 65+",
     contact: "admin@iscj.org",
     description: "Meets on the last Sunday of each month for social activities and community connection for senior members of the ISCJ community.",
-  },
-  {
-    name: "Policies and Procedures Committee",
-    contact: "admin@iscj.org",
-    description: "There is a right way and a haphazard way to do the same thing. This committee ensures that standards of quality for our policies and procedures are maintained.",
   },
 ];
 
