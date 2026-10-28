@@ -18,9 +18,9 @@ Where the project stands after ~3 months away, and the path to finishing it.
 2. ~~**Stale hardcoded events are live on the site.**~~ **RESOLVED 2026-09-03:**
    events moved to `src/lib/events.ts` with real ISO dates, and `EventsSection`
    now drops past events after mount, so they expire on their own.
-   `AnnouncementsSection.tsx` is a separate hardcoded list and still shows April
-   2026 items — it was left out of the content-file work and needs either the
-   same treatment or deletion.
+   **Superseded 2026-10-27:** both the events section and the hardcoded
+   `AnnouncementsSection` ("News & Updates") were removed from the home page
+   before launch; news goes out through the WhatsApp group instead.
 3. **npm audit findings** (postcss, sharp). Build-time only — low real-world risk
    for a static site. `npm audit fix` was a no-op; the remaining 3 high findings
    are versions bundled inside Next 15 and only clear with a **Next 16 upgrade**
@@ -89,11 +89,10 @@ get right, an API key to hold, and a runtime failure mode a static site
 otherwise cannot have (Supabase down or paused means an empty events section).
 The fallback cascade in the plan existed only to paper over that.
 
-**What shipped instead.** Three content files, each documented in its own header
-comment, edited and pushed like any other change:
+**What shipped instead.** Content files, each documented in its own header
+comment, edited and pushed like any other change. (`src/lib/events.ts` was the
+third; the events section was removed before launch, see CLAUDE.md.)
 
-- `src/lib/events.ts` — the `EVENTS` array. ISO dates; past events drop off on
-  their own after mount.
 - `src/lib/prayerSettings.ts` — `PRAYER_SETTINGS`, the iqamah and jumu'ah times.
   Adhan times still come from the Aladhan API at runtime.
 - `src/lib/announcements.ts` — the alert banner, with `active` and
@@ -122,7 +121,7 @@ editor already lets someone edit these files through a browser.
       `/hff` and anything renamed) via Cloudflare redirect rules.
 - [ ] Lighthouse + real-phone mobile pass.
 - [ ] Analytics (Cloudflare Web Analytics is free and cookie-less).
-- [ ] A one-page "how to post an event" doc covering the three content files in
+- [ ] A one-page "how to update the site" doc covering the content files in
       `src/lib/`, for whoever maintains the site next.
 
 **Recommended order:** Phase 2 is what blocks retiring the old site, so it comes

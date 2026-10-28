@@ -31,7 +31,7 @@ export type Announcement = {
   label: string;
   /** Keep to roughly one line, about 90 characters. */
   text: string;
-  /** Where the message links. Defaults to the home page announcements list. */
+  /** Where the message links. Defaults to the home page. */
   href?: string;
   linkLabel?: string;
   /** Off switch. Anything but an explicit `false` counts as on. */
@@ -50,16 +50,16 @@ export const ANNOUNCEMENTS: Announcement[] = [
     id: "snow-closure-2026-02",
     label: "Closure",
     text: "Snow day. The masjid is closed today and all classes and programs are cancelled.",
-    href: "/#announcements",
-    linkLabel: "Details",
+    href: "/about/contact",
+    linkLabel: "Contact us",
     active: false,
   },
   {
     id: "ramadan-2026",
     label: "Ramadan",
     text: "Taraweeh begins nightly after Isha, with iftar served in the community hall.",
-    href: "/#events",
-    linkLabel: "See schedule",
+    href: "/#prayer-times",
+    linkLabel: "Prayer times",
     active: false,
   },
   {

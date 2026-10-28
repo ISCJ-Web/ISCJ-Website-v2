@@ -8,21 +8,6 @@ export interface ServiceCard {
   description: string;
 }
 
-export interface EventCard {
-  month: string;
-  day: string;
-  tag: string;
-  title: string;
-  time: string;
-  location: string;
-}
-
-export interface Announcement {
-  title: string;
-  description: string;
-  date: string;
-}
-
 export interface PrayerTime {
   name: string;
   time: string;

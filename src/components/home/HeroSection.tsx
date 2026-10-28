@@ -95,7 +95,7 @@ export default function HeroSection() {
         </p>
 
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <Button variant="primary" href="#events">Upcoming Events</Button>
+          <Button variant="primary" href="#prayer-times">Prayer Times</Button>
           <Button variant="outline" href="#about">Learn More</Button>
         </div>
       </div>

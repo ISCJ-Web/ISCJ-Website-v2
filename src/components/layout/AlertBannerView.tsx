@@ -29,7 +29,7 @@ export default function AlertBannerView({
   if (items.length === 0) return null;
 
   const item = items[Math.min(index, items.length - 1)];
-  const href = item.href ?? "/#announcements";
+  const href = item.href ?? "/";
 
   const message = (
     <>

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Website for the Islamic Society of Central Jersey (ISCJ) mosque. A modern, animated, public-facing site with multiple pages covering about, services, events, and donation.
+Website for the Islamic Society of Central Jersey (ISCJ) mosque. A modern, animated, public-facing site with multiple pages covering about, services, programs, and donation.
 
 ## Tech Stack
 
@@ -61,8 +61,6 @@ src/
 │   │   ├── AlertBanner.tsx       # Announcement ticker (top strip of the navbar)
 │   │   ├── AlertBannerView.tsx   # The strip's markup
 │   │   └── Footer.tsx
-│   ├── events/
-│   │   └── EventCardView.tsx     # The event card itself
 │   ├── about/
 │   │   └── MissionVision.tsx     # CONTENT: Mission + Vision cards (home + Who We Are)
 │   └── home/                     # Home page section components
@@ -70,13 +68,10 @@ src/
 │       ├── AboutSection.tsx
 │       ├── PrayerTimesSection.tsx
 │       ├── ServicesSection.tsx
-│       ├── EventsSection.tsx
-│       ├── AnnouncementsSection.tsx
 │       └── DonateCTASection.tsx
 ├── lib/
 │   ├── utils.ts                  # cn() utility
 │   ├── announcements.ts          # CONTENT: alert banner messages
-│   ├── events.ts                 # CONTENT: upcoming events + date helpers
 │   ├── prayerSettings.ts         # CONTENT: iqamah + jumu'ah times
 │   └── assetPath.ts              # basePath-aware URL helper for /public assets
 └── types/
@@ -241,41 +236,36 @@ so it stays visible while scrolling and never reflows page content.
 
 ### Editing Site Content
 
-Three files hold everything the masjid changes between code releases. There is
+Two files hold everything the masjid changes between code releases. There is
 no database and no admin UI: edit the file, commit, push, and the GitHub Actions
 workflow redeploys. Each file opens with a comment explaining its own fields.
 
 | What changes | File | Notes |
 |---|---|---|
 | Alert banner ticker | `src/lib/announcements.ts` | See "Alert Banner" above |
-| Upcoming events | `src/lib/events.ts` | `EVENTS` array |
 | Iqamah + jumu'ah times | `src/lib/prayerSettings.ts` | `PRAYER_SETTINGS` |
 
-- **Events carry an ISO date, not display strings.** `"2026-09-14"` is the
-  source of truth; the "Sep" and "14" on the card are derived by
-  `eventDisplayParts()`. Parse dates only with `parseEventDate()`, which reads
-  them at local noon: a bare `new Date("2026-09-14")` is UTC midnight, which is
-  the previous evening in New Jersey and renders the wrong day.
-- **Past events drop off by themselves.** `EventsSection` sorts at module scope
-  so the build output and the browser's first render match, then narrows to
-  upcoming events in a `useEffect`. Filtering before mount would bake "today"
-  into the static HTML at deploy time and break hydration. Leaving an old event
-  in the array is therefore harmless; deleting it just keeps the file tidy. With
-  nothing upcoming the section renders a short line instead of an empty grid.
 - **Iqamah times are stored plain** (`"5:30 AM"`); `iqamaLabel()` is what turns
   them into the `"Iqama 5:30"` the strip renders. An empty string hides that
   prayer's line. Sunrise has no iqamah and is absent from the record by design.
 - **Adhan times are never edited here.** They come from the Aladhan API at
   runtime; `FALLBACK_TIMES` in `PrayerTimesSection` only shows if that call
   fails.
-- `EventCardView` and `AlertBannerView` hold the markup for the event card and
-  the banner strip. They are separate from their sections so the card and strip
-  can be rendered on their own; `AlertBanner` remains the only writer of
-  `--banner-h`.
+- `AlertBannerView` holds the markup for the banner strip, separate from
+  `AlertBanner` so the strip can be rendered on its own; `AlertBanner` remains
+  the only writer of `--banner-h`.
+- **There is no events or news section.** Both "Upcoming Events" and "News &
+  Updates" were removed from the home page before launch (Oct 2026): events and
+  news go out through the masjid's WhatsApp group, and hand-edited lists on the
+  site went stale within weeks. Reading the group automatically was ruled
+  out (no official API for ordinary group chats; unofficial bridges break
+  WhatsApp's terms and need an always-on server). The old `src/lib/events.ts`,
+  `EventsSection`, `EventCardView` and `AnnouncementsSection` are in git
+  history if they come back.
 
 ### Scroll Animations
 
-Apply to `.service-card`, `.event-card`, `.announce-item`, `.stat-card`:
+Apply to `.service-card`, `.stat-card`:
 - Initial state: `opacity: 0`, `transform: translateY(20px)`
 - On `IntersectionObserver` entry: `opacity: 1`, `transform: translateY(0)`, `transition: 0.5s ease`
 - In Next.js, use Framer Motion `whileInView` with `viewport={{ once: true, amount: 0.1 }}`
@@ -295,7 +285,7 @@ Apply to `.service-card`, `.event-card`, `.announce-item`, `.stat-card`:
 - UI primitives accept standard HTML props via `React.ComponentPropsWithoutRef`
 - Section components are self-contained with their own data/layout
 - Use `"use client"` on components that need browser APIs, interactivity, or event handlers. Any component with `onMouseEnter`/`onMouseLeave`/`onClick` etc. **must** be a Client Component — even if it has no hooks — or Next.js will throw when a Server Component tries to render it.
-- Current Client Components: `Navbar`, `Footer`, `Button`, `HeroSection`, `AboutSection`, `ServicesSection`, `EventsSection`, `AnnouncementsSection`, `MissionVision`, `PrayerTimesSection` (fetches live times from the Aladhan API)
+- Current Client Components: `Navbar`, `Footer`, `Button`, `HeroSection`, `AboutSection`, `ServicesSection`, `MissionVision`, `PrayerTimesSection` (fetches live times from the Aladhan API)
 - Current Server Components (no `"use client"`): `DonateCTASection`, `Container`, `SectionHeading`
 - Framer Motion variants defined at the component level, not inline
 
@@ -339,7 +329,7 @@ See `NEXT-STEPS.md` for the full phased plan. Confirmed direction:
 - **Content parity** with the old Webflow site (iscj.org), including rescuing all
   PDFs/documents off Webflow's CDN into `public/documents/` before it is retired.
   Morocco '26 and Halal Food Fest (`/hff`) pages are intentionally dropped (events over).
-- **No database.** Events, iqamah times and banner alerts are edited in the three
+- **No database.** Iqamah times and banner alerts are edited in the two
   content files listed under "Editing Site Content" and ship in the build. A
   Supabase backend and an `/admin` portal were planned, built against mock data,
   and then removed: at roughly fifty content changes a year, run by the developer,
