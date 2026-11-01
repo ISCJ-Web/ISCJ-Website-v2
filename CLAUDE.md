@@ -245,9 +245,14 @@ workflow redeploys. Each file opens with a comment explaining its own fields.
 | Alert banner ticker | `src/lib/announcements.ts` | See "Alert Banner" above |
 | Iqamah + jumu'ah times | `src/lib/prayerSettings.ts` | `PRAYER_SETTINGS` |
 
+- **Iqamah times come in dated periods**, one per block of the monthly flyer
+  (`from: "2026-11-16"`), each with optional `sunday` overrides. `iqamahFor()`
+  picks the latest period that has started, applied in the browser on every
+  render so the switch on the 16th or a Sunday needs no redeploy.
 - **Iqamah times are stored plain** (`"5:30 AM"`); `iqamaLabel()` is what turns
-  them into the `"Iqama 5:30"` the strip renders. An empty string hides that
-  prayer's line. Sunrise has no iqamah and is absent from the record by design.
+  them into the `"Iqama 5:30"` the strip renders. Other text ("On Time") prints
+  as written. An empty string hides that prayer's line. Sunrise has no iqamah
+  and is absent from the record by design.
 - **Adhan times are never edited here.** They come from the Aladhan API at
   runtime; `FALLBACK_TIMES` in `PrayerTimesSection` only shows if that call
   fails.

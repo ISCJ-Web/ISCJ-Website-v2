@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { PrayerTime } from "@/types";
-import { PRAYER_SETTINGS, iqamaLabel } from "@/lib/prayerSettings";
+import { PRAYER_SETTINGS, iqamaLabel, iqamahFor } from "@/lib/prayerSettings";
 
 // ISCJ — Monmouth Junction, NJ
 const LAT = 40.3748;
@@ -81,8 +81,9 @@ function saveCache(times: PrayerTime[]): void {
   } catch {}
 }
 
-function withIqama(times: PrayerTime[]): PrayerTime[] {
-  return times.map((p) => ({ ...p, iqama: iqamaLabel(PRAYER_SETTINGS.iqamah[p.name] ?? "") }));
+function withIqama(times: PrayerTime[], date: Date): PrayerTime[] {
+  const iqamah = iqamahFor(date);
+  return times.map((p) => ({ ...p, iqama: iqamaLabel(iqamah[p.name] ?? "") }));
 }
 
 function buildGregorianLabel(): string {
@@ -237,19 +238,19 @@ function JumuahStrip() {
 }
 
 export default function PrayerTimesSection() {
-  const [times, setTimes] = useState<PrayerTime[]>(withIqama(FALLBACK_TIMES));
+  const [times, setTimes] = useState<PrayerTime[]>(FALLBACK_TIMES);
   const [now, setNow] = useState<Date>(new Date());
   const mobileScrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const cached = loadCached();
     if (cached) {
-      setTimes(withIqama(cached));
+      setTimes(cached);
     } else {
       fetchFromAladhan()
         .then((fetched) => {
           saveCache(fetched);
-          setTimes(withIqama(fetched));
+          setTimes(fetched);
         })
         .catch(() => {/* fallback already set */});
     }
@@ -258,6 +259,9 @@ export default function PrayerTimesSection() {
     return () => clearInterval(tick);
   }, []);
 
+  // Applied on every render, not when times are fetched, so the minute tick
+  // also carries the strip across midnight into a new period or a Sunday.
+  const shown = withIqama(times, now);
   const activePrayer = computeActivePrayer(times, now);
 
   // Centre the active prayer cell horizontally within its scroll container.
@@ -315,12 +319,12 @@ export default function PrayerTimesSection() {
         </div>
 
         <div style={{ display: "flex", flex: 1 }}>
-          {times.map((p, i) => (
+          {shown.map((p, i) => (
             <PrayerCell
               key={p.name}
               p={p}
               isActive={p.name === activePrayer}
-              isLast={i === times.length - 1}
+              isLast={i === shown.length - 1}
             />
           ))}
         </div>
@@ -380,12 +384,12 @@ export default function PrayerTimesSection() {
             scrollbarWidth: "none",
           }}
         >
-          {times.map((p, i) => (
+          {shown.map((p, i) => (
             <PrayerCell
               key={p.name}
               p={p}
               isActive={p.name === activePrayer}
-              isLast={i === times.length - 1}
+              isLast={i === shown.length - 1}
             />
           ))}
         </div>
@@ -434,7 +438,7 @@ export default function PrayerTimesSection() {
             background: "rgba(255,255,255,0.06)",
           }}
         >
-          {times.map((p) => {
+          {shown.map((p) => {
             const isActive = p.name === activePrayer;
             return (
               <div
