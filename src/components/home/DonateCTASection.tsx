@@ -1,4 +1,5 @@
 import Button from "@/components/ui/Button";
+import { assetPath } from "@/lib/assetPath";
 
 export default function DonateCTASection() {
   return (
@@ -53,8 +54,8 @@ export default function DonateCTASection() {
           Your generous donations fund our programs, maintain our facilities, and help us reach families in need. Every contribution — large or small — makes a meaningful difference.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-          <Button variant="primary" href="#">Donate Now</Button>
-          <Button variant="outline" href="#">Become a Member</Button>
+          <Button variant="primary" href={assetPath("/donate")}>Donate Now</Button>
+          <Button variant="outline" href={assetPath("/about/who-are-we#membership")}>Become a Member</Button>
         </div>
       </div>
     </section>

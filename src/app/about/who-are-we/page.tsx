@@ -109,8 +109,12 @@ export default function Page() {
         </Container>
       </section>
 
-      {/* Membership + Contact */}
-      <section style={{ padding: "0 0 80px" }}>
+      {/* Membership + Contact. The id is the home page "Become a Member" target;
+          the scroll margin keeps the heading clear of the fixed navbar. */}
+      <section
+        id="membership"
+        style={{ padding: "0 0 80px", scrollMarginTop: "calc(108px + var(--banner-h, 0px) + 24px)" }}
+      >
         <Container style={{ padding: "0 48px" }}>
           <div
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "64px", alignItems: "start" }}
