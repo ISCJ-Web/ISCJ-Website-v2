@@ -306,9 +306,9 @@ Apply to `.service-card`, `.stat-card`:
 
 ## Image References
 
-This project is deployed as a static export (`output: "export"`) under a production `basePath` of `/ISCJ-Website-v2` (see `next.config.ts`). Next.js auto-prefixes `<Image>`/`<Link>` `href`/`src` props, but it does **not** rewrite raw URLs inside CSS `background-image`, plain `<img>` tags, or anything else where you build a string yourself.
+This project is deployed as a static export (`output: "export"`). Cloudflare Pages serves it from the domain root with no `basePath`; the GitHub Pages preview builds with `BASE_PATH=/ISCJ-Website-v2` set in `.github/workflows/deploy.yml` (see `next.config.ts`). Next.js auto-prefixes `<Image>`/`<Link>` `href`/`src` props, but it does **not** rewrite raw URLs inside CSS `background-image`, plain `<img>` tags, or anything else where you build a string yourself.
 
-**Rule:** Every reference to a file in `/public` must go through the `assetPath()` helper from `@/lib/assetPath`. Otherwise the URL works in `next dev` but 404s in the production build, leaving you with broken images / missing assets.
+**Rule:** Every reference to a file in `/public` must go through the `assetPath()` helper from `@/lib/assetPath`. Otherwise the URL works at the root but 404s on the GitHub Pages preview, leaving you with broken images / missing assets.
 
 ```tsx
 import { assetPath } from "@/lib/assetPath";
@@ -344,5 +344,7 @@ See `NEXT-STEPS.md` for the full phased plan. Confirmed direction:
   git-based CMS (Decap, Sveltia) over a database even then.
 - **Visitor analytics** — Cloudflare Web Analytics, a cookieless script tag, for
   visit counts and referrers. Not yet added.
-- **Hosting migration** to Cloudflare Pages at the end; basePath drops to `""` then
-  (centralized in `next.config.ts` + `assetPath()`).
+- **Hosting migration** to Cloudflare Pages is under way (Nov 2026). The default
+  build has no basePath; only the GitHub Pages workflow sets one. Cloudflare's
+  build clones submodules, so `.claude/worktrees/` is gitignored: a worktree
+  committed as a gitlink once broke that clone.

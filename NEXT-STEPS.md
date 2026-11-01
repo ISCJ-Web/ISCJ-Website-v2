@@ -108,9 +108,8 @@ editor already lets someone edit these files through a browser.
 ## Phase 4 — Cloudflare migration (last)
 
 - Deploy the same static `out/` to Cloudflare Pages (or Workers static assets).
-- Once on a custom domain, drop the `/ISCJ-Website-v2` basePath — it's
-  centralized in `next.config.ts` + `assetPath()`, so it's a one-line env
-  change, but grep for any stragglers.
+- [x] Drop the `/ISCJ-Website-v2` basePath for Cloudflare (Nov 2026). It is now
+  the `BASE_PATH` env var, set only by the GitHub Pages workflow.
 - DNS cutover for iscj.org only after Phase 2 parity is confirmed; keep the
   Webflow site up until then (but rescue the files first — 2c).
 
