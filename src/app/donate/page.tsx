@@ -1,13 +1,144 @@
+import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { assetPath } from "@/lib/assetPath";
 
-const paymentMethods = [
-  { label: "Venmo", value: "@iscj-nj", detail: "Scan QR or search handle" },
-  { label: "Zelle", value: "accounting@iscj.org", detail: "Direct bank transfer" },
-  { label: "PayPal", value: "accounting@iscj.org", detail: "Credit & debit accepted" },
-  { label: "Mohid", value: "Online portal", detail: "Select your fund category" },
-  { label: "Check", value: "Islamic Society of Central Jersey", detail: "Mail to PO Box 628" },
+type PaymentMethod = {
+  label: string;
+  value: string;
+  detail: string;
+  /** Where the card's link and QR code go. */
+  href?: string;
+  linkLabel?: string;
+  /** QR code image in /public/images, rescued from the old Webflow donate page. */
+  qr?: string;
+};
+
+/* Links and QR codes match iscj.org/donate. Each QR was decoded and points at
+   the same URL as its link. */
+const scanMethods: PaymentMethod[] = [
+  {
+    label: "Venmo",
+    value: "@iscj-nj",
+    detail: "Add the donation category as a note in the transaction.",
+    href: "https://venmo.com/code?user_id=2995353091571712717",
+    linkLabel: "Open Venmo",
+    qr: "/images/donate-qr-venmo.png",
+  },
+  {
+    label: "Zelle",
+    value: "accounting@iscj.org",
+    detail: "Add the donation category as a note in the transaction.",
+    href: "https://enroll.zellepay.com/qr-codes?data=eyJuYW1lIjoiSVNMQU1JQyBTT0NJRVRZIE9GIENFTlRSQUwgSkVSU0VZIiwiYWN0aW9uIjoicGF5bWVudCIsInRva2VuIjoiNzMyNzg5NjY3MyJ9",
+    linkLabel: "Open Zelle",
+    qr: "/images/donate-qr-zelle.png",
+  },
+  {
+    label: "PayPal",
+    value: "accounting@iscj.org",
+    detail: "Credit card donations are accepted via PayPal. Add the donation category as a note in the transaction.",
+    href: "https://www.paypal.com/paypalme/iscjnj",
+    linkLabel: "Open PayPal",
+    qr: "/images/donate-qr-paypal.png",
+  },
 ];
+
+const otherMethods: PaymentMethod[] = [
+  {
+    label: "Mohid",
+    value: "Credit card donations",
+    detail: "Select the category toward which you want your donation to be applied.",
+    href: "https://us.mohid.co/nj/njrgn/iscj/masjid/online/donation",
+    linkLabel: "Donate via Mohid",
+  },
+  {
+    label: "Check",
+    value: "Payable to \"Islamic Society of Central Jersey\"",
+    detail: "Drop it off in person at the ISCJ office, or mail it to P.O. Box 628, Monmouth Junction, NJ 08852.",
+  },
+];
+
+function PaymentCard({ m, dark }: { m: PaymentMethod; dark: boolean }) {
+  return (
+    <div
+      style={{
+        background: dark ? "var(--navy)" : "var(--white)",
+        padding: "36px 32px",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <p
+        style={{
+          fontSize: "0.68rem",
+          fontWeight: 500,
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          color: "var(--gold)",
+          marginBottom: 12,
+        }}
+      >
+        {m.label}
+      </p>
+      <p
+        style={{
+          fontFamily: "var(--ff-head)",
+          fontSize: "1.25rem",
+          color: dark ? "var(--white)" : "var(--navy)",
+          marginBottom: 8,
+          lineHeight: 1.4,
+          overflowWrap: "anywhere",
+        }}
+      >
+        {m.value}
+      </p>
+      <p
+        style={{
+          fontSize: "0.85rem",
+          fontWeight: 300,
+          lineHeight: 1.7,
+          color: dark ? "rgba(255,255,255,0.6)" : "var(--muted)",
+          marginBottom: m.qr || m.href ? 24 : 0,
+        }}
+      >
+        {m.detail}
+      </p>
+
+      {m.qr && m.href && (
+        <a
+          href={m.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${m.label} QR code`}
+          style={{ alignSelf: "flex-start", background: "var(--white)", padding: 10, border: dark ? "none" : "1px solid var(--border)", marginBottom: 20, lineHeight: 0 }}
+        >
+          <Image src={assetPath(m.qr)} alt={`Scan to donate with ${m.label}`} width={140} height={140} style={{ display: "block" }} />
+        </a>
+      )}
+
+      {m.href && (
+        <a
+          href={m.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            marginTop: "auto",
+            alignSelf: "flex-start",
+            fontSize: "0.75rem",
+            fontWeight: 500,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "var(--gold)",
+            textDecoration: "none",
+            borderBottom: "1px solid var(--gold)",
+            paddingBottom: 2,
+          }}
+        >
+          {m.linkLabel} &rarr;
+        </a>
+      )}
+    </div>
+  );
+}
 
 const funds = [
   { name: "Masjid Operations", description: "Day-to-day running of the mosque and its programs." },
@@ -85,54 +216,28 @@ export default function Page() {
       <section style={{ padding: "80px 0" }}>
         <Container style={{ padding: "0 48px" }}>
           <span className="section-label">How to Give</span>
-          <h2 className="section-title" style={{ marginTop: 12, marginBottom: 48 }}>
+          <h2 className="section-title" style={{ marginTop: 12, marginBottom: 16 }}>
             Payment <em>Options</em>
           </h2>
+          <p style={{ fontSize: "1rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, maxWidth: 640, marginBottom: 48 }}>
+            In the memo of your donation, please specify the type of donation (for
+            example Campus Infrastructure, Endowment, Masjid Operations, Quran Academy,
+            Sadaqah, Youth LIT, or Zakat).
+          </p>
           <div
-            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}
+            style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px", marginBottom: 2 }}
             className="max-sm:!grid-cols-1"
           >
-            {paymentMethods.map((m, i) => (
-              <div
-                key={i}
-                style={{
-                  background: i === 0 || i === 2 || i === 4 ? "var(--navy)" : "var(--white)",
-                  padding: "36px 32px",
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: "0.68rem",
-                    fontWeight: 500,
-                    letterSpacing: "0.2em",
-                    textTransform: "uppercase",
-                    color: "var(--gold)",
-                    marginBottom: 12,
-                  }}
-                >
-                  {m.label}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "var(--ff-head)",
-                    fontSize: "1.05rem",
-                    color: i === 0 || i === 2 || i === 4 ? "var(--white)" : "var(--navy)",
-                    marginBottom: 8,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {m.value}
-                </p>
-                <p
-                  style={{
-                    fontSize: "0.8rem",
-                    fontWeight: 300,
-                    color: i === 0 || i === 2 || i === 4 ? "rgba(255,255,255,0.5)" : "var(--muted)",
-                  }}
-                >
-                  {m.detail}
-                </p>
-              </div>
+            {scanMethods.map((m, i) => (
+              <PaymentCard key={m.label} m={m} dark={i !== 1} />
+            ))}
+          </div>
+          <div
+            style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2px" }}
+            className="max-sm:!grid-cols-1"
+          >
+            {otherMethods.map((m, i) => (
+              <PaymentCard key={m.label} m={m} dark={i === 1} />
             ))}
           </div>
         </Container>
