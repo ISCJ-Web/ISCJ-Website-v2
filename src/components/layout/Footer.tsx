@@ -85,6 +85,11 @@ function ColHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* The "Stay Connected" signup is hidden until there is a mailing list behind it:
+   the form only shows a thank-you and sends the address nowhere. Wire
+   handleSubscribe to the real list, then set this to true. */
+const MAILING_LIST_ENABLED = false;
+
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -104,6 +109,7 @@ export default function Footer() {
       className="footer-root"
     >
       {/* Mailing list banner — top of footer */}
+      {MAILING_LIST_ENABLED && (
       <div
         style={{
           maxWidth: 1200,
@@ -192,6 +198,7 @@ export default function Footer() {
           )}
         </form>
       </div>
+      )}
 
       {/* Main grid */}
       <div
@@ -202,7 +209,7 @@ export default function Footer() {
           display: "grid",
           gridTemplateColumns: "2fr 1fr 1fr 1.5fr",
           gap: 48,
-          paddingTop: 48,
+          paddingTop: MAILING_LIST_ENABLED ? 48 : 0,
           paddingBottom: 48,
           borderBottom: "1px solid rgba(255,255,255,0.07)",
         }}
