@@ -57,22 +57,18 @@ export default function Page() {
         </Container>
       </section>
 
-      {/* Mission + Vision, then the guiding principles. The second row runs
-          white then navy so the four cards join as a checkerboard. */}
+      {/* Mission + Vision, then Who We Serve as a full-width card beneath. */}
       <section style={{ padding: "80px 0" }}>
         <Container style={{ padding: "0 48px" }}>
           <MissionVision />
-          <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px", marginTop: 2 }}
-            className="max-sm:!grid-cols-1"
-          >
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
-              <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
-                Who We Serve
-              </span>
-              <h3 style={{ fontFamily: "var(--ff-head)", fontSize: "1.6rem", fontWeight: 400, color: "var(--navy)", marginBottom: 20 }}>
-                Community &amp; <em>Citizenship</em>
-              </h3>
+          <div style={{ background: "var(--white)", padding: "48px 36px", marginTop: 2 }}>
+            <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
+              Who We Serve
+            </span>
+            <h3 style={{ fontFamily: "var(--ff-head)", fontSize: "1.6rem", fontWeight: 400, color: "var(--navy)", marginBottom: 20 }}>
+              Community &amp; <em>Citizenship</em>
+            </h3>
+            <div style={{ maxWidth: 720 }}>
               <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, marginBottom: 16 }}>
                 ISCJ encourages its members to be model U.S. citizens — to participate in
                 government through volunteering, voting, and civic engagement. We regularly
@@ -81,28 +77,6 @@ export default function Page() {
               <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8 }}>
                 ISCJ maintains strict political neutrality and never endorses any candidate
                 for any office. Our focus is faith, family, and community service.
-              </p>
-            </div>
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
-              <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
-                Guiding Principles
-              </span>
-              <h2 style={{ fontFamily: "var(--ff-head)", fontSize: "1.8rem", fontWeight: 400, color: "var(--white)", marginBottom: 20, lineHeight: 1.2 }}>
-                Our <em>Aspiration</em>
-              </h2>
-              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, fontStyle: "italic", marginBottom: 16 }}>
-                &ldquo;We aspire to be the anchor of a model community of practicing Muslims of
-                diverse backgrounds, democratically governed, efficiently served, relating to
-                one another with inclusiveness and tolerance, and interacting with the
-                neighbors and the community at large in an Islamic exemplary fashion.&rdquo;
-              </p>
-              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85, marginBottom: 16 }}>
-                The fundamental objective of the Society will be to seek Glory to Allah
-                Subhanahu Wa Ta&rsquo;ala.
-              </p>
-              <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.85 }}>
-                The Quran, Sunnah and the Sharia shall always be the guiding light for the
-                Society.
               </p>
             </div>
           </div>
