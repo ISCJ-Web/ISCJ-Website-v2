@@ -82,7 +82,7 @@ const NAV_LINKS: NavLink[] = [
       { label: "Sanad", href: "http://sanad.iscj.org", external: true },
     ],
   },
-  { label: "Volunteer", href: "/volunteer" },
+  { label: "Contact", href: "/about/contact" },
 ];
 
 const CHEVRON_PATH = "M6 9l6 6 6-6";
@@ -126,7 +126,12 @@ export default function Navbar() {
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
-    return pathname.startsWith(href);
+    if (!pathname.startsWith(href)) return false;
+    // Contact (/about/contact) is also a top-level link, so it takes the
+    // underline instead of About on its own page.
+    return !NAV_LINKS.some(
+      (l) => l.href !== href && l.href.startsWith(href) && pathname.startsWith(l.href)
+    );
   };
 
   return (

@@ -49,8 +49,7 @@ src/
 │   │   └── weekend-school/page.tsx
 │   ├── committees/page.tsx
 │   ├── donate/page.tsx
-│   ├── learn-about-islam/page.tsx
-│   └── volunteer/page.tsx
+│   └── learn-about-islam/page.tsx
 ├── components/
 │   ├── ui/                       # Reusable design-system primitives
 │   │   ├── Button.tsx

@@ -47,8 +47,7 @@ src/
 │   ├── programs/               # LIT, Quran Academy, Sanad, Weekend School
 │   ├── committees/
 │   ├── donate/
-│   ├── learn-about-islam/
-│   └── volunteer/
+│   └── learn-about-islam/
 ├── components/
 │   ├── ui/                     # Design-system primitives (Button, Card, Container)
 │   ├── layout/                 # Navbar, Footer
