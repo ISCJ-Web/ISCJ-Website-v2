@@ -72,7 +72,7 @@ export default function Page() {
             className="max-sm:!grid-cols-1"
           >
             {/* Phone */}
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Phone
               </span>
@@ -88,7 +88,7 @@ export default function Page() {
             </div>
 
             {/* Email */}
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Email
               </span>
@@ -113,7 +113,7 @@ export default function Page() {
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
-            <div style={{ background: "var(--surface)", padding: "40px 36px", border: "1px solid var(--border)" }}>
+            <div style={{ background: "var(--surface)", padding: "40px var(--card-px, 36px)", border: "1px solid var(--border)" }}>
               <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 12 }}>
                 Physical Address
               </p>
@@ -122,7 +122,7 @@ export default function Page() {
                 Monmouth Junction, NJ 08852-0628
               </p>
             </div>
-            <div style={{ background: "var(--surface)", padding: "40px 36px", border: "1px solid var(--border)" }}>
+            <div style={{ background: "var(--surface)", padding: "40px var(--card-px, 36px)", border: "1px solid var(--border)" }}>
               <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 12 }}>
                 Mailing Address
               </p>

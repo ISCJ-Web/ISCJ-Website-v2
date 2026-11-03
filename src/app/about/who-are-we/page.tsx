@@ -61,7 +61,7 @@ export default function Page() {
       <section style={{ padding: "80px 0" }}>
         <Container style={{ padding: "0 48px" }}>
           <MissionVision />
-          <div style={{ background: "var(--white)", padding: "48px 36px", marginTop: 2 }}>
+          <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)", marginTop: 2 }}>
             <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
               Who We Serve
             </span>

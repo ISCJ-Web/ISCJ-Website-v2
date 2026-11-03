@@ -300,6 +300,7 @@ Apply to `.service-card`, `.stat-card`:
 - Section labels are always: small, uppercase, gold, `tracking-[0.2em]` — use the `.section-label` CSS class defined in `globals.css`
 - Section title `<em>` is always: italic, `font-light` (weight 300), same color as heading — use the `h2.section-title` CSS class
 - The `2px` gap between cards is intentional — it creates a mosaic/grid-join effect, not a traditional gutter
+- **Card side padding goes through `--card-px`:** write `padding: "48px var(--card-px, 36px)"`, not `"48px 36px"`. Desktop gets the fallback; below 640px `globals.css` sets `--card-px: 22px` so cards don't eat a phone's width. `Container` likewise drops to 24px on mobile via `.site-container`, overriding the inline `padding: "0 48px"` pages pass it
 - Dark-background sections use `rgba(255,255,255,*)` for all sub-colors (never hardcode grays)
 - Geometric texture overlays go on `::before` pseudo-elements so content stays above
 

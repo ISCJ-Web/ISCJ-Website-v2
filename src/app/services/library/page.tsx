@@ -89,7 +89,7 @@ export default function Page() {
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Hours
               </span>
@@ -121,7 +121,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Membership & Access
               </span>
@@ -156,7 +156,7 @@ export default function Page() {
             style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
-            <div style={{ background: "var(--white)", padding: "40px 32px" }}>
+            <div style={{ background: "var(--white)", padding: "40px var(--card-px, 32px)" }}>
               <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 16 }}>
                 Book Subjects
               </p>
@@ -172,7 +172,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div style={{ background: "var(--navy)", padding: "40px 32px" }}>
+            <div style={{ background: "var(--navy)", padding: "40px var(--card-px, 32px)" }}>
               <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 16 }}>
                 Periodicals
               </p>
@@ -185,7 +185,7 @@ export default function Page() {
               </ul>
             </div>
 
-            <div style={{ background: "var(--white)", padding: "40px 32px" }}>
+            <div style={{ background: "var(--white)", padding: "40px var(--card-px, 32px)" }}>
               <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>
                 Qur&apos;an Translations
               </p>

@@ -177,7 +177,7 @@ export default function Page() {
             className="max-sm:!grid-cols-1"
           >
             {steps.map((step) => (
-              <div key={step.number} style={{ background: "var(--white)", padding: "40px 36px" }}>
+              <div key={step.number} style={{ background: "var(--white)", padding: "40px var(--card-px, 36px)" }}>
                 <div
                   style={{
                     fontFamily: "var(--ff-head)",
@@ -258,7 +258,7 @@ export default function Page() {
           <div
             style={{
               background: "var(--navy)",
-              padding: "36px 40px",
+              padding: "36px var(--card-px, 40px)",
               borderLeft: "3px solid var(--gold)",
               display: "flex",
               gap: 28,
@@ -315,7 +315,7 @@ export default function Page() {
             className="max-sm:!grid-cols-1"
           >
             {/* Guidelines */}
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>
               <span
                 style={{
                   fontSize: "0.68rem",
@@ -379,7 +379,7 @@ export default function Page() {
             </div>
 
             {/* Payment */}
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span
                 style={{
                   fontSize: "0.68rem",
@@ -515,7 +515,7 @@ export default function Page() {
               />
             </div>
 
-            <div style={{ background: "var(--navy)", padding: "48px 36px", display: "flex", flexDirection: "column", justifyContent: "center" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)", display: "flex", flexDirection: "column", justifyContent: "center" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 The Space
               </span>
@@ -538,7 +538,7 @@ export default function Page() {
               href={assetPath("/documents/mpr-reservation-form.pdf")}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ background: "var(--white)", padding: "36px 28px", textDecoration: "none", display: "block" }}
+              style={{ background: "var(--white)", padding: "36px var(--card-px, 28px)", textDecoration: "none", display: "block" }}
             >
               <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>
                 Reservation Form
@@ -554,7 +554,7 @@ export default function Page() {
               href={assetPath("/documents/marriage-application.pdf")}
               target="_blank"
               rel="noopener noreferrer"
-              style={{ background: "var(--white)", padding: "36px 28px", textDecoration: "none", display: "block" }}
+              style={{ background: "var(--white)", padding: "36px var(--card-px, 28px)", textDecoration: "none", display: "block" }}
             >
               <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>
                 Marriage Application Form
@@ -566,7 +566,7 @@ export default function Page() {
                 Download
               </span>
             </a>
-            <div style={{ background: "var(--white)", padding: "36px 28px" }}>
+            <div style={{ background: "var(--white)", padding: "36px var(--card-px, 28px)" }}>
               <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)", marginBottom: 10, lineHeight: 1.3 }}>
                 Setup Photos
               </p>
@@ -643,7 +643,7 @@ export default function Page() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <div
-                style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}
+                style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}
               >
                 <p
                   style={{
@@ -671,7 +671,7 @@ export default function Page() {
               </div>
 
               <div
-                style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}
+                style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}
               >
                 <p
                   style={{
@@ -712,7 +712,7 @@ export default function Page() {
               </div>
 
               <div
-                style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}
+                style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}
               >
                 <p
                   style={{

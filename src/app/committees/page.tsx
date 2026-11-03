@@ -136,7 +136,7 @@ export default function Page() {
                 key={i}
                 style={{
                   background: i % 6 === 0 || i % 6 === 3 ? "var(--navy)" : "var(--white)",
-                  padding: "36px 28px",
+                  padding: "36px var(--card-px, 28px)",
                 }}
               >
                 <p

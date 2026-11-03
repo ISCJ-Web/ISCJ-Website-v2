@@ -77,7 +77,7 @@ export default function Page() {
               />
             </div>
 
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Resident Scholar
               </span>
@@ -102,7 +102,7 @@ export default function Page() {
             </div>
           </div>
 
-          <div style={{ background: "var(--white)", padding: "48px 36px", marginTop: 2 }}>
+          <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)", marginTop: 2 }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Areas of Study
               </span>

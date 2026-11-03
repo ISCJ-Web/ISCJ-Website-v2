@@ -62,7 +62,7 @@ function PaymentCard({ m, dark }: { m: PaymentMethod; dark: boolean }) {
     <div
       style={{
         background: dark ? "var(--navy)" : "var(--white)",
-        padding: "36px 32px",
+        padding: "36px var(--card-px, 32px)",
         display: "flex",
         flexDirection: "column",
       }}
@@ -262,11 +262,15 @@ export default function Page() {
                   padding: "20px 0",
                   borderBottom: "1px solid var(--border)",
                 }}
+                className="max-sm:!flex-col max-sm:!items-start max-sm:!gap-1"
               >
                 <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.15rem", fontWeight: 400, color: "var(--navy)" }}>
                   {f.name}
                 </p>
-                <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--muted)", textAlign: "right", maxWidth: 360 }}>
+                <p
+                  style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--muted)", textAlign: "right", maxWidth: 360 }}
+                  className="max-sm:!text-left"
+                >
                   {f.description}
                 </p>
               </div>
@@ -293,17 +297,17 @@ export default function Page() {
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <div style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>Accounting</p>
                 <a href="mailto:accounting@iscj.org" style={{ fontFamily: "var(--ff-head)", fontSize: "1.1rem", color: "var(--navy)", textDecoration: "none" }}>accounting@iscj.org</a>
               </div>
-              <div style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>Mailing Address</p>
                 <p style={{ fontFamily: "var(--ff-head)", fontSize: "1rem", color: "var(--navy)", lineHeight: 1.5 }}>
                   P.O. Box 628<br />Monmouth Junction, NJ 08852
                 </p>
               </div>
-              <div style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>Phone</p>
                 <a href="tel:7323296995" style={{ fontFamily: "var(--ff-head)", fontSize: "1.1rem", color: "var(--navy)", textDecoration: "none" }}>732-329-6995 (Option 3)</a>
               </div>

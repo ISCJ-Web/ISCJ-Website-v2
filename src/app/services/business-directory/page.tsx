@@ -65,7 +65,7 @@ export default function Page() {
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Advertise With Us
               </span>
@@ -111,7 +111,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Current Partners
               </span>
@@ -172,7 +172,7 @@ export default function Page() {
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <div style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
                   Advertising
                 </p>
@@ -180,7 +180,7 @@ export default function Page() {
                   advertising@iscj.org
                 </a>
               </div>
-              <div style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
                   General Inquiries
                 </p>

@@ -83,7 +83,7 @@ export default function Page() {
                 key={i}
                 style={{
                   background: i % 4 === 1 || i % 4 === 2 ? "var(--navy)" : "var(--white)",
-                  padding: "36px 32px",
+                  padding: "36px var(--card-px, 32px)",
                 }}
               >
                 <a
@@ -128,7 +128,7 @@ export default function Page() {
                 key={i}
                 style={{
                   background: i % 2 === 0 ? "var(--white)" : "var(--navy)",
-                  padding: "36px 32px",
+                  padding: "36px var(--card-px, 32px)",
                 }}
               >
                 <a
@@ -164,7 +164,7 @@ export default function Page() {
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
-            <div style={{ background: "var(--white)", padding: "40px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "40px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Additional
               </span>
@@ -182,7 +182,7 @@ export default function Page() {
                 </div>
               ))}
             </div>
-            <div style={{ background: "var(--navy)", padding: "40px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "40px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Disclaimer
               </span>

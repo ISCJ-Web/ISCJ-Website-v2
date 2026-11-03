@@ -83,7 +83,7 @@ export default function Page() {
                 key={i}
                 style={{
                   background: i === 0 ? "var(--navy)" : "var(--white)",
-                  padding: "40px 32px",
+                  padding: "40px var(--card-px, 32px)",
                 }}
               >
                 <p
@@ -123,7 +123,7 @@ export default function Page() {
             className="max-sm:!grid-cols-1"
           >
             {/* Members */}
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Board Members
               </span>
@@ -149,7 +149,7 @@ export default function Page() {
             </div>
 
             {/* Liaisons */}
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Liaisons
               </span>

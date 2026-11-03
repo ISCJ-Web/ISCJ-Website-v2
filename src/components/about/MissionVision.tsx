@@ -40,7 +40,7 @@ export default function MissionVision({ lightFill = "var(--white)" }: MissionVis
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          style={{ background: s.dark ? "var(--navy)" : lightFill, padding: "48px 36px" }}
+          style={{ background: s.dark ? "var(--navy)" : lightFill, padding: "48px var(--card-px, 36px)" }}
         >
           <span
             style={{

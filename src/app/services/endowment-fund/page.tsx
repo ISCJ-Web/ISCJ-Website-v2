@@ -81,7 +81,7 @@ export default function Page() {
             style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Vision
               </span>
@@ -94,7 +94,7 @@ export default function Page() {
                 seeking modest 5–8% returns to spend on Masjid operations.
               </p>
             </div>
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 What It Is
               </span>
@@ -108,7 +108,7 @@ export default function Page() {
                 the principal is preserved and grown.
               </p>
             </div>
-            <div style={{ background: "var(--surface)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--surface)", padding: "48px var(--card-px, 36px)" }}>
               <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 16 }}>
                 Benefits
               </span>
@@ -140,7 +140,7 @@ export default function Page() {
             className="max-sm:!grid-cols-1"
           >
             {waysToDonate.map((w, i) => (
-              <div key={i} style={{ background: "var(--white)", padding: "40px 36px" }}>
+              <div key={i} style={{ background: "var(--white)", padding: "40px var(--card-px, 36px)" }}>
                 <div
                   style={{
                     fontFamily: "var(--ff-head)",
@@ -185,7 +185,7 @@ export default function Page() {
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <div style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
                   Endowment Office
                 </p>
@@ -193,7 +193,7 @@ export default function Page() {
                   endowment@iscj.org
                 </a>
               </div>
-              <div style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
                   Mailing Address
                 </p>

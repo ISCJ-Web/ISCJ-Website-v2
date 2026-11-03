@@ -72,7 +72,7 @@ export default function Page() {
             style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2px" }}
             className="max-sm:!grid-cols-1"
           >
-            <div style={{ background: "var(--navy)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 36px)" }}>
               <span
                 style={{
                   fontSize: "0.68rem",
@@ -124,7 +124,7 @@ export default function Page() {
               </div>
             </div>
 
-            <div style={{ background: "var(--white)", padding: "48px 36px" }}>
+            <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>
               <span
                 style={{
                   fontSize: "0.68rem",

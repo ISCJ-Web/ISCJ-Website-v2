@@ -8,7 +8,7 @@ interface ContainerProps extends React.ComponentPropsWithoutRef<"div"> {
 export default function Container({ children, className, style, ...props }: ContainerProps) {
   return (
     <div
-      className={cn("max-w-[1200px] mx-auto px-12 max-sm:px-6", className)}
+      className={cn("site-container max-w-[1200px] mx-auto px-12 max-sm:px-6", className)}
       /* Centered inline: the unlayered `* { margin: 0 }` reset in globals.css
          outranks Tailwind's layered utilities, so `mx-auto` alone does nothing. */
       style={{ marginLeft: "auto", marginRight: "auto", ...style }}

@@ -99,7 +99,7 @@ export default function Page() {
                 key={m.era}
                 style={{
                   background: i % 2 === 0 ? "var(--white)" : "var(--navy)",
-                  padding: "40px 36px",
+                  padding: "40px var(--card-px, 36px)",
                   display: "grid",
                   gridTemplateColumns: "200px 1fr",
                   gap: 32,
@@ -134,7 +134,7 @@ export default function Page() {
             {stats.map((s) => (
               <div
                 key={s.label}
-                style={{ background: s.dark ? "var(--navy)" : "var(--white)", padding: "40px 32px" }}
+                style={{ background: s.dark ? "var(--navy)" : "var(--white)", padding: "40px var(--card-px, 32px)" }}
               >
                 <div style={{ fontFamily: "var(--ff-head)", fontSize: "3rem", fontWeight: 300, color: s.dark ? "var(--white)" : "var(--navy)", lineHeight: 1 }}>
                   {s.value}

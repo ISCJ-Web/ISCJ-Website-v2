@@ -167,7 +167,7 @@ export default function Page() {
             className="max-sm:!grid-cols-1"
           >
             {steps.map((step) => (
-              <div key={step.number} style={{ background: "var(--white)", padding: "40px 36px" }}>
+              <div key={step.number} style={{ background: "var(--white)", padding: "40px var(--card-px, 36px)" }}>
                 <div
                   style={{
                     fontFamily: "var(--ff-head)",
@@ -213,7 +213,7 @@ export default function Page() {
           <div
             style={{
               background: "var(--navy)",
-              padding: "36px 40px",
+              padding: "36px var(--card-px, 40px)",
               borderLeft: "3px solid var(--gold)",
             }}
           >
@@ -270,7 +270,7 @@ export default function Page() {
                 key={i}
                 style={{
                   background: i === 0 ? "var(--navy)" : "var(--white)",
-                  padding: "40px 36px",
+                  padding: "40px var(--card-px, 36px)",
                 }}
               >
                 <p
@@ -411,7 +411,7 @@ export default function Page() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <div
-                style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}
+                style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}
               >
                 <p
                   style={{
@@ -439,7 +439,7 @@ export default function Page() {
               </div>
 
               <div
-                style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}
+                style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}
               >
                 <p
                   style={{
@@ -480,7 +480,7 @@ export default function Page() {
               </div>
 
               <div
-                style={{ padding: "24px 28px", border: "1px solid var(--border)", borderRadius: 2 }}
+                style={{ padding: "24px var(--card-px, 28px)", border: "1px solid var(--border)", borderRadius: 2 }}
               >
                 <p
                   style={{

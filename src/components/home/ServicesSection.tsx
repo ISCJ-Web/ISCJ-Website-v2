@@ -125,7 +125,7 @@ export default function ServicesSection() {
               whileHover={{ y: -4, boxShadow: "0 12px 40px rgba(1,25,44,0.08)" }}
               style={{
                 background: "var(--white)",
-                padding: "48px 36px",
+                padding: "48px var(--card-px, 36px)",
                 cursor: "default",
               }}
             >

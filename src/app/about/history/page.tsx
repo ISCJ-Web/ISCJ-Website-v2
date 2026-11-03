@@ -276,7 +276,7 @@ export default function Page() {
                 style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 2 }}
                 className="max-sm:!grid-cols-1"
               >
-                <div style={{ background: "var(--navy)", padding: "40px 36px" }}>
+                <div style={{ background: "var(--navy)", padding: "40px var(--card-px, 36px)" }}>
                   {/* Sticky, so the era stays in view while its entries scroll past */}
                   <div style={{ position: "sticky", top: "calc(148px + var(--banner-h))" }}>
                     <span style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", display: "block", marginBottom: 12 }}>
@@ -353,7 +353,7 @@ export default function Page() {
             {stories.map((s, i) => {
               const dark = i % 4 === 1 || i % 4 === 2;
               return (
-                <div key={s.title} style={{ background: dark ? "var(--navy)" : "var(--white)", padding: "40px 36px" }}>
+                <div key={s.title} style={{ background: dark ? "var(--navy)" : "var(--white)", padding: "40px var(--card-px, 36px)" }}>
                   <h3
                     style={{
                       fontFamily: "var(--ff-head)",
@@ -408,7 +408,7 @@ export default function Page() {
       {/* Services overview callout */}
       <section style={{ padding: "0 0 80px" }}>
         <Container style={{ padding: "0 48px" }} className="max-sm:!px-6">
-          <div style={{ background: "var(--navy)", padding: "48px 40px", borderLeft: "3px solid var(--gold)" }}>
+          <div style={{ background: "var(--navy)", padding: "48px var(--card-px, 40px)", borderLeft: "3px solid var(--gold)" }}>
             <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 12 }}>
               Today
             </p>

@@ -70,7 +70,7 @@ export default function Page() {
             ].map((s) => (
               <div
                 key={s.label}
-                style={{ background: s.dark ? "var(--navy)" : "var(--white)", padding: "48px 36px", textAlign: "center" }}
+                style={{ background: s.dark ? "var(--navy)" : "var(--white)", padding: "48px var(--card-px, 36px)", textAlign: "center" }}
               >
                 <p
                   style={{
@@ -206,7 +206,7 @@ export default function Page() {
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-              <div style={{ padding: "24px 28px", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
                   Expansion Fund
                 </p>
@@ -214,7 +214,7 @@ export default function Page() {
                   expansion@iscj.org
                 </a>
               </div>
-              <div style={{ padding: "24px 28px", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 2 }}>
+              <div style={{ padding: "24px var(--card-px, 28px)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 2 }}>
                 <p style={{ fontSize: "0.68rem", fontWeight: 500, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
                   General Inquiries
                 </p>

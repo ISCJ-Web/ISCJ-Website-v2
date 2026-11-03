@@ -80,6 +80,17 @@ h2.section-title em {
 @media (max-width: 639px) {
   .desktop-only { display: none !important; }
 
+  /* Pages pass Container an inline `padding: "0 48px"`, which beats the
+     max-sm:px-6 class, so the 24px mobile gutter has to win with !important. */
+  .site-container {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  /* Cards write their side padding as `var(--card-px, 36px)`: the desktop
+     value is the fallback, and phones get this narrower one. */
+  :root { --card-px: 22px; }
+
   /* Tighter section title on small screens */
   h2.section-title {
     font-size: clamp(1.7rem, 7vw, 2.4rem);
