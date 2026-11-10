@@ -91,7 +91,7 @@ export default function Page() {
               <p style={{ fontSize: "0.9rem", fontWeight: 300, color: "rgba(255,255,255,0.7)", lineHeight: 1.8 }}>
                 Our mission is to build a $10 million endowment by collecting, investing, and
                 growing funds through halal investment vehicles — preserving principal while
-                seeking modest 5–8% returns to spend on Masjid operations.
+                seeking modest 5–8% returns to spend on ISCJ operations.
               </p>
             </div>
             <div style={{ background: "var(--white)", padding: "48px var(--card-px, 36px)" }}>

@@ -31,7 +31,7 @@ const steps = [
   {
     number: "01",
     title: "Contact the Funeral Director",
-    body: "Call Br. Afzal Saeed at 732-991-5896 as soon as possible — he is available 24 hours a day. He will guide your family through the entire process with a documented checklist to ensure arrangements are made in a timely and proper Islamic manner.",
+    body: "Contact Muslim Funeral Services as soon as possible at 732-991-5896. You can call anytime 24 hours/7 days a week. You will be guided through the entire process with a documented checklist to ensure arrangements are made in a timely and proper Islamic manner.",
   },
   {
     number: "02",

@@ -10,6 +10,12 @@ const pastTopics = [
   { title: "A Scent of Ramadan: Discussing Rajab and Sha’baan", speaker: "Sh. Abdulrahman Alaa" },
 ];
 
+const SOCIAL_LINKS = [
+  { label: "Facebook", href: "https://www.facebook.com/ISCJ1/" },
+  { label: "Instagram", href: "https://www.instagram.com/iscj_official/" },
+  { label: "YouTube", href: "https://www.youtube.com/user/iscjtv" },
+];
+
 export default function Page() {
   return (
     <main style={{ minHeight: "100vh", background: "var(--surface)" }}>
@@ -34,7 +40,7 @@ export default function Page() {
           }}
         />
         <Container style={{ position: "relative", padding: "0 48px" }}>
-          <span className="section-label">Services</span>
+          <span className="section-label">Programs</span>
           <h1
             style={{
               fontFamily: "var(--ff-head)",
@@ -84,7 +90,7 @@ export default function Page() {
                   marginBottom: 16,
                 }}
               >
-                When & Where
+                When
               </span>
               <h2
                 style={{
@@ -99,27 +105,34 @@ export default function Page() {
                 Every <em>Friday</em>
               </h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                {[
-                  { label: "Time", value: "After Maghrib or Isha\n(depending on time of year)" },
-                  { label: "Coordinator", value: "Dr. Ahmed Mohamed" },
-                  { label: "Location", value: "4145 Route 1 South\nMonmouth Junction, NJ 08852" },
-                ].map((item) => (
-                  <div key={item.label}>
-                    <p style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
-                      {item.label}
-                    </p>
-                    <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.1rem", color: "var(--white)", lineHeight: 1.5, whiteSpace: "pre-line" }}>
-                      {item.value}
-                    </p>
-                  </div>
-                ))}
                 <div>
                   <p style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
-                    Contact
+                    Time
                   </p>
-                  <a href="mailto:lit@iscj.org" style={{ fontFamily: "var(--ff-head)", fontSize: "1.1rem", color: "var(--white)", textDecoration: "none" }}>
-                    lit@iscj.org
-                  </a>
+                  <p style={{ fontFamily: "var(--ff-head)", fontSize: "1.1rem", color: "var(--white)", lineHeight: 1.5, whiteSpace: "pre-line" }}>
+                    {"After Maghrib or Isha\n(depending on time of year)"}
+                  </p>
+                </div>
+                <div>
+                  <p style={{ fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 6 }}>
+                    Stay Updated
+                  </p>
+                  <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "rgba(255,255,255,0.75)", lineHeight: 1.7, marginBottom: 14 }}>
+                    Follow us on social media or sign up for emails to get the latest info.
+                  </p>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
+                    {SOCIAL_LINKS.map((s) => (
+                      <a
+                        key={s.label}
+                        href={s.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ fontFamily: "var(--ff-head)", fontSize: "1.1rem", color: "var(--white)", textDecoration: "none", borderBottom: "1px solid rgba(255,255,255,0.3)" }}
+                      >
+                        {s.label}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

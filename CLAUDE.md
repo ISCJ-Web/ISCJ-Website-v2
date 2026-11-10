@@ -37,12 +37,11 @@ src/
 │   │   ├── zakat/page.tsx
 │   │   ├── sadaqah/page.tsx
 │   │   ├── food-pantry/page.tsx
-│   │   ├── library/page.tsx
 │   │   ├── senior-housing/page.tsx
 │   │   ├── endowment-fund/page.tsx
-│   │   ├── business-directory/page.tsx
-│   │   └── friday-halaqa/page.tsx
+│   │   └── business-directory/page.tsx
 │   ├── programs/
+│   │   ├── friday-halaqa/page.tsx
 │   │   ├── lit/page.tsx
 │   │   ├── quran-academy/page.tsx
 │   │   ├── sanad/page.tsx

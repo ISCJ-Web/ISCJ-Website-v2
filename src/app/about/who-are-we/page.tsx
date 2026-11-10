@@ -70,13 +70,17 @@ export default function Page() {
             </h3>
             <div style={{ maxWidth: 720 }}>
               <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8, marginBottom: 16 }}>
-                ISCJ encourages its members to be model U.S. citizens — to participate in
-                government through volunteering, voting, and civic engagement. We regularly
-                invite community leaders and elected officials to address our members.
+                The ISCJ encourages its members to represent Islam in the best manner through
+                their character in all facets of their life including their home life, work
+                life and as members of the American society. We encourage our members to serve
+                not just the ISCJ community but the larger community by volunteering and civic
+                engagement.
               </p>
               <p style={{ fontSize: "0.95rem", fontWeight: 300, color: "var(--muted)", lineHeight: 1.8 }}>
-                ISCJ maintains strict political neutrality and never endorses any candidate
-                for any office. Our focus is faith, family, and community service.
+                As an organization, the ISCJ invites members of the public, the community and
+                elected officials as well as political candidates to address our community.
+                Note that ISCJ is a non-partisan non-profit organization and does not endorse
+                any candidate for any office. Our focus is faith, family and community service.
               </p>
             </div>
           </div>
