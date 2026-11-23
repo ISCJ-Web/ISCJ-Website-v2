@@ -48,7 +48,8 @@ function computeActivePrayer(times: PrayerTime[], now: Date): string | null {
       active = p.name;
     }
   }
-  return active;
+  // Between midnight and Fajr, last night's Isha is still the current prayer.
+  return active ?? "Isha";
 }
 
 async function fetchFromAladhan(): Promise<PrayerTime[]> {
@@ -115,26 +116,30 @@ function PrayerCell({
   isActive: boolean;
   isLast: boolean;
 }) {
+  // The current prayer gets a lighter fill and a gold bar along its top edge, so
+  // it reads as "now" at a glance rather than relying on a faint shade change.
   return (
     <div
+      aria-current={isActive ? "time" : undefined}
       style={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "14px 16px",
-        borderRight: isLast ? "none" : "1px solid rgba(255,255,255,0.06)",
+        padding: "16px 16px 15px",
+        borderRight: isLast ? "none" : "1px solid rgba(255,255,255,0.08)",
         flex: 1,
-        minWidth: 78,
-        background: isActive ? "rgba(255,255,255,0.04)" : "transparent",
+        minWidth: 88,
+        background: isActive ? "rgba(255,255,255,0.09)" : "transparent",
+        boxShadow: isActive ? "inset 0 3px 0 var(--gold)" : "none",
       }}
     >
       <span
         style={{
-          fontSize: "0.65rem",
+          fontSize: "0.7rem",
           fontWeight: 500,
           letterSpacing: "0.12em",
           textTransform: "uppercase",
-          color: isActive ? "var(--gold)" : "rgba(255,255,255,0.45)",
+          color: isActive ? "var(--gold-light)" : "rgba(255,255,255,0.65)",
           marginBottom: 4,
         }}
       >
@@ -143,16 +148,25 @@ function PrayerCell({
       <span
         style={{
           fontFamily: "var(--ff-head)",
-          fontSize: "clamp(0.9rem, 1.2vw, 1.1rem)",
-          fontWeight: 400,
-          color: isActive ? "var(--white)" : "rgba(255,255,255,0.85)",
+          fontSize: "clamp(1.15rem, 1.5vw, 1.35rem)",
+          fontWeight: isActive ? 600 : 500,
+          lineHeight: 1.2,
+          color: "var(--white)",
           whiteSpace: "nowrap",
         }}
       >
         {p.time}
       </span>
       {p.iqama && p.iqama.trim() && (
-        <span style={{ fontSize: "0.6rem", color: "rgba(255,255,255,0.3)", marginTop: 2 }}>
+        <span
+          style={{
+            fontSize: "0.74rem",
+            fontWeight: isActive ? 500 : 400,
+            color: isActive ? "var(--gold-light)" : "rgba(255,255,255,0.7)",
+            marginTop: 4,
+            whiteSpace: "nowrap",
+          }}
+        >
           {p.iqama}
         </span>
       )}
@@ -329,15 +343,13 @@ export default function PrayerTimesSection() {
           ))}
         </div>
 
-        <div
-          style={{
-            fontSize: "0.72rem",
-            color: "rgba(255,255,255,0.4)",
-            paddingLeft: 24,
-            whiteSpace: "nowrap",
-          }}
-        >
-          {gregorian} · {hijri}
+        <div style={{ paddingLeft: 24, textAlign: "right", whiteSpace: "nowrap" }}>
+          <div style={{ fontSize: "0.74rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>
+            {gregorian}
+          </div>
+          <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.5)", lineHeight: 1.5 }}>
+            {hijri}
+          </div>
         </div>
       </div>
 

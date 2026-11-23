@@ -229,6 +229,9 @@ so it stays visible while scrolling and never reflows page content.
   variable on `<html>` (0px when hidden or empty). Anything positioned against
   the bottom of the navbar must add it, e.g. `.imam-hero-photo` uses
   `top: calc(108px + var(--banner-h))`. Navbar is 108px desktop / 64px mobile.
+  The same goes for in-page anchors: `#prayer-times` (target of the hero's
+  Prayer Times button) has a `scroll-margin-top` built from these numbers, so
+  change it too if the navbar height ever changes.
 - **Styles:** `.alert-banner*` in `globals.css` (inline styles can't do the
   media queries or the pulse keyframes).
 

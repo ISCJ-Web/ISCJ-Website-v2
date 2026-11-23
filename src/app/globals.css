@@ -104,6 +104,14 @@ h2.section-title em {
 .prayer-mobile { display: none; }
 .prayer-mobile-grid { display: none; }
 
+/* The hero's "Prayer Times" button and the banner link jump to #prayer-times.
+   Without an offset the bar lands under the fixed navbar (108px desktop,
+   64px mobile, plus the alert banner), so only the section below shows. */
+#prayer-times { scroll-margin-top: calc(108px + var(--banner-h, 0px)); }
+@media (max-width: 639px) {
+  #prayer-times { scroll-margin-top: calc(64px + var(--banner-h, 0px)); }
+}
+
 @media (max-width: 639px) {
   .nav-mobile-bar    { display: flex; }
   .nav-mobile-drawer { display: block; }
