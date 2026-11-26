@@ -455,9 +455,12 @@ h2.section-title em {
 .footer-mailing .ctct-form-custom > .ctct-form-text {
   display: none !important;
 }
-/* Email box and button on one line, consent text and errors full width below. */
+/* Email box and button on one line, consent text and errors full width below.
+   No !important on display: after a successful signup the widget hides the
+   form with an inline display:none, and that must win so only the
+   "Thanks for signing up!" message is left. */
 .footer-mailing .ctct-form-custom {
-  display: flex !important;
+  display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
   gap: 12px 0;
