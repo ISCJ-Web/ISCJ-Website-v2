@@ -183,17 +183,17 @@ function JumuahStrip() {
         alignItems: "center",
         justifyContent: "center",
         flexWrap: "wrap",
-        gap: 18,
-        padding: "10px 24px",
-        background: "rgba(255,255,255,0.025)",
-        borderTop: "1px solid rgba(255,255,255,0.06)",
+        gap: 20,
+        padding: "13px 24px",
+        background: "rgba(255,255,255,0.04)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
       }}
     >
       <span
         style={{
-          fontSize: "0.62rem",
+          fontSize: "0.72rem",
           fontWeight: 500,
-          letterSpacing: "0.22em",
+          letterSpacing: "0.18em",
           textTransform: "uppercase",
           color: "var(--gold)",
           whiteSpace: "nowrap",
@@ -205,26 +205,27 @@ function JumuahStrip() {
       <span
         aria-hidden
         className="jumuah-strip-sep"
-        style={{ width: 1, height: 14, background: "rgba(255,255,255,0.18)" }}
+        style={{ width: 1, height: 18, background: "rgba(255,255,255,0.25)" }}
       />
 
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 14,
+          gap: 18,
           flexWrap: "wrap",
           justifyContent: "center",
         }}
       >
         {JUMUAH_TIMES.map((t, i) => (
-          <span key={t} style={{ display: "inline-flex", alignItems: "center", gap: 14 }}>
+          <span key={t} style={{ display: "inline-flex", alignItems: "center", gap: 18 }}>
             <span
               style={{
                 fontFamily: "var(--ff-head)",
-                fontSize: "1rem",
-                fontWeight: 400,
-                color: "rgba(255,255,255,0.9)",
+                fontSize: "clamp(1.2rem, 1.5vw, 1.35rem)",
+                fontWeight: 600,
+                lineHeight: 1.2,
+                color: "var(--white)",
                 letterSpacing: "0.01em",
                 whiteSpace: "nowrap",
               }}
@@ -235,11 +236,11 @@ function JumuahStrip() {
               <span
                 aria-hidden
                 style={{
-                  width: 3,
-                  height: 3,
+                  width: 4,
+                  height: 4,
                   borderRadius: "50%",
                   background: "var(--gold)",
-                  opacity: 0.6,
+                  opacity: 0.8,
                   display: "inline-block",
                 }}
               />
