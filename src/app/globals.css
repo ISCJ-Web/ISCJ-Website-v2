@@ -431,6 +431,166 @@ h2.section-title em {
   .imam-hero-photo { margin-top: 36px; }
 }
 
+/* ---------- Footer: Constant Contact inline sign-up form ----------
+   Constant Contact injects its own markup and a <style> block (light grey
+   card, its own fonts and button colours) into .ctct-inline-form. These
+   overrides pull it onto the navy footer; !important is needed to beat the
+   widget's id-scoped rules. Field labels, list checkboxes and the consent
+   line are kept: the consent text is required by Constant Contact. */
+.footer-mailing .ctct-form-defaults {
+  background: transparent !important;
+  padding: 0 !important;
+  border: 0 !important;
+  font-family: var(--ff-body) !important;
+}
+.footer-mailing .ctct-form-header {
+  font-family: var(--ff-head) !important;
+  font-weight: 400 !important;
+  color: var(--white) !important;
+}
+/* The footer's own "Stay Connected" heading and line replace the form's title
+   and description. Only the ones inside the <form> are hidden: the "Thanks
+   for signing up!" message lives outside it and must still show. */
+.footer-mailing .ctct-form-custom > .ctct-form-header,
+.footer-mailing .ctct-form-custom > .ctct-form-text {
+  display: none !important;
+}
+/* Email box and button on one line, consent text and errors full width below. */
+.footer-mailing .ctct-form-custom {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 0;
+}
+.footer-mailing .ctct-form-field {
+  flex: 1 1 200px;
+  margin: 0 !important;
+}
+.footer-mailing .ctct-form-custom > .ctct-form-button { order: 1; }
+.footer-mailing .ctct-form-error,
+.footer-mailing #gdpr_text { order: 2; flex: 1 1 100%; }
+.footer-mailing .ctct-form-custom > .g-recaptcha { order: 3; }
+.footer-mailing .ctct-form-label {
+  margin-bottom: 6px !important;
+}
+.footer-mailing .ctct-form-text,
+.footer-mailing .ctct-form-label,
+.footer-mailing .ctct-form-checkbox,
+.footer-mailing .ctct-form-listname {
+  font-family: var(--ff-body) !important;
+  font-size: 0.82rem !important;
+  font-weight: 300 !important;
+  color: rgba(255,255,255,0.65) !important;
+}
+.footer-mailing .ctct-form-element {
+  height: 46px !important;
+  padding: 0 16px !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  border-radius: 0 !important;
+  color: var(--white) !important;
+  font-family: var(--ff-body) !important;
+  font-size: 0.9rem !important;
+  font-weight: 300 !important;
+}
+.footer-mailing .ctct-form-element:focus {
+  border-color: var(--gold) !important;
+  outline: none !important;
+}
+.footer-mailing .ctct-form-button {
+  width: auto !important;
+  height: 46px !important;
+  margin: 0 !important;
+  padding: 0 26px !important;
+  background: var(--gold) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  color: var(--navy-deep) !important;
+  font-family: var(--ff-body) !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.footer-mailing .ctct-form-button:hover {
+  background: var(--gold-light) !important;
+}
+.footer-mailing .ctct-gdpr-text {
+  font-size: 0.7rem !important;
+  line-height: 1.6 !important;
+  color: rgba(255,255,255,0.45) !important;
+}
+.footer-mailing .ctct-gdpr-text {
+  margin: 0 !important;
+}
+.footer-mailing .ctct-gdpr-text a {
+  color: rgba(255,255,255,0.7) !important;
+}
+.footer-mailing .ctct-form-errorMessage {
+  color: #ff9b9b !important;
+}
+/* Constant Contact's logo badge under the form is hidden. The "Emails are
+   serviced by Constant Contact" sentence stays: it is part of the consent text. */
+.footer-mailing .ctct-form-footer {
+  display: none !important;
+}
+/* The Constant Contact account also has a popup sign-up form, and the widget
+   script loads every active form on the account. It doesn't match the site
+   and covers the page on arrival, so the footer form is the only signup.
+   To retire it for good, unpublish it under Sign-up forms in Constant Contact. */
+.ctct-popup-form {
+  display: none !important;
+}
+/* Google lets a site hide the floating reCAPTCHA badge when the form carries
+   its notice instead; the Footer prints that notice under the form. */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+/* ---------- Legal pages (Privacy Policy, Terms of Service) ---------- */
+.legal-list {
+  list-style: none;
+  margin: 0 0 18px;
+  padding: 0;
+}
+.legal-list li {
+  position: relative;
+  padding-left: 22px;
+  margin-bottom: 12px;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text);
+}
+.legal-list li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.75em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+/* Anchor jumps (e.g. "Section 8 (Contact Us)") land below the fixed navbar. */
+.legal-section { scroll-margin-top: calc(132px + var(--banner-h, 0px)); }
+@media (max-width: 639px) {
+  .legal-hero { padding: calc(120px + var(--banner-h, 0px)) 0 44px !important; }
+  .legal-section { scroll-margin-top: calc(88px + var(--banner-h, 0px)); }
+  .legal-card { padding-top: 32px !important; padding-bottom: 32px !important; }
+}
+
+.footer-legal-link {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-legal-link:hover { color: var(--gold); }
+
 /* ---------- Footer responsive ---------- */
 .footer-root {
   padding: 72px 48px 36px;

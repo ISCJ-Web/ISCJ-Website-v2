@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { assetPath } from "@/lib/assetPath";
@@ -85,22 +85,37 @@ function ColHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* The "Stay Connected" signup is hidden until there is a mailing list behind it:
-   the form only shows a thank-you and sends the address nowhere. Wire
-   handleSubscribe to the real list, then set this to true. */
-const MAILING_LIST_ENABLED = false;
+/* "Stay Connected" signup: Constant Contact's inline sign-up form. Both values
+   come from the form's embed code in Constant Contact:
+     accountId  the `_ctct_m = "..."` value in the "Universal Code" <script>
+     formId     the `data-form-id` on the <div class="ctct-inline-form">
+   Neither is a secret: both are visible in the page source to every visitor.
+   The strip stays hidden until both are filled in. Constant Contact renders
+   the form itself; `.footer-mailing .ctct-*` in globals.css restyles it. */
+const CONSTANT_CONTACT = {
+  accountId: "e5a6061be0ceda42bc8670955528804f",
+  formId: "14580a23-2ac3-4010-a8a6-e09d67a164a0",
+};
+const MAILING_LIST_ENABLED = Boolean(CONSTANT_CONTACT.accountId && CONSTANT_CONTACT.formId);
+const CTCT_SCRIPT_SRC =
+  "https://static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js";
+
+/* The footer lives in the root layout and mounts once per visit, so the widget
+   script is added once and finds the form's <div> already in the page. */
+function useConstantContactWidget() {
+  useEffect(() => {
+    if (!MAILING_LIST_ENABLED || document.getElementById("signupScript")) return;
+    (window as Window & { _ctct_m?: string })._ctct_m = CONSTANT_CONTACT.accountId;
+    const script = document.createElement("script");
+    script.id = "signupScript";
+    script.src = CTCT_SCRIPT_SRC;
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+}
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubmitted(true);
-      setEmail("");
-    }
-  };
+  useConstantContactWidget();
 
   return (
     <footer
@@ -116,7 +131,7 @@ export default function Footer() {
           margin: "0 auto",
           padding: "40px 0",
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "space-between",
           gap: 48,
           borderBottom: "1px solid rgba(255,255,255,0.07)",
@@ -127,7 +142,7 @@ export default function Footer() {
         <div style={{ flex: "1 1 280px" }}>
           <h4
             style={{
-              fontFamily: "var(--ff-display)",
+              fontFamily: "var(--ff-head)",
               fontSize: "clamp(1.3rem, 2.5vw, 1.8rem)",
               fontWeight: 400,
               color: "var(--white)",
@@ -142,61 +157,25 @@ export default function Footer() {
           </p>
         </div>
 
-        <form
-          onSubmit={handleSubscribe}
-          style={{ display: "flex", gap: 0, flex: "1 1 360px", maxWidth: 480 }}
-        >
-          {submitted ? (
-            <p style={{ fontSize: "0.85rem", fontWeight: 300, color: "var(--gold)", padding: "12px 0" }}>
-              Thank you for subscribing!
-            </p>
-          ) : (
-            <>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                required
-                style={{
-                  flex: 1,
-                  padding: "12px 18px",
-                  background: "rgba(255,255,255,0.06)",
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  borderRight: "none",
-                  color: "var(--white)",
-                  fontFamily: "var(--ff-body)",
-                  fontSize: "0.85rem",
-                  fontWeight: 300,
-                  outline: "none",
-                  borderRadius: 0,
-                }}
-              />
-              <button
-                type="submit"
-                style={{
-                  padding: "12px 24px",
-                  background: "var(--gold)",
-                  color: "var(--navy-deep)",
-                  fontFamily: "var(--ff-body)",
-                  fontSize: "0.72rem",
-                  fontWeight: 500,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  border: "none",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                  transition: "background 0.2s",
-                  borderRadius: 0,
-                }}
-                onMouseEnter={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold-light)")}
-                onMouseLeave={(e) => ((e.currentTarget as HTMLButtonElement).style.background = "var(--gold)")}
-              >
-                Subscribe
-              </button>
-            </>
-          )}
-        </form>
+        <div style={{ flex: "1 1 360px", maxWidth: 480 }}>
+          <div className="ctct-inline-form" data-form-id={CONSTANT_CONTACT.formId} />
+          {/* Required by Google when its floating reCAPTCHA badge is hidden (see globals.css). */}
+          <p style={{ fontSize: "0.7rem", lineHeight: 1.6, color: "rgba(255,255,255,0.45)", marginTop: 8 }}>
+            This site is protected by reCAPTCHA and the Google{" "}
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "underline" }}>
+              Privacy Policy
+            </a>{" "}
+            and{" "}
+            <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "underline" }}>
+              Terms of Service
+            </a>{" "}
+            apply. See our{" "}
+            <Link href="/privacy-policy" style={{ color: "rgba(255,255,255,0.7)", textDecoration: "underline" }}>
+              Privacy Policy
+            </Link>{" "}
+            for how ISCJ uses your information.
+          </p>
+        </div>
       </div>
       )}
 
@@ -350,9 +329,17 @@ export default function Footer() {
           gap: 12,
         }}
       >
-        <p style={{ fontSize: "0.75rem", fontWeight: 300 }}>
-          © 2026 Islamic Society of Central Jersey. All rights reserved.
-        </p>
+        <div style={{ display: "flex", alignItems: "center", flexWrap: "wrap", gap: "8px 24px" }}>
+          <p style={{ fontSize: "0.75rem", fontWeight: 300 }}>
+            © 2026 Islamic Society of Central Jersey. All rights reserved.
+          </p>
+          {/* Linked from every page: services like Mohid's SMS setup scan the
+              site for these two pages before they will send messages. */}
+          <nav aria-label="Legal" style={{ display: "flex", gap: 20 }}>
+            <Link href="/privacy-policy" className="footer-legal-link">Privacy Policy</Link>
+            <Link href="/terms-of-service" className="footer-legal-link">Terms of Service</Link>
+          </nav>
+        </div>
         <div style={{ display: "flex", gap: 10 }}>
           {SOCIAL_LINKS.map((s) => (
             <a

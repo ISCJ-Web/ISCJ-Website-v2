@@ -48,7 +48,9 @@ src/
 │   │   └── weekend-school/page.tsx
 │   ├── committees/page.tsx
 │   ├── donate/page.tsx
-│   └── learn-about-islam/page.tsx
+│   ├── learn-about-islam/page.tsx
+│   ├── privacy-policy/page.tsx   # LEGAL: verbatim from the board's policy .docx
+│   └── terms-of-service/page.tsx # LEGAL: verbatim from the board's policy .docx
 ├── components/
 │   ├── ui/                       # Reusable design-system primitives
 │   │   ├── Button.tsx
@@ -61,6 +63,8 @@ src/
 │   │   └── Footer.tsx
 │   ├── about/
 │   │   └── MissionVision.tsx     # CONTENT: Mission + Vision cards (home + Who We Are)
+│   ├── legal/
+│   │   └── LegalPage.tsx         # Shared layout for the two legal pages
 │   └── home/                     # Home page section components
 │       ├── HeroSection.tsx
 │       ├── AboutSection.tsx
@@ -260,6 +264,15 @@ workflow redeploys. Each file opens with a comment explaining its own fields.
 - `AlertBannerView` holds the markup for the banner strip, separate from
   `AlertBanner` so the strip can be rendered on its own; `AlertBanner` remains
   the only writer of `--banner-h`.
+- **Privacy Policy and Terms of Service** (`/privacy-policy`,
+  `/terms-of-service`) are copied word for word from the policy document the
+  board's legal reviewer (Mohamed Asker) signed off, last on 2026-11-25. Edit
+  them only from a revised document, never by rewording, and update each page's
+  `LAST_UPDATED` with it. The footer links to both from every page because
+  Mohid's SMS/email setup scans the site for them before it will send.
+- **Footer email signup** is Constant Contact's inline form, set by
+  `CONSTANT_CONTACT` in `Footer.tsx` and restyled by `.footer-mailing .ctct-*`
+  in `globals.css`. The account's popup form is hidden with CSS on purpose.
 - **There is no events or news section.** Both "Upcoming Events" and "News &
   Updates" were removed from the home page before launch (Oct 2026): events and
   news go out through the masjid's WhatsApp group, and hand-edited lists on the

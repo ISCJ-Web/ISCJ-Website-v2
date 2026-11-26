@@ -47,7 +47,7 @@ export default function NotFound() {
 
         <h1
           style={{
-            fontFamily: "var(--ff-display)",
+            fontFamily: "var(--ff-head)",
             fontSize: "clamp(2.2rem, 5vw, 3.6rem)",
             fontWeight: 400,
             color: "var(--navy)",
